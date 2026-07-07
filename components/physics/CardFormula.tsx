@@ -6,24 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import type { ResultadoInferencia } from "@/app/physics/engine/inferencia";
-
-const AREA_LABEL: Record<string, string> = {
-  cinematica: "Cinemática",
-  dinamica:   "Dinâmica",
-  energia:    "Energia",
-  momento:    "Momento",
-  rotacao:    "Rotação",
-  gravitacao: "Gravitação",
-};
-
-const AREA_COLOR: Record<string, string> = {
-  cinematica: "bg-blue-500/10 text-blue-600 border-blue-500/20",
-  dinamica:   "bg-orange-500/10 text-orange-600 border-orange-500/20",
-  energia:    "bg-green-500/10 text-green-600 border-green-500/20",
-  momento:    "bg-purple-500/10 text-purple-600 border-purple-500/20",
-  rotacao:    "bg-yellow-500/10 text-yellow-600 border-yellow-500/20",
-  gravitacao: "bg-red-500/10 text-red-600 border-red-500/20",
-};
+import { obterMetadadosFormula } from "@/app/physics/formulas/metadata";
+import { AREA_LABEL, AREA_COLOR } from "@/lib/physics/areas";
 
 interface CardFormulaProps {
   resultado: ResultadoInferencia;
@@ -31,6 +15,7 @@ interface CardFormulaProps {
 
 export function CardFormula({ resultado }: CardFormulaProps) {
   const { formula, variacaoAplicavel, podeCalcular } = resultado;
+  const metadados = obterMetadadosFormula(formula.id);
 
   return (
     <Card className="border hover:shadow-md transition-shadow duration-200">
@@ -78,6 +63,15 @@ export function CardFormula({ resultado }: CardFormulaProps) {
           <p className="text-xs text-muted-foreground leading-relaxed">
             {formula.descricao}
           </p>
+        )}
+
+        {metadados && (
+          <div className="rounded-md border border-dashed px-3 py-2">
+            <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">
+              Por que esta fórmula
+            </span>
+            <p className="text-xs leading-relaxed mt-1">{metadados.porqueUsar}</p>
+          </div>
         )}
 
         <Separator />

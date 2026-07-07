@@ -10,25 +10,11 @@ import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { catalogoFormulas, type AreaFisica, type Formula } from "@/app/physics/formulas/catalog";
 import { catalogoVariaveis } from "@/app/physics/variables/catalog";
+import { obterMetadadosFormula } from "@/app/physics/formulas/metadata";
+import { obterFenomenosPorFormula } from "@/app/physics/engine/conexoes";
+import { AREAS_NAVEGACAO, AREA_COLOR } from "@/lib/physics/areas";
 
-const AREAS: { valor: AreaFisica | "todas"; label: string; emoji: string }[] = [
-  { valor: "todas",      label: "Todas",      emoji: "📚" },
-  { valor: "cinematica", label: "Cinemática", emoji: "🏃" },
-  { valor: "dinamica",   label: "Dinâmica",   emoji: "⚙️" },
-  { valor: "energia",    label: "Energia",    emoji: "⚡" },
-  { valor: "momento",    label: "Momento",    emoji: "💥" },
-  { valor: "rotacao",    label: "Rotação",    emoji: "🔄" },
-  { valor: "gravitacao", label: "Gravitação", emoji: "🌍" },
-];
-
-const AREA_COLOR: Record<string, string> = {
-  cinematica: "bg-blue-500/10 text-blue-600 border-blue-500/20",
-  dinamica:   "bg-orange-500/10 text-orange-600 border-orange-500/20",
-  energia:    "bg-green-500/10 text-green-600 border-green-500/20",
-  momento:    "bg-purple-500/10 text-purple-600 border-purple-500/20",
-  rotacao:    "bg-yellow-500/10 text-yellow-600 border-yellow-500/20",
-  gravitacao: "bg-red-500/10 text-red-600 border-red-500/20",
-};
+const AREAS = AREAS_NAVEGACAO;
 
 function resolverNomeVariavel(id: string): string {
   const found = catalogoVariaveis.find(v => v.id === id);
@@ -36,6 +22,9 @@ function resolverNomeVariavel(id: string): string {
 }
 
 function CardCatalogo({ formula }: { formula: Formula }) {
+  const metadados = obterMetadadosFormula(formula.id);
+  const fenomenos = obterFenomenosPorFormula(formula.id);
+
   return (
     <Card className="border hover:shadow-md transition-shadow duration-200">
       <CardHeader className="pb-2 pt-4 px-4">
@@ -65,6 +54,34 @@ function CardCatalogo({ formula }: { formula: Formula }) {
           <p className="text-xs text-muted-foreground leading-relaxed">
             {formula.descricao}
           </p>
+        )}
+
+        {metadados && (
+          <div className="flex flex-col gap-2">
+            <div>
+              <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">
+                Por que usar
+              </span>
+              <p className="text-xs leading-relaxed mt-0.5">{metadados.porqueUsar}</p>
+            </div>
+            <div>
+              <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">
+                Relação entre grandezas
+              </span>
+              <p className="text-xs leading-relaxed mt-0.5 text-muted-foreground">
+                {metadados.relacaoGrandezas}
+              </p>
+            </div>
+            {fenomenos.length > 0 && (
+              <div className="flex flex-wrap gap-1">
+                {fenomenos.map((f) => (
+                  <Badge key={f.id} variant="secondary" className="text-[10px] font-normal">
+                    {f.nome}
+                  </Badge>
+                ))}
+              </div>
+            )}
+          </div>
         )}
 
         <Separator />

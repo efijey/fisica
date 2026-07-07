@@ -32,9 +32,17 @@ app/
 ├── page.tsx                    → entrada da aplicação
 ├── pages/Calculadora/          → UI principal (abas Inferência + Catálogo)
 └── physics/
-    ├── engine/inferencia.ts    → motor de inferência
-    ├── formulas/catalog.ts     → catálogo de fórmulas e variações isoladas
-    └── variables/catalog.ts    → catálogo de variáveis físicas
+    ├── engine/
+    │   ├── inferencia.ts       → motor de inferência
+    │   └── conexoes.ts         → grafo variável ↔ fórmula ↔ fenômeno
+    ├── formulas/
+    │   ├── catalog.ts            → catálogo de fórmulas
+    │   └── metadata.ts           → metadados explicativos das fórmulas
+    ├── variables/
+    │   ├── catalog.ts            → catálogo de variáveis
+    │   └── metadata.ts           → metadados explicativos das variáveis
+    └── phenomena/
+        └── catalog.ts            → fenômenos da natureza e entidades
 
 components/
 ├── physics/                    → SeletorVariavel, ListaFormulas, CatalogoFormulas, Card*
@@ -59,14 +67,17 @@ ListaFormulas exibe resultados agrupados por área
 
 | Pronto | Pendente |
 |--------|----------|
-| Catálogo de ~27 fórmulas em 6 áreas | Metadados explicativos ricos (porquê, fenômenos, exemplos) |
-| Catálogo de ~55 variáveis físicas | Conexões entre variáveis e fórmulas (grafo de relações) |
-| Motor de inferência (falta 1 variável) | Página/vista de exploração por variável |
-| UI responsiva com shadcn/ui | Cadeias de inferência (várias etapas) |
-| Abas Inferência + Catálogo | Input de enunciado com identificação de contexto |
-| Separação engine / UI / dados | Testes E2E |
-| Testes unitários do motor de inferência | Deploy em produção |
-| Descrições curtas por fórmula | Passo a passo explicativo da resolução |
+| Catálogo de ~27 fórmulas em 6 áreas | Cadeias de inferência (várias etapas) |
+| Catálogo de ~55 variáveis físicas | Input de enunciado com identificação de contexto |
+| Motor de inferência (falta 1 variável) | Testes E2E |
+| UI responsiva com shadcn/ui | Deploy em produção |
+| Abas Inferência + Explorar + Catálogo | Passo a passo explicativo da resolução |
+| Separação engine / UI / dados | |
+| Testes unitários do motor de inferência | |
+| Metadados explicativos (variáveis, fórmulas, fenômenos) | |
+| Grafo de conexões variável ↔ fórmula | |
+| Vista de exploração por variável | |
+| Testes do grafo de conexões | |
 
 ## Roadmap por fases
 
@@ -91,31 +102,29 @@ ListaFormulas exibe resultados agrupados por área
 
 Foco em responder perguntas como: *"Em quantas equações a aceleração aparece? Por quê ela é tão presente? Em quais fenômenos da natureza ela surge?"*
 
-| Entrega | Descrição |
-|---------|-----------|
-| Metadados explicativos nas variáveis | Significado físico, exemplos na natureza, quando a grandeza é relevante |
-| Metadados explicativos nas fórmulas | Por que usar, relação entre grandezas, cenários típicos (não só descrição de uma linha) |
-| Grafo de conexões variável ↔ fórmula | Motor que calcula em quantas fórmulas cada variável aparece e em quais áreas |
-| Vista de exploração por variável | UI para o estudante escolher uma grandeza (ex.: `a`) e ver fórmulas, áreas e fenômenos associados |
-| Fenômenos / contextos no catálogo | Entidades reais (queda livre, freada, lançamento) ligadas a variáveis e fórmulas |
-| Testes para o grafo de conexões | Cobertura unitária das novas relações |
+| Entrega | Status |
+|---------|--------|
+| Metadados explicativos nas variáveis | Concluído |
+| Metadados explicativos nas fórmulas | Concluído |
+| Grafo de conexões variável ↔ fórmula | Concluído |
+| Vista de exploração por variável | Concluído |
+| Fenômenos / contextos no catálogo | Concluído |
+| Testes para o grafo de conexões | Concluído |
 
 **Fora do escopo desta sprint:** novas fórmulas, cálculo numérico, input de enunciado.
 
-### Sprint 3 — Contexto do problema
+### Backlog futuro
 
-**Objetivo:** aproximar o app do exercício real de vestibular.
+Sprints 3 e 4 serão definidas após a conclusão da Sprint 2. Candidatos:
 
-- Campo de input para colar/digitar enunciado
+**Contexto do problema**
+- Campo de input para colar/digitar enunciado de vestibular
 - Identificação de entidades no texto (carro, esfera, mola, etc.)
 - Sugestão de área/fenômeno provável com base no catálogo enriquecido
 - Cadeias de inferência (quando faltam 2+ variáveis, sugerir caminho explicativo)
 - Passo a passo da resolução (raciocínio, não aritmética)
 
-### Sprint 4 — Cálculo e qualidade
-
-**Objetivo:** para quem precisar do número, e preparar o app para uso real.
-
+**Cálculo e qualidade**
 - Campos de entrada para valores das variáveis selecionadas
 - Avaliação numérica da expressão isolada
 - Validação de unidades compatíveis
@@ -124,8 +133,7 @@ Foco em responder perguntas como: *"Em quantas equações a aceleração aparece
 - Deploy (Vercel ou similar)
 - Polish de UI e acessibilidade
 
-### Backlog futuro
-
+**Outros**
 - Expandir catálogo (termodinâmica, ondas, eletromagnetismo)
 - Histórico de problemas explorados (localStorage)
 - PWA básico (opcional)
