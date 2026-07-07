@@ -127,7 +127,7 @@ export function CatalogoFormulas() {
         onValueChange={v => setAreaAtiva(v as AreaFisica | "todas")}
       >
         {/* Abas de área */}
-        <ScrollArea className="w-full" type="scroll">
+        <ScrollArea className="w-full">
           <TabsList className="flex w-max gap-1 bg-muted p-1 rounded-lg">
             {AREAS.map(area => (
               <TabsTrigger
