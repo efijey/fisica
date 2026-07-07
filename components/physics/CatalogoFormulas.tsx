@@ -56,7 +56,7 @@ function CardCatalogo({ formula }: { formula: Formula }) {
         {/* Expressão */}
         <div className="rounded-lg bg-muted px-4 py-3 text-center">
           <span className="font-mono text-lg font-bold tracking-wide">
-            {formula.expressao}
+            {formula.expressaoPrincipal}
           </span>
         </div>
 
