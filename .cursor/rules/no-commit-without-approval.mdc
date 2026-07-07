@@ -1,0 +1,25 @@
+---
+description: Nunca commitar ou fazer push sem aprovação explícita do usuário
+alwaysApply: true
+---
+
+# Commits e push — exigem aprovação
+
+**Nunca** execute `git commit`, `git push`, `git merge`, nem crie PRs sem o usuário pedir ou aprovar explicitamente antes.
+
+## O que fazer
+
+1. Implementar alterações normalmente (código, docs, testes).
+2. Ao terminar, **mostrar um resumo** do que mudou (`git status` / `git diff`).
+3. **Perguntar** se o usuário quer commitar — e, se sim, qual mensagem ou agrupamento.
+4. Só então executar `git add`, `git commit` e `git push` (se solicitado).
+
+## O que não fazer
+
+- Não commitar "por iniciativa própria" ao concluir uma tarefa.
+- Não commitar várias mudanças em sequência sem consultar entre cada commit.
+- Não fazer push para `origin` sem confirmação explícita.
+
+## Exceção
+
+Se o usuário disser explicitamente na mensagem atual algo como "commita isso", "pode commitar" ou "faz o push", aí sim proceder conforme o pedido.

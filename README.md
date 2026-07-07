@@ -26,7 +26,7 @@ Calculadora inteligente de física para estudantes. Selecione as grandezas que v
 ## Setup
 
 ```bash
-git clone https://github.com/<seu-usuario>/fisica.git
+git clone https://github.com/efijey/fisica.git
 cd fisica
 npm install
 npm run dev
@@ -42,6 +42,7 @@ Abra [http://localhost:3000](http://localhost:3000) no navegador.
 | `npm run build` | Build de produção |
 | `npm run start` | Servidor de produção |
 | `npm run lint` | Verificação ESLint |
+| `npm run test` | Testes unitários (Vitest) |
 
 ## Estrutura do projeto
 
@@ -60,7 +61,6 @@ fisica/
 ├── docs/
 │   ├── git-workflow.md          # Padrões de branch e commit
 │   └── roadmap.md               # Visão e roadmap do projeto
-└── types/independentes/         # Tipos TS (em avaliação)
 ```
 
 ## Como funciona
