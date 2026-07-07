@@ -56,10 +56,10 @@ ListaFormulas exibe resultados agrupados por área
 | Catálogo de ~55 variáveis físicas | Cálculo automático do resultado |
 | Motor de inferência (falta 1 variável) | Cadeias de inferência (várias etapas) |
 | UI responsiva com shadcn/ui | Passo a passo da resolução |
-| Abas Calculadora + Catálogo | Testes automatizados |
+| Abas Calculadora + Catálogo | Testes E2E |
 | Separação engine / UI / dados | Deploy em produção |
-| | Metadata e i18n completos (pt-BR) |
-| | Integração dos tipos em `types/independentes/` |
+| Testes unitários do motor de inferência | Cadeias de inferência (várias etapas) |
+| Metadata em português (pt-BR) | Passo a passo da resolução |
 
 ## Roadmap por fases
 
@@ -69,13 +69,14 @@ ListaFormulas exibe resultados agrupados por área
 
 | Entrega | Status |
 |---------|--------|
-| Documentação (README, git-workflow, roadmap) | Em andamento |
-| Repositório GitHub + branch `sprint-1` | Em andamento |
-| Metadata em português (`layout.tsx`) | Pendente |
-| Corrigir bug `expressao` → `expressaoPrincipal` no catálogo | Pendente |
-| Testes unitários do motor `inferirFormulas()` | Pendente |
-| Decidir destino de `types/independentes/` | Pendente |
-| Adicionar licença MIT | Pendente |
+| Documentação (README, git-workflow, roadmap) | Concluído |
+| Repositório GitHub + branch `sprint-1` | Concluído |
+| Metadata em português (`layout.tsx`) | Concluído |
+| Corrigir bug `expressao` → `expressaoPrincipal` no catálogo | Concluído |
+| Testes unitários do motor `inferirFormulas()` | Concluído |
+| Remover `types/independentes/` (substituído pelo catálogo) | Concluído |
+| Adicionar licença MIT | Concluído |
+| Issues no GitHub para próximas sprints | Concluído |
 
 ### Sprint 2 — Cálculo
 
@@ -107,14 +108,7 @@ ListaFormulas exibe resultados agrupados por área
 
 ## Backlog da Sprint 1
 
-Itens concretos para começar a trabalhar na branch `sprint-1`:
-
-1. **[fix]** Corrigir `formula.expressao` → `formula.expressaoPrincipal` em `CatalogoFormulas.tsx`
-2. **[feat]** Atualizar `app/layout.tsx`: `lang="pt-BR"`, título e descrição do app
-3. **[test]** Configurar Vitest e escrever testes para `inferirFormulas()`
-4. **[chore]** Adicionar `LICENSE` (MIT)
-5. **[refactor]** Avaliar `types/independentes/` — integrar ao catálogo ou remover
-6. **[docs]** Criar issues no GitHub a partir deste backlog
+Todos os itens foram concluídos. Próximo passo: Sprint 2 (ver issues no GitHub).
 
 ## Áreas de física cobertas
 
