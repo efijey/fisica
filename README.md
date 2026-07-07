@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Física — Motor de Fórmulas
 
-## Getting Started
+Calculadora inteligente de física para estudantes. Selecione as grandezas que você já conhece em um problema e o sistema sugere quais fórmulas podem ser usadas para descobrir a variável que falta — já na forma isolada.
 
-First, run the development server:
+## Funcionalidades
+
+- **Inferência de fórmulas** — selecione variáveis conhecidas e veja quais expressões resolvem o que falta
+- **Catálogo navegável** — ~28 fórmulas organizadas por área (cinemática, dinâmica, energia, momento, rotação, gravitação)
+- **~55 variáveis físicas** — com símbolo, nome e unidade
+- **Interface responsiva** — abas Calculadora e Catálogo, construída com shadcn/ui
+
+## Stack
+
+| Camada | Tecnologia |
+|--------|------------|
+| Framework | Next.js 16 (App Router) |
+| UI | React 19, TypeScript 5 |
+| Estilo | Tailwind CSS 4, shadcn/ui |
+| Ícones | Lucide React |
+
+## Pré-requisitos
+
+- Node.js 20+
+- npm
+
+## Setup
 
 ```bash
+git clone https://github.com/<seu-usuario>/fisica.git
+cd fisica
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abra [http://localhost:3000](http://localhost:3000) no navegador.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Comando | Descrição |
+|---------|-----------|
+| `npm run dev` | Servidor de desenvolvimento |
+| `npm run build` | Build de produção |
+| `npm run start` | Servidor de produção |
+| `npm run lint` | Verificação ESLint |
 
-## Learn More
+## Estrutura do projeto
 
-To learn more about Next.js, take a look at the following resources:
+```
+fisica/
+├── app/
+│   ├── page.tsx                 # Entrada da aplicação
+│   ├── pages/Calculadora/       # UI principal
+│   └── physics/
+│       ├── engine/              # Motor de inferência
+│       ├── formulas/            # Catálogo de fórmulas
+│       └── variables/           # Catálogo de variáveis
+├── components/
+│   ├── physics/                 # Componentes de domínio
+│   └── ui/                      # Componentes shadcn
+├── docs/
+│   ├── git-workflow.md          # Padrões de branch e commit
+│   └── roadmap.md               # Visão e roadmap do projeto
+└── types/independentes/         # Tipos TS (em avaliação)
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Como funciona
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. O estudante seleciona as variáveis que possui (ex.: velocidade inicial, tempo, aceleração)
+2. O motor `inferirFormulas()` percorre o catálogo e encontra fórmulas onde **falta exatamente uma variável**
+3. Para cada match, exibe a expressão já isolada na variável desconhecida
 
-## Deploy on Vercel
+## Documentação
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [Padrões de Git e commits](docs/git-workflow.md)
+- [Roadmap e backlog](docs/roadmap.md)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Contribuindo
+
+1. Leia os [padrões de Git](docs/git-workflow.md)
+2. Trabalhe na branch `sprint-1` (ou crie `feature/*` a partir dela)
+3. Siga [Conventional Commits](https://www.conventionalcommits.org/) em português
+
+## Licença
+
+MIT — veja [LICENSE](LICENSE) para detalhes.
