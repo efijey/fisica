@@ -26,7 +26,7 @@ Calculadora inteligente de física para estudantes. Selecione as grandezas que v
 ## Setup
 
 ```bash
-git clone https://github.com/<seu-usuario>/fisica.git
+git clone https://github.com/efijey/fisica.git
 cd fisica
 npm install
 npm run dev
