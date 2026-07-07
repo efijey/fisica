@@ -113,16 +113,24 @@ Foco em responder perguntas como: *"Em quantas equações a aceleração aparece
 
 **Fora do escopo desta sprint:** novas fórmulas, cálculo numérico, input de enunciado.
 
+### Sprint 3 — Ingestor de exercícios
+
+**Objetivo:** app interno que ingere exercícios em texto, cataloga fórmulas/variáveis/fenômenos via regras, armazena no Supabase e exporta exemplos aprovados para a explicadora.
+
+| Entrega | Status |
+|---------|--------|
+| Monorepo (`apps/explicadora`, `apps/ingestor`, `packages/physics-core`) | Concluído |
+| Schema Supabase + migrations | Concluído |
+| Parser por regras (opção A) | Concluído |
+| UI ingestor (colar, listar, aprovar/rejeitar) | Concluído |
+| Script `export-catalog` | Concluído |
+| Testes do parser | Concluído |
+| Auth Supabase (login admin) | Pendente |
+| Explicadora consumindo `catalogoExemplos` | Pendente |
+
+Ver [ingestor.md](./ingestor.md) para setup.
+
 ### Backlog futuro
-
-Sprints 3 e 4 serão definidas após a conclusão da Sprint 2. Candidatos:
-
-**Contexto do problema**
-- Campo de input para colar/digitar enunciado de vestibular
-- Identificação de entidades no texto (carro, esfera, mola, etc.)
-- Sugestão de área/fenômeno provável com base no catálogo enriquecido
-- Cadeias de inferência (quando faltam 2+ variáveis, sugerir caminho explicativo)
-- Passo a passo da resolução (raciocínio, não aritmética)
 
 **Cálculo e qualidade**
 - Campos de entrada para valores das variáveis selecionadas
@@ -152,6 +160,6 @@ Sprints 3 e 4 serão definidas após a conclusão da Sprint 2. Candidatos:
 ## Como contribuir
 
 1. Leia [git-workflow.md](./git-workflow.md) para padrões de branch e commit
-2. Trabalhe na branch `sprint-2` (ou crie `feature/*` a partir dela)
-3. Abra PR para `sprint-2` ao concluir uma feature
-4. Ao final da sprint, PR de `sprint-2` → `main`
+2. Trabalhe na branch `sprint-3` (ou crie `feature/*` a partir dela)
+3. Abra PR para `sprint-3` ao concluir uma feature
+4. Ao final da sprint, PR de `sprint-3` → `main`
