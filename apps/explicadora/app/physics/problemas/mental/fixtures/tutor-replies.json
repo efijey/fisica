@@ -1,0 +1,134 @@
+[
+  {
+    "problemaId": "newton_caixa_empurrada",
+    "cenarios": [
+      {
+        "quando": "ajuda",
+        "aposTurnos": 0,
+        "mensagem": "Qual grandeza você quer isolar: força, massa ou aceleração? Lembre que F = m · a.",
+        "passosSugeridos": []
+      },
+      {
+        "quando": "ajuda",
+        "aposTurnos": 1,
+        "mensagem": "Você já tem F = m · a. Para achar a aceleração, isole a: a = F / m.",
+        "passosSugeridos": [
+          {
+            "tipo": "nota_tutor",
+            "texto": "Próximo passo sugerido: isolar a aceleração.",
+            "expressao": "a = F / m"
+          }
+        ]
+      },
+      {
+        "quando": "corrigir",
+        "aposTurnos": 0,
+        "mensagem": "Ainda não há passos suficientes. Grave pelo menos a escolha da fórmula.",
+        "veredito": "desviado"
+      },
+      {
+        "quando": "corrigir",
+        "aposTurnos": 1,
+        "mensagem": "A fórmula está certa. Falta substituir / isolar a grandeza pedida.",
+        "veredito": "no_caminho"
+      },
+      {
+        "quando": "corrigir",
+        "aposTurnos": 3,
+        "mensagem": "Excelente: você usou a 2ª lei e isolou a aceleração corretamente.",
+        "veredito": "certo"
+      },
+      {
+        "quando": "corrigir_fim",
+        "mensagem": "Revisão final: F = m · a e a = F / m estão alinhados com o problema.",
+        "veredito": "certo"
+      }
+    ]
+  },
+  {
+    "problemaId": "freada_aceleracao",
+    "cenarios": [
+      {
+        "quando": "ajuda",
+        "aposTurnos": 0,
+        "mensagem": "Na freada, a velocidade muda com o tempo. Qual equação do MRUV conecta v, v₀, a e t?",
+        "passosSugeridos": []
+      },
+      {
+        "quando": "ajuda",
+        "aposTurnos": 1,
+        "mensagem": "Com v = 0 (parado), a = (v − v₀) / t fica a = −v₀ / t.",
+        "passosSugeridos": [
+          {
+            "tipo": "nota_tutor",
+            "texto": "Lembre: velocidade final nula na freada até parar.",
+            "expressao": "a = (0 − v₀) / t"
+          }
+        ]
+      },
+      {
+        "quando": "corrigir",
+        "aposTurnos": 0,
+        "mensagem": "Comece gravando qual equação do MRUV você usaria.",
+        "veredito": "desviado"
+      },
+      {
+        "quando": "corrigir",
+        "aposTurnos": 1,
+        "mensagem": "Boa escolha da equação. Falta aplicar v = 0 e isolar a.",
+        "veredito": "no_caminho"
+      },
+      {
+        "quando": "corrigir",
+        "aposTurnos": 3,
+        "mensagem": "Raciocínio sólido: MRUV + freada com v final zero.",
+        "veredito": "certo"
+      },
+      {
+        "quando": "corrigir_fim",
+        "mensagem": "Revisão final: a = (v − v₀) / t com v = 0 descreve a freada.",
+        "veredito": "certo"
+      }
+    ]
+  },
+  {
+    "problemaId": "vm_onibus_escolar",
+    "cenarios": [
+      {
+        "quando": "ajuda",
+        "aposTurnos": 0,
+        "mensagem": "Velocidade média usa deslocamento e intervalo de tempo. Qual a definição?",
+        "passosSugeridos": []
+      },
+      {
+        "quando": "ajuda",
+        "aposTurnos": 1,
+        "mensagem": "Você já tem Vm = ΔS / Δt. Confira as unidades do tempo (min → h se quiser km/h).",
+        "passosSugeridos": []
+      },
+      {
+        "quando": "corrigir",
+        "aposTurnos": 0,
+        "mensagem": "Grave primeiro a definição de velocidade média.",
+        "veredito": "desviado"
+      },
+      {
+        "quando": "corrigir",
+        "aposTurnos": 1,
+        "mensagem": "Definição ok. Falta conectar ΔS e Δt do enunciado.",
+        "veredito": "no_caminho"
+      },
+      {
+        "quando": "corrigir",
+        "aposTurnos": 3,
+        "mensagem": "Você chegou em Vm = ΔS / Δt com o raciocínio certo.",
+        "veredito": "certo"
+      },
+      {
+        "quando": "corrigir_fim",
+        "mensagem": "Revisão final: velocidade média é a razão entre deslocamento e tempo.",
+        "veredito": "certo"
+      }
+    ]
+  }
+]

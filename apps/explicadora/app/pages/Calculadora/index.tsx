@@ -7,6 +7,8 @@ import { SeletorVariaveis } from "@/components/physics/SeletorVariavel";
 import { ListaFormulas } from "@/components/physics/ListaFormulas";
 import { CatalogoFormulas } from "@/components/physics/CatalogoFormulas";
 import { ExploradorVariavel } from "@/components/physics/ExploradorVariavel";
+import { GraficosEquacoes } from "@/components/physics/GraficosEquacoes";
+import { ProblemasConceituais } from "@/components/physics/ProblemasConceituais";
 import { inferirFormulas } from "@fisica/physics-core";
 
 export default function Calculadora() {
@@ -56,6 +58,12 @@ export default function Calculadora() {
             <TabsTrigger value="catalogo" className="flex-1 sm:flex-none">
               Catálogo de fórmulas
             </TabsTrigger>
+            <TabsTrigger value="graficos" className="flex-1 sm:flex-none">
+              Gráficos
+            </TabsTrigger>
+            <TabsTrigger value="problemas" className="flex-1 sm:flex-none">
+              Problemas
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="inferencia" className="mt-6">
@@ -81,6 +89,14 @@ export default function Calculadora() {
 
           <TabsContent value="catalogo" className="mt-6">
             <CatalogoFormulas />
+          </TabsContent>
+
+          <TabsContent value="graficos" className="mt-6">
+            <GraficosEquacoes />
+          </TabsContent>
+
+          <TabsContent value="problemas" className="mt-6">
+            <ProblemasConceituais />
           </TabsContent>
         </Tabs>
 
