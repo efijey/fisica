@@ -1,0 +1,77 @@
+[
+  {
+    "problemaId": "newton_caixa_empurrada",
+    "turnos": [
+      {
+        "id": "newton_t1",
+        "transcript": "Para começar, vamos usar a segunda lei de Newton.",
+        "intencao": "escrever_formula",
+        "formulaId": "segunda_lei_newton"
+      },
+      {
+        "id": "newton_t2",
+        "transcript": "A massa da caixa é m e a força resultante é F. Quero a aceleração, então a é F sobre m.",
+        "intencao": "substituir",
+        "detalhe": "Isolando a aceleração: a = F / m"
+      },
+      {
+        "id": "newton_t3",
+        "transcript": "Então a aceleração é a razão entre a força resultante e a massa.",
+        "intencao": "resultado",
+        "detalhe": "a = F / m"
+      }
+    ]
+  },
+  {
+    "problemaId": "freada_aceleracao",
+    "turnos": [
+      {
+        "id": "freada_t1",
+        "transcript": "Isso é MRUV. Vou usar a equação da velocidade final.",
+        "intencao": "escrever_formula",
+        "formulaId": "mruv_velocidade_final"
+      },
+      {
+        "id": "freada_t2",
+        "transcript": "O carro para, então a velocidade final é zero. A aceleração é v menos v zero, tudo sobre t.",
+        "intencao": "substituir",
+        "detalhe": "Com v = 0: a = (0 − v₀) / t = −v₀ / t"
+      },
+      {
+        "id": "freada_t3",
+        "transcript": "A aceleração é negativa porque é uma freada — módulo v zero sobre t.",
+        "intencao": "resultado",
+        "detalhe": "a = −v₀ / t"
+      }
+    ]
+  },
+  {
+    "problemaId": "vm_onibus_escolar",
+    "turnos": [
+      {
+        "id": "vm_t1",
+        "transcript": "Vamos usar a definição de velocidade média.",
+        "intencao": "escrever_formula",
+        "formulaId": "velocidade_media"
+      },
+      {
+        "id": "vm_t2",
+        "transcript": "O deslocamento é doze quilômetros e o tempo é vinte minutos. Preciso converter o tempo para horas se quiser km por hora.",
+        "intencao": "passo_raciocinio"
+      },
+      {
+        "id": "vm_t3",
+        "transcript": "Então Vm é delta S sobre delta t.",
+        "intencao": "resultado",
+        "detalhe": "Vm = ΔS / Δt"
+      },
+      {
+        "id": "vm_t4",
+        "transcript": "Espera, deixa eu lembrar também da fórmula de Bhaskara só como exemplo de comando.",
+        "intencao": "comando_generico",
+        "expressao": "x = (−b ± √(b² − 4ac)) / (2a)",
+        "detalhe": "Fórmula de Bhaskara (exemplo de comando genérico)"
+      }
+    ]
+  }
+]
