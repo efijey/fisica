@@ -1,0 +1,17 @@
+---
+alwaysApply: true
+---
+
+# Decisões sempre por perguntas com opções
+
+O usuário decide melhor escolhendo entre opções do que lendo listas no texto.
+
+Sempre que houver ideia nova, pendência, bifurcação de caminho ou próximo passo a definir:
+
+1. Explicar o contexto em poucas frases, em português simples.
+2. Usar a ferramenta de perguntas (`AskQuestion`) com opções claras, em vez de listar alternativas no texto.
+3. Marcar a opção recomendada com "(Recomendado)" e colocá-la primeiro.
+4. Agrupar várias decisões num único formulário quando forem independentes.
+5. Ao fim de cada tarefa, perguntar o próximo passo (push, PR, próxima feature) também por opções.
+
+Não perguntar o que dá para resolver sozinho pelo código, pela documentação ou por um padrão sensato.
