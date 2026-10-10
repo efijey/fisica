@@ -197,13 +197,15 @@
       "area": "explicadora",
       "title": "Renderização de equações (derivadas, integrais)",
       "user_visible_behavior": "Equações aparecem formatadas como em livro, incluindo dx/dt e integrais.",
-      "status": "not_started",
+      "status": "passing",
       "verification": [
         "Página com derivada e integral renderizadas no navegador.",
         "npm run build"
       ],
-      "evidence": [],
-      "notes": ""
+      "evidence": [
+        "2026-10-10: /estudo em localhost:3000 mostra limite, dx/dt, d²x/dt² e integral formatados (screenshot conferido); npm run build ok (rota /estudo estática); lint 0 erros; tsc ok."
+      ],
+      "notes": "KaTeX renderizado no servidor. components/physics/Equacao.tsx: <Equacao tex bloco> e <TextoComEquacoes texto> com \\( \\) na linha e \\[ \\] em destaque. Fórmulas do catálogo continuam em Unicode (não convertidas)."
     },
     {
       "id": "study-003",

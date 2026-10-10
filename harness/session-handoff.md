@@ -13,6 +13,8 @@
 
 - Lint verde (`qa-002` passing): 0 erros, 2 avisos de variável não usada.
 - Rascunho da ementa em `docs/ementa-fisica-1.md` (`study-001`).
+- Equações em LaTeX com KaTeX (`study-002` passing), branch `feature/equacoes-katex`: componente `components/physics/Equacao.tsx` e página `/estudo` (prévia, vira a casa da trilha).
+- Fonte do site corrigida: `--font-sans` apontava para si mesma e o site todo caía em fonte serifada.
 
 ## Quebrado ou sem verificar
 

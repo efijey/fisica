@@ -34,4 +34,5 @@ Estudante de física; vai usar o app no semestre de Física 1 (cinemática, Newt
 - **Verificação:** `./init.sh` ok; `npm run build` ok; `tsc` ok. `npm run lint` com 2 erros pré-existentes (`qa-002`).
 - **Próximo passo:** `qa-002` (lint), depois `study-001` (ementa) → `study-002` (equações) → `study-003` (capítulo 1) → `study-004` (lente).
 - **Depois (mesmo dia):** `qa-002` passing — `npm run lint` com 0 erros (GraficosEquacoes sem efeito; MesaCalculoMental com `useSyncExternalStore`), build e tsc ok. Rascunho da ementa em `docs/ementa-fisica-1.md` (`study-001`, aguardando revisão).
+- **Depois (2):** filosofia registrada em `docs/roadmap.md` (livro para qualquer pessoa; público em transição: cursinho, 1º ano). `study-002` passing na branch `feature/equacoes-katex` (KaTeX + `/estudo`, conferido no navegador). Fonte Geist corrigida no `globals.css`.
 - **Pasta auxiliar:** worktree `../fisica-tft` na branch `feature/treino-personalizado-qualidade`, servindo em `localhost:3002`; pode ser removida após o merge (`git worktree remove ../fisica-tft`).
