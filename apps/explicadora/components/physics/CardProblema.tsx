@@ -44,9 +44,9 @@ export function CardProblema({
             <div className="flex flex-col items-end gap-1 shrink-0">
               <Badge
                 variant="outline"
-                className={`text-xs capitalize ${AREA_COLOR[problema.area]}`}
+                className={`text-xs capitalize ${AREA_COLOR[problema.area] ?? "bg-zinc-100 text-zinc-700 border-zinc-200"}`}
               >
-                {AREA_LABEL[problema.area]}
+                {AREA_LABEL[problema.area] ?? problema.area}
               </Badge>
               {resolvido && (
                 <Badge variant="outline" className="text-[10px] text-green-700 border-green-500/30 bg-green-500/10">

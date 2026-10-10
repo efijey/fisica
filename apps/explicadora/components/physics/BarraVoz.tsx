@@ -8,7 +8,7 @@ interface BarraVozProps {
   ouvindo: boolean
   pensando: boolean
   ocupado: boolean
-  modoStt: "webspeech" | "mock"
+  modoStt: "whisper" | "webspeech" | "mock"
   turnosRestantes: number | null
   llmAtivo: boolean | null
   corrigirNoFim: boolean
@@ -38,6 +38,14 @@ export function BarraVoz({
   const micEsgotado =
     modoStt === "mock" && turnosRestantes !== null && turnosRestantes === 0
 
+  const rotuloMic = (() => {
+    if (pensando) return "Escrevendo…"
+    if (ouvindo) return modoStt === "whisper" ? "Parar" : "Parar / ouvindo…"
+    if (modoStt === "whisper") return "Gravar"
+    if (modoStt === "webspeech") return "Falar"
+    return "Falar próximo passo (demo)"
+  })()
+
   return (
     <div className="flex flex-col gap-3 rounded-xl border bg-card p-3">
       <div className="flex flex-wrap items-center gap-2">
@@ -45,17 +53,11 @@ export function BarraVoz({
           type="button"
           size="lg"
           onClick={onGravar}
-          disabled={ocupado || micEsgotado}
+          disabled={(ocupado && !ouvindo) || micEsgotado}
           className={ouvindo ? "animate-pulse" : undefined}
         >
           <Mic data-icon="inline-start" />
-          {ouvindo
-            ? "Ouvindo…"
-            : pensando
-              ? "Escrevendo…"
-              : modoStt === "webspeech"
-                ? "Falar"
-                : "Falar próximo passo"}
+          {rotuloMic}
         </Button>
 
         <Button
@@ -117,14 +119,18 @@ export function BarraVoz({
 
       <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
         <Badge variant="outline" className="text-[10px] font-normal">
-          {modoStt === "webspeech" ? "Web Speech" : "Mock STT"}
+          {modoStt === "whisper"
+            ? "STT Whisper"
+            : modoStt === "webspeech"
+              ? "Web Speech"
+              : "Mock STT (demo)"}
         </Badge>
         <Badge variant="outline" className="text-[10px] font-normal">
           {llmAtivo === null
-            ? "Tutor…"
+            ? "Tutor sob demanda"
             : llmAtivo
-              ? "LLM OpenAI"
-              : "Tutor mock"}
+              ? "Tutor LLM"
+              : "Tutor offline"}
         </Badge>
         {modoStt === "mock" && turnosRestantes !== null && (
           <span>
@@ -133,8 +139,16 @@ export function BarraVoz({
               : `${turnosRestantes} turno${turnosRestantes === 1 ? "" : "s"} restante${turnosRestantes === 1 ? "" : "s"}`}
           </span>
         )}
+        {modoStt === "whisper" && (
+          <span>
+            Gravar → falar → Parar. O texto vai ao papel; a IA só entra na
+            correção.
+          </span>
+        )}
         {modoStt === "webspeech" && (
-          <span>Fale e solte — a folha atualiza com filtro leve.</span>
+          <span>
+            Fale e clique de novo para parar. Correção parcial atualiza a tag.
+          </span>
         )}
       </div>
     </div>

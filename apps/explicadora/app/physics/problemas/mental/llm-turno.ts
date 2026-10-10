@@ -43,31 +43,29 @@ const respostaSchema = z.object({
 })
 
 function systemPrompt(): string {
-  return `Você é um assistente de mesa de cálculo mental para física (ensino médio).
-O aluno fala; você escreve/atualiza uma FOLHA de resolução (documento de blocos).
+  return `Você é o tutor de correção de uma mesa de cálculo mental (física, ensino médio).
 
-Filtro SUAVE:
-- Limpe balbucios e forme uma frase clara (campo "eco").
-- NÃO corrija o raciocínio físico no modo "turno" — o aluno pode errar e o erro pode ficar no papel.
-- Só escreva equação do catálogo se o aluno pedir claramente uma fórmula.
-- Use append na maioria dos casos; rewrite/remove/move quando precisar reorganizar.
+A FOLHA já contém o que o aluno falou (parágrafos). Você NÃO escreve o raciocínio do aluno —
+isso já foi para o papel via STT. Seu papel é avaliar e dar feedback.
 
 Modos:
-- turno: interpretar a fala e atualizar a folha.
-- ajuda: nota curta de orientação (sem entregar a resposta numérica completa).
-- corrigir / corrigir_fim: avaliar o documento; pode acrescentar nota e veredito.
+- ajuda: uma nota curta de orientação (não entregue a resposta final completa). veredito = null.
+- corrigir: CORREÇÃO PARCIAL em tempo real. Compare enunciado × folha até agora.
+  - SEMPRE preencha veredito:
+    - "certo": caminho e resultado coerentes com o pedido (mesmo que incompleto em detalhes menores)
+    - "no_caminho": raciocínio útil / direção certa, ainda incompleto ou com falha leve
+    - "desviado": abordagem errada, fórmula inadequada ou contradição clara com o enunciado
+  - Acrescente UMA nota breve (1–3 frases). Não aponte cada detalhe; seja leve.
+  - NÃO reescreva nem apague os blocos do aluno.
+- corrigir_fim: CORREÇÃO FINAL da sessão. Mesmas regras de veredito (obrigatório),
+  feedback um pouco mais completo, ainda sem apagar a resolução do aluno.
 
 ${schemaOperacoesHint()}
 
 Regras do JSON de operações (schema achatado):
-- append/replace: preencha "bloco" com id, tipo e campos do tipo.
-- paragrafo/nota: use bloco.texto
-- equacao: use bloco.expressao (obrigatório) e bloco.texto/formulaId opcionais
-- rewrite: preencha "id" + "texto" (+ expressao se equacao)
-- remove: preencha "id"
-- move: preencha "id" + "afterId" (null = início)
-
-Gere ids novos únicos para blocos append (ex.: b1, b2).`
+- Prefira append de bloco tipo "nota" com o feedback.
+- Só use rewrite/remove/move em casos excepcionais (quase nunca).
+- Gere ids novos únicos para append (ex.: n1, n2).`
 }
 
 function normalizarBloco(
@@ -151,6 +149,11 @@ export type ResultadoProcessamento = RespostaTurnoMental & {
 export async function processarTurnoMental(
   pedido: PedidoTurnoMental
 ): Promise<ResultadoProcessamento> {
+  // Turno de fala: append local no cliente. Se chegar aqui, só espelha o texto.
+  if (pedido.intencao === "turno") {
+    return processarTurnoMock(pedido)
+  }
+
   const key = process.env.OPENAI_API_KEY?.trim()
   if (!key) {
     return processarTurnoMock(pedido)
@@ -167,7 +170,6 @@ export async function processarTurnoMental(
       pergunta: pedido.pergunta,
     },
     formulasCatalogo: resumoFormulasParaPrompt(pedido.formulas),
-    transcript: pedido.transcript ?? null,
     documentoAtual: pedido.documento,
     turnosConsumidos: pedido.turnosConsumidos,
   }
@@ -177,13 +179,21 @@ export async function processarTurnoMental(
       model: openai("gpt-4o-mini"),
       schema: respostaSchema,
       system: systemPrompt(),
-      prompt: `Pedido do aluno (JSON):\n${JSON.stringify(userPayload, null, 2)}`,
+      prompt: `Pedido de tutor (JSON):\n${JSON.stringify(userPayload, null, 2)}`,
     })
+
+    let veredito = object.veredito ?? undefined
+    if (
+      (pedido.intencao === "corrigir" || pedido.intencao === "corrigir_fim") &&
+      !veredito
+    ) {
+      veredito = "no_caminho"
+    }
 
     return {
       eco: object.eco,
       operacoes: normalizarOperacoes(object.operacoes),
-      veredito: object.veredito ?? undefined,
+      veredito,
       fonte: "llm",
     }
   } catch (e) {

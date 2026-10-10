@@ -86,8 +86,9 @@ export function FolhaResolucao({
 
         {vazio ? (
           <p className="text-sm text-muted-foreground leading-relaxed max-w-prose">
-            Esta folha está em branco. Fale o próximo passo — a IA escreve aqui
-            com um filtro leve, sem corrigir seu raciocínio até você pedir.
+            Esta folha está em branco. Fale o próximo passo — contas e fórmulas
+            aparecem em notação matemática; o restante fica como você disse.
+            Peça correção quando quiser feedback.
           </p>
         ) : (
           <div className="flex flex-col gap-2 max-w-prose">

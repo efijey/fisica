@@ -19,7 +19,10 @@ type SpeechRecognitionLike = {
 }
 
 type SpeechRecognitionEventLike = {
-  results: ArrayLike<ArrayLike<{ transcript: string; confidence: number }> & { isFinal?: boolean }>
+  resultIndex: number
+  results: ArrayLike<
+    ArrayLike<{ transcript: string; confidence: number }> & { isFinal?: boolean }
+  >
 }
 
 function getSpeechRecognitionCtor():
@@ -38,8 +41,7 @@ export function webSpeechDisponivel(): boolean {
 }
 
 /**
- * Push-to-talk: inicia reconhecimento e resolve no primeiro resultado final
- * ou ao chamar stop (via timeout de silêncio / end).
+ * Push-to-talk: acumula resultados finais até `parar()` ou timeout.
  */
 export function gravarWebSpeech(opts?: {
   lang?: string
@@ -51,7 +53,9 @@ export function gravarWebSpeech(opts?: {
   const Ctor = getSpeechRecognitionCtor()
   if (!Ctor) {
     return {
-      promise: Promise.reject(new Error("Web Speech API indisponível neste navegador.")),
+      promise: Promise.reject(
+        new Error("Web Speech API indisponível neste navegador.")
+      ),
       parar: () => {},
     }
   }
@@ -59,42 +63,51 @@ export function gravarWebSpeech(opts?: {
   const recognition = new Ctor()
   recognition.lang = opts?.lang ?? "pt-BR"
   recognition.interimResults = true
-  recognition.continuous = false
+  recognition.continuous = true
   recognition.maxAlternatives = 1
 
   let settled = false
+  let finais = ""
   let parcial = ""
+  let confianca = 0
   let timer: ReturnType<typeof setTimeout> | null = null
+  let stopping = false
 
   const promise = new Promise<ResultadoWebSpeech>((resolve, reject) => {
-    const finish = (transcript: string, confianca?: number) => {
+    const finish = (transcript: string, conf?: number) => {
       if (settled) return
       settled = true
       if (timer) clearTimeout(timer)
       const t = transcript.trim()
       if (!t) reject(new Error("Nenhuma fala detectada."))
-      else resolve({ transcript: t, confianca })
+      else resolve({ transcript: t, confianca: conf })
     }
 
     recognition.onresult = (event) => {
-      let finalText = ""
-      let confidence = 0
-      for (let i = 0; i < event.results.length; i++) {
+      let novosFinais = ""
+      let ultimoParcial = ""
+      for (let i = event.resultIndex; i < event.results.length; i++) {
         const result = event.results[i]
         if (!result || !result[0]) continue
         const alt = result[0]
         if ((result as { isFinal?: boolean }).isFinal) {
-          finalText += alt.transcript
-          confidence = alt.confidence
+          novosFinais += alt.transcript
+          confianca = alt.confidence
         } else {
-          parcial = alt.transcript
+          ultimoParcial = alt.transcript
         }
       }
-      if (finalText) finish(finalText, confidence)
+      if (novosFinais) finais += novosFinais
+      parcial = ultimoParcial
     }
 
     recognition.onerror = (event) => {
       if (settled) return
+      // "aborted" / "no-speech" no fim voluntário: tenta o que já capturou
+      if (stopping || event.error === "aborted" || event.error === "no-speech") {
+        finish(`${finais}${parcial}`.trim(), confianca || undefined)
+        return
+      }
       settled = true
       if (timer) clearTimeout(timer)
       reject(new Error(`Erro no reconhecimento: ${event.error}`))
@@ -102,11 +115,12 @@ export function gravarWebSpeech(opts?: {
 
     recognition.onend = () => {
       if (settled) return
-      finish(parcial)
+      finish(`${finais}${parcial}`.trim(), confianca || undefined)
     }
 
-    const timeoutMs = opts?.timeoutMs ?? 12000
+    const timeoutMs = opts?.timeoutMs ?? 20000
     timer = setTimeout(() => {
+      stopping = true
       try {
         recognition.stop()
       } catch {
@@ -126,6 +140,7 @@ export function gravarWebSpeech(opts?: {
   return {
     promise,
     parar: () => {
+      stopping = true
       try {
         recognition.stop()
       } catch {

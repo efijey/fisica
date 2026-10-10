@@ -284,9 +284,9 @@ export function PainelRespostaProblema({
         </Button>
         <Badge
           variant="outline"
-          className={`text-xs capitalize ${AREA_COLOR[problema.area]}`}
+          className={`text-xs capitalize ${AREA_COLOR[problema.area] ?? "bg-zinc-100 text-zinc-700 border-zinc-200"}`}
         >
-          {AREA_LABEL[problema.area]}
+          {AREA_LABEL[problema.area] ?? problema.area}
         </Badge>
       </div>
 

@@ -5,13 +5,8 @@ import type {
   OperacaoFolha,
   RespostaTurnoMental,
 } from "./documento"
-import {
-  transcriptParaOperacoesMock,
-  tutorParaOperacoesMock,
-  turnoParaOperacoes,
-} from "./turno-para-ops"
-import type { RoteiroSttProblema, TurnoVoz } from "./types"
-import sttFixtures from "./fixtures/stt-turns.json"
+import { limparFalaAluno, novoBlocoId } from "./documento"
+import { tutorParaOperacoesMock } from "./turno-para-ops"
 
 export interface PedidoTurnoMental {
   problemaId: string
@@ -22,33 +17,15 @@ export interface PedidoTurnoMental {
   intencao: IntencaoMental
   transcript?: string
   documento: DocumentoFolha
-  /** Quantos turnos de fala já ocorreram nesta sessão (para mock tutor). */
+  /** Quantos turnos de fala já ocorreram nesta sessão. */
   turnosConsumidos: number
 }
 
-function encontrarTurnoPorTranscript(
-  problemaId: string,
-  transcript: string
-): TurnoVoz | undefined {
-  const roteiro = (sttFixtures as RoteiroSttProblema[]).find(
-    (r) => r.problemaId === problemaId
-  )
-  if (!roteiro) return undefined
-  const norm = transcript.trim().toLowerCase()
-  return roteiro.turnos.find((t) => t.transcript.trim().toLowerCase() === norm)
-}
-
-function proximoTurnoFixture(
-  problemaId: string,
-  turnosConsumidos: number
-): TurnoVoz | undefined {
-  const roteiro = (sttFixtures as RoteiroSttProblema[]).find(
-    (r) => r.problemaId === problemaId
-  )
-  return roteiro?.turnos[turnosConsumidos]
-}
-
-/** Processamento local sem LLM (fallback). */
+/**
+ * Fallback sem LLM.
+ * Turno de fala normalmente nem chega aqui (append local no cliente).
+ * Ajuda/correção: resposta genérica — sem gabarito por problema.
+ */
 export function processarTurnoMock(
   pedido: PedidoTurnoMental
 ): RespostaTurnoMental {
@@ -60,35 +37,27 @@ export function processarTurnoMock(
     return tutorParaOperacoesMock(
       pedido.problemaId,
       pedido.intencao,
-      pedido.turnosConsumidos
+      pedido.turnosConsumidos,
+      pedido.documento
     )
   }
 
   const transcript = pedido.transcript?.trim() ?? ""
   if (!transcript) {
-    return {
-      eco: "",
-      operacoes: [],
-      fonte: "mock",
-    }
+    return { eco: "", operacoes: [], fonte: "mock" }
   }
 
-  const porTexto = encontrarTurnoPorTranscript(pedido.problemaId, transcript)
-  if (porTexto) return turnoParaOperacoes(porTexto)
-
-  const porIndice = proximoTurnoFixture(
-    pedido.problemaId,
-    pedido.turnosConsumidos
-  )
-  // Se o transcript bate com o do índice (mock STT), usa estrutura
-  if (
-    porIndice &&
-    porIndice.transcript.trim().toLowerCase() === transcript.toLowerCase()
-  ) {
-    return turnoParaOperacoes(porIndice)
+  const eco = limparFalaAluno(transcript)
+  return {
+    eco,
+    operacoes: [
+      {
+        op: "append",
+        bloco: { id: novoBlocoId("p"), tipo: "paragrafo", texto: eco },
+      },
+    ],
+    fonte: "mock",
   }
-
-  return transcriptParaOperacoesMock(transcript, pedido.formulas)
 }
 
 export function resumoFormulasParaPrompt(formulaIds: string[]): string {
@@ -104,18 +73,16 @@ export function resumoFormulasParaPrompt(formulaIds: string[]): string {
 export function schemaOperacoesHint(): string {
   return `Responda SOMENTE JSON válido com o formato:
 {
-  "eco": "frase limpa do que o aluno quis dizer",
+  "eco": "resumo curto do feedback (1 frase)",
   "operacoes": [
-    { "op": "append", "bloco": { "id": "tmp1", "tipo": "paragrafo", "texto": "..." } },
-    { "op": "append", "bloco": { "id": "tmp2", "tipo": "equacao", "texto": "nome", "expressao": "F = m · a", "formulaId": "segunda_lei_newton" } },
-    { "op": "append", "bloco": { "id": "tmp3", "tipo": "nota", "texto": "ajuda do tutor" } },
-    { "op": "rewrite", "id": "id-existente", "texto": "novo texto", "expressao": "opcional" },
-    { "op": "remove", "id": "id-existente" },
-    { "op": "replace", "id": "id-existente", "bloco": { "id": "id-existente", "tipo": "paragrafo", "texto": "..." } },
-    { "op": "move", "id": "id-existente", "afterId": null }
+    { "op": "append", "bloco": { "id": "tmp1", "tipo": "nota", "texto": "feedback do tutor" } }
   ],
-  "veredito": "certo" | "no_caminho" | "desviado" | omitir
-}`
+  "veredito": "certo" | "no_caminho" | "desviado"
+}
+
+Em ajuda, veredito pode ser null.
+Em corrigir / corrigir_fim, veredito é OBRIGATÓRIO.
+Prefira append de nota; não apague nem reescreva o raciocínio do aluno.`
 }
 
 export type { OperacaoFolha }

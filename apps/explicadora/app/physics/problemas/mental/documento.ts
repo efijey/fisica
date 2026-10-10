@@ -1,4 +1,5 @@
 import type { Veredito } from "../catalog"
+import { formatarFalaParaFolha } from "./fala-para-matematica"
 
 export type BlocoFolha =
   | { id: string; tipo: "paragrafo"; texto: string }
@@ -45,6 +46,69 @@ let blocoSeq = 0
 export function novoBlocoId(prefixo = "b"): string {
   blocoSeq += 1
   return `${prefixo}-${Date.now()}-${blocoSeq}`
+}
+
+/** Limpeza mínima da fala para colocar no papel (sem LLM). */
+export function limparFalaAluno(texto: string): string {
+  const t = texto.trim().replace(/\s+/g, " ")
+  if (!t) return t
+  return t.charAt(0).toUpperCase() + t.slice(1)
+}
+
+/** Anexa a fala do aluno — prosa como parágrafo; conta/fórmula como equação. */
+export function anexarFalaNaFolha(
+  doc: DocumentoFolha,
+  transcript: string
+): { documento: DocumentoFolha; texto: string } {
+  const bruto = transcript.trim().replace(/\s+/g, " ")
+  if (!bruto) return { documento: doc, texto: "" }
+
+  const formatado = formatarFalaParaFolha(bruto)
+  const ops: OperacaoFolha[] = []
+
+  if (formatado.tipo === "paragrafo") {
+    if (!formatado.texto) return { documento: doc, texto: "" }
+    ops.push({
+      op: "append",
+      bloco: {
+        id: novoBlocoId("p"),
+        tipo: "paragrafo",
+        texto: formatado.texto,
+      },
+    })
+  } else if (formatado.tipo === "equacao") {
+    ops.push({
+      op: "append",
+      bloco: {
+        id: novoBlocoId("eq"),
+        tipo: "equacao",
+        texto: formatado.texto,
+        expressao: formatado.expressao,
+      },
+    })
+  } else {
+    ops.push({
+      op: "append",
+      bloco: {
+        id: novoBlocoId("p"),
+        tipo: "paragrafo",
+        texto: formatado.paragrafo,
+      },
+    })
+    ops.push({
+      op: "append",
+      bloco: {
+        id: novoBlocoId("eq"),
+        tipo: "equacao",
+        expressao: formatado.expressao,
+      },
+    })
+  }
+
+  return {
+    texto: bruto,
+    documento: aplicarOperacoes(doc, ops),
+  }
 }
 
 export function aplicarOperacoes(

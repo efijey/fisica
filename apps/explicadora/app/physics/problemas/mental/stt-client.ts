@@ -66,6 +66,11 @@ export class MockSttClient implements SttClient {
   }
 }
 
+/**
+ * Cliente STT de demonstração (fixtures).
+ * Em produção a mesa usa gravação + Whisper (`gravar-audio.ts`) ou Web Speech;
+ * este mock só entra quando não há microfone/STT real.
+ */
 export function criarSttClient(problemaId: string): SttClient {
   return new MockSttClient(problemaId)
 }

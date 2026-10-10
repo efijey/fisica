@@ -4,16 +4,11 @@
 
 import { Separator } from "@/components/ui/separator";
 import { CardFormula } from "./CardFormula";
-import type { ResultadoInferencia, AreaFisica } from "@fisica/physics-core";
-
-const AREA_LABEL: Record<AreaFisica, string> = {
-  cinematica: "Cinemática",
-  dinamica:   "Dinâmica",
-  energia:    "Energia",
-  momento:    "Momento",
-  rotacao:    "Rotação",
-  gravitacao: "Gravitação",
-};
+import {
+  AREA_LABEL,
+  type ResultadoInferencia,
+  type AreaFisica,
+} from "@fisica/physics-core";
 
 interface ListaFormulasProps {
   resultados: ResultadoInferencia[];
@@ -79,7 +74,7 @@ export function ListaFormulas({ resultados, variaveisSelecionadas }: ListaFormul
           {index > 0 && <Separator />}
 
           <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-            {AREA_LABEL[area]}
+            {AREA_LABEL[area] ?? area}
           </h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
