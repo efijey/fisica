@@ -1,3 +1,4 @@
+import { fenomenosGerados } from "../../generated/phenomena";
 import type { AreaFisica } from "../formulas/catalog";
 
 export interface Fenomeno {
@@ -10,7 +11,7 @@ export interface Fenomeno {
   formulas: string[];
 }
 
-export const catalogoFenomenos: Fenomeno[] = [
+export const catalogoFenomenosBase: Fenomeno[] = [
   {
     id: "freada_veiculo",
     nome: "Freada de um veículo",
@@ -197,6 +198,11 @@ export const catalogoFenomenos: Fenomeno[] = [
     ],
     formulas: ["atrito_cinetico", "atrito_estatico_maximo", "segunda_lei_newton"],
   },
+];
+
+export const catalogoFenomenos: Fenomeno[] = [
+  ...catalogoFenomenosBase,
+  ...fenomenosGerados,
 ];
 
 export function buscarFenomenoPorId(id: string): Fenomeno | undefined {

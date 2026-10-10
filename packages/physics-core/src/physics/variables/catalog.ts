@@ -1,5 +1,7 @@
 // physics/variables/catalog.ts
 
+import { variaveisGeradas } from "../../generated/variables";
+
 export interface VariavelFisica {
     id: string;
     simbolo: string;
@@ -14,9 +16,13 @@ export interface VariavelFisica {
     | "energia"
     | "rotacao"
     | "gravitacao"
-    | "momento";
+    | "momento"
+    | "hidrostatica"
+    | "termodinamica"
+    | "ondas"
+    | "eletromagnetismo";
   
-  export const catalogoVariaveis: VariavelFisica[] = [
+  export const catalogoVariaveisBase: VariavelFisica[] = [
     // ==================== CINEMÁTICA ====================
     {
       id: "tempo.modulo",
@@ -407,3 +413,8 @@ export interface VariavelFisica {
       categoria: "gravitacao"
     }
   ];
+
+export const catalogoVariaveis: VariavelFisica[] = [
+  ...catalogoVariaveisBase,
+  ...variaveisGeradas,
+];

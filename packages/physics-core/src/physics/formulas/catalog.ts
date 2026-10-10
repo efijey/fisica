@@ -1,5 +1,7 @@
 // physics/formulas/catalog.ts
 
+import { formulasGeradas } from "../../generated/formulas";
+
 export interface VariacaoFormula {
     isola: string;           // id da variável que esta forma resolve
     expressao: string;       // expressão já isolada nessa variável
@@ -22,9 +24,13 @@ export interface VariacaoFormula {
     | "energia"
     | "rotacao"
     | "gravitacao"
-    | "momento";
+    | "momento"
+    | "hidrostatica"
+    | "termodinamica"
+    | "ondas"
+    | "eletromagnetismo";
   
-  export const catalogoFormulas: Formula[] = [
+  export const catalogoFormulasBase: Formula[] = [
   
     // ==================== CINEMÁTICA ====================
     {
@@ -416,3 +422,8 @@ export interface VariacaoFormula {
       ]
     },
   ];
+
+export const catalogoFormulas: Formula[] = [
+  ...catalogoFormulasBase,
+  ...formulasGeradas,
+];

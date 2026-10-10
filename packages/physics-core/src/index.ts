@@ -6,4 +6,6 @@ export * from "./physics/phenomena/catalog";
 export * from "./physics/engine/inferencia";
 export * from "./physics/engine/conexoes";
 export * from "./physics/graficos/catalog";
+export * from "./physics/graficos/serializado";
 export * from "./areas";
+export * from "./generated/areas";

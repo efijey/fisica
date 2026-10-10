@@ -1,3 +1,4 @@
+import { graficosGerados } from "../../generated/graficos";
 import type { AreaFisica } from "../formulas/catalog";
 
 export type GrauEquacao = 1 | 2;
@@ -47,7 +48,7 @@ export const GRAU_LABEL: Record<GrauEquacao, string> = {
   2: "2º grau",
 };
 
-export const catalogoGraficos: VisualizacaoGrafico[] = [
+export const catalogoGraficosBase: VisualizacaoGrafico[] = [
   // ==================== 1º GRAU ====================
   {
     id: "mru_s_t",
@@ -329,6 +330,11 @@ export const catalogoGraficos: VisualizacaoGrafico[] = [
       "Como Ec, a energia na mola é quadrática na deformação. Em x = 0 a energia é zero; alongar ou comprimir o mesmo |x| guarda a mesma energia — parábola simétrica.",
     pontoDestaqueX: 0.2,
   },
+];
+
+export const catalogoGraficos: VisualizacaoGrafico[] = [
+  ...catalogoGraficosBase,
+  ...graficosGerados,
 ];
 
 export function obterGrafico(id: string): VisualizacaoGrafico | undefined {

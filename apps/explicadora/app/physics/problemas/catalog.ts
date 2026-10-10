@@ -1,4 +1,5 @@
 import type { AreaFisica } from "@fisica/physics-core";
+import { catalogoProblemasGerados } from "./catalog.generated";
 
 export type Veredito = "certo" | "no_caminho" | "desviado";
 
@@ -18,7 +19,7 @@ export interface ProblemaConceitual {
   titulo: string;
   contexto: string;
   pergunta: string;
-  area: Extract<AreaFisica, "cinematica" | "dinamica">;
+  area: AreaFisica | string;
   formulas: string[];
   variaveis: string[];
   fenomenos: string[];
@@ -26,7 +27,7 @@ export interface ProblemaConceitual {
   dica: string;
 }
 
-export const catalogoProblemas: ProblemaConceitual[] = [
+export const catalogoProblemasManuais: ProblemaConceitual[] = [
   {
     id: "vm_onibus_escolar",
     titulo: "Velocidade média do ônibus",
@@ -249,6 +250,11 @@ export const catalogoProblemas: ProblemaConceitual[] = [
     },
     dica: "Trem A: MRU (aceleração nula, velocidade constante). Trem B: MRUV (aceleração constante, velocidade muda com o tempo).",
   },
+];
+
+export const catalogoProblemas: ProblemaConceitual[] = [
+  ...catalogoProblemasManuais,
+  ...catalogoProblemasGerados,
 ];
 
 export function buscarProblemaPorId(id: string): ProblemaConceitual | undefined {
