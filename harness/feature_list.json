@@ -233,12 +233,15 @@
       "area": "explicadora",
       "title": "Lente por mundo na trilha (mundo como idioma do site)",
       "user_visible_behavior": "Um seletor troca o capítulo para a versão TFT/LoL: intuição, analogias, exemplos e exercícios mudam; a parte formal fica igual.",
-      "status": "not_started",
+      "status": "in_progress",
       "verification": [
         "Trocar o mundo e ver só a pele mudar.",
         "Textos por mundo salvos no repositório e revisados pelo autor."
       ],
-      "evidence": [],
+      "evidence": [
+        "2026-10-10: lente TFT do capítulo 1 em /estudo?mundo=tft (8 seções: intuição, 6 exemplos, 8 exercícios). No navegador: seletor Formal/TFT troca só intuição, exemplo e exercício (etiqueta 'versão TFT'); definição, por quê e armadilhas iguais; aviso de rascunho; voltar para Formal remove etiquetas. Juiz da lente: 8/8 boa=certo, ruim=desviado (script tsx). Build, lint e tsc ok.",
+        "Pendente: revisão do autor (revisado: false) e lente de nanopartículas (depende dos artigos do autor)."
+      ],
       "notes": "Gerados uma vez, revisados, salvos (como traduções). Ver docs/personalizacao.md. Capítulo 1 sai com duas lentes: TFT (afinidade) e nanopartículas para biomateriais (interesse; nível iniciante na aplicação, fatos só de artigos/trechos enviados pelo autor)."
     },
     {
