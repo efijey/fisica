@@ -10,8 +10,9 @@ Antes de implementar ou planejar:
 
 1. Leia **[`docs/mente.md`](docs/mente.md)** (contexto vivo: visão, estado, MVP).
 2. Para mapa de pastas/rotas/lógica/banco: **[`docs/manual.md`](docs/manual.md)**.
-3. Consulte **[`docs/roadmap.md`](docs/roadmap.md)** e **[`docs/git-workflow.md`](docs/git-workflow.md)**.
-4. Siga as regras em **`.cursor/rules/`** (sempre aplicadas).
+3. Para personalização por interesses: **[`docs/personalizacao.md`](docs/personalizacao.md)**.
+4. Consulte **[`docs/roadmap.md`](docs/roadmap.md)** e **[`docs/git-workflow.md`](docs/git-workflow.md)**.
+5. Siga as regras em **`.cursor/rules/`** (sempre aplicadas).
 
 ## Princípios deste repositório
 
