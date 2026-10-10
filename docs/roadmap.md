@@ -10,6 +10,12 @@ Construir uma **explicadora de física** para estudantes brasileiros. O foco é 
 
 O estudante deve sair com **compreensão**, não apenas com um resultado. A aplicação funciona como um catálogo vivo que conecta matemática e fenômenos reais.
 
+### Filosofia: um livro que qualquer pessoa consegue ler
+
+Nas palavras do autor: o aplicativo é **um livro que pode ser lido por qualquer pessoa**. A intenção é que qualquer pessoa interessada nos temas tenha a **carga cognitiva reduzida** para conseguir aprender física.
+
+Público-alvo: quem está em **transição**, por exemplo no cursinho pré-vestibular ou no primeiro ano da faculdade. Por isso o texto não pode pressupor maturidade acadêmica, mas também não abre mão do rigor: reduz o esforço de entrar no assunto, não o conteúdo.
+
 ### Personalização por mundo (lente)
 
 Exemplos em cenários pouco familiares (avião decolando, por exemplo) gastam atenção antes mesmo da física. A tese do projeto: o **esqueleto científico** (definições, equações, derivações) é fixo; a **pele** (intuições, analogias, exemplos, exercícios) vem de um mundo que o aluno conhece — TFT, League of Legends, futebol, mountain bike.
