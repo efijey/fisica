@@ -46,9 +46,14 @@ const CUSTO_COMPRA_XP = 4
 const XP_PASSIVO = 2
 const xpParaSubir = { 3: 6, 4: 10, 5: 20, 6: 36, 7: 48, 8: 76, 9: 84 }
 const juros = (g) => Math.min(Math.floor(g / JUROS_POR), JUROS_MAX)
+const DANO_POR_INIMIGO_VIVO = 1
+const MULT_ESTRELA = { vida: [1, 1.8, 3.24], dano: [1, 1.5, 2.25] }
+const FONTE_DANO_UNIDADE = "https://teamfighttactics.leagueoflegends.com/en-us/news/game-updates/teamfight-tactics-patch-14-8-notes/"
+const FONTE_ESTRELAS = "https://wiki.leagueoflegends.com/en-us/TFT:Champion"
 
 // ---------- 1. sequências ----------
-const danoUnidadesHip = { 2: 3, 3: 5 }
+const inimigosVivosHip = { 2: 3, 3: 5, 4: 6 }
+const danoDerrota = (estagio) => danoEstagio(estagio) + DANO_POR_INIMIGO_VIVO * inimigosVivosHip[estagio]
 function simularSequencia(resultados) {
   let s = 0
   let ouro = 0
@@ -61,7 +66,7 @@ function simularSequencia(resultados) {
       ouro += OURO_VITORIA
     } else {
       s = s < 0 ? s - 1 : -1
-      vida += danoEstagio(estagio) + danoUnidadesHip[estagio]
+      vida += danoDerrota(estagio)
     }
     ouro += bonusSequencia(Math.abs(s))
   })
@@ -85,7 +90,7 @@ const taxaCambio = (perde.ouro - perdeCedo.ouro) / (perde.vida - perdeCedo.vida)
 const danoEst2 = pvpPorEstagio[1] * danoEstagio(2)
 const danoEst3 = pvpPorEstagio[2] * danoEstagio(3)
 const vidaDepoisPerdeTudo = VIDA_INICIAL - perde.vida
-const danoPorDerrotaEst4Hip = danoEstagio(4) + 6
+const danoPorDerrotaEst4Hip = danoDerrota(4)
 const derrotasRestantes = vidaDepoisPerdeTudo / danoPorDerrotaEst4Hip
 
 // ---------- 3. economia ----------
@@ -165,7 +170,7 @@ const regrasUsadas = `<div class="caixa curta"><b>Regras usadas neste material $
 <li>Bônus de sequência (vitórias ou derrotas seguidas): 3–4 seguidas = +1; 5 = +2; 6 ou mais = +3. Rodadas contra monstros e carrossel não quebram a sequência.</li>
 <li>XP: ${CUSTO_COMPRA_XP} de ouro compram ${XP_POR_COMPRA} XP; +${XP_PASSIVO} XP por rodada. XP para subir: ${Object.entries(xpParaSubir).map(([de, xp]) => `${de}→${Number(de) + 1}: ${xp}`).join("; ")}.</li>
 <li>Número de peças em campo = nível do jogador.</li>
-<li>Ao perder, o dano ao jogador é o dano do estágio ${DADOS} mais um valor por unidade inimiga sobrevivente (depende de custo e estrelas; não vem nos arquivos).</li>
+<li>Ao perder, o dano ao jogador é o dano do estágio ${DADOS} mais ${DANO_POR_INIMIGO_VIVO} por unidade inimiga viva, sem importar custo ou estrelas (regra oficial desde a atualização 14.8: <a href="${FONTE_DANO_UNIDADE}">notas da Riot</a>; guias do set ${SET} confirmam).</li>
 <li>As unidades atacam, em geral, o inimigo mais próximo.</li>
 </ul></div>`
 
@@ -192,7 +197,7 @@ ${regrasUsadas}
 
 <h2 class="quebra">1. O que é melhor: sequência de vitórias ou de derrotas?</h2>
 <div class="caixa resposta"><b>Resposta curta.</b> Vencer em sequência é o melhor (ouro + vida). Perder em sequência só compensa <b>cedo</b> (estágio 2, quando a derrota é barata) e <b>junto com economia</b>: o bônus sozinho paga pouco. Levar a sequência de derrotas até o fim do estágio 3 custa vida demais. O pior caso é alternar vitória e derrota: perde vida e não ganha bônus.</div>
-<p>${DADOS} Os estágios 2 e 3 têm ${pvpPorEstagio[1]} combates contra jogadores cada (mais um carrossel e uma rodada de monstros). ${REGRA}${HIPOTESE} Simulação dos ${totalPvp} combates, contando só o ouro que <b>muda</b> entre os cenários (vitórias + bônus de sequência) e a vida perdida. O dano das unidades sobreviventes foi suposto em ${danoUnidadesHip[2]} por derrota no estágio 2 e ${danoUnidadesHip[3]} no estágio 3.</p>
+<p>${DADOS} Os estágios 2 e 3 têm ${pvpPorEstagio[1]} combates contra jogadores cada (mais um carrossel e uma rodada de monstros). ${REGRA}${HIPOTESE} Simulação dos ${totalPvp} combates, contando só o ouro que <b>muda</b> entre os cenários (vitórias + bônus de sequência) e a vida perdida. Cada derrota custa o dano do estágio mais ${DANO_POR_INIMIGO_VIVO} por inimigo vivo; supusemos ${inimigosVivosHip[2]} inimigos vivos por derrota no estágio 2 e ${inimigosVivosHip[3]} no estágio 3.</p>
 <table><tr><th>Cenário</th><th>Resultados (V/D)</th><th>Ouro extra</th><th>Vida perdida</th></tr>${linhasCenarios}</table>
 <p><b>Leitura da tabela:</b> “perde o estágio 2, vence o 3” tem <b>mais ouro e menos vida perdida</b> do que alternar (${perdeCedo.ouro} contra ${alterna.ouro} de ouro; ${perdeCedo.vida} contra ${alterna.vida} de vida). Ele é melhor nas duas coisas ao mesmo tempo. Já estender as derrotas pelo estágio 3 (“perde tudo”) troca vida por ouro a uma taxa ruim:</p>
 ${md(String.raw`\frac{\Delta\,\text{ouro}}{\Delta\,\text{vida}} = \frac{${perde.ouro} - ${perdeCedo.ouro}}{${perde.vida} - ${perdeCedo.vida}} \approx ${n(taxaCambio, 2)}\ \frac{\text{ouro}}{\text{ponto de vida}}`)}
@@ -206,14 +211,16 @@ ${md(String.raw`\frac{\Delta\,\text{ouro}}{\Delta\,\text{vida}} = \frac{${perde.
 </ol></div>
 
 <h2 class="quebra">2. Quanto dano você pode tomar no total?</h2>
-<div class="caixa resposta"><b>Resposta curta.</b> Você começa com ${VIDA_INICIAL}. Perder o estágio 2 inteiro custa ~${perdeCedo.vida} no nosso exemplo, um quarto da vida. Perder <b>todos</b> os combates dos estágios 2 e 3 custa ${danoEst2 + danoEst3} só de dano fixo e ~${perde.vida} com as unidades sobreviventes: sobram ~${vidaDepoisPerdeTudo}, que no estágio 4 valem só umas ${fmt(derrotasRestantes, 1)} derrotas.</div>
-<p>${DADOS} Dano fixo por derrota em cada estágio (encontrado nos arquivos; a tabela bate com o modo padrão, mas o set não aponta para ela por nome, então vale conferir):</p>
-<table><tr><th>Estágio</th>${[2, 3, 4, 5, 6, 7].map((e) => `<td>${e}</td>`).join("")}</tr><tr><th>Dano fixo por derrota</th>${[2, 3, 4, 5, 6, 7].map((e) => `<td>${danoEstagio(e)}</td>`).join("")}</tr></table>
-<p>${MODELO}${HIPOTESE} Quantas derrotas ainda cabem? É a mesma conta do “tempo para derrubar o Ornn” da parte 1:</p>
-${md(String.raw`\text{derrotas restantes} = \frac{\text{vida}}{\text{dano por derrota}} = \frac{${vidaDepoisPerdeTudo}}{${danoEstagio(4)} + 6} \approx ${n(derrotasRestantes, 1)}`)}
-<p>Compare com quem perdeu só o estágio 2: ${mi(String.raw`\frac{${VIDA_INICIAL - perdeCedo.vida}}{${danoEstagio(4)} + 6} \approx ${n((VIDA_INICIAL - perdeCedo.vida) / danoPorDerrotaEst4Hip, 1)}`)} derrotas ainda cabem no estágio 4. A diferença entre as duas estratégias é ${mi(String.raw`\approx ${n((VIDA_INICIAL - perdeCedo.vida) / danoPorDerrotaEst4Hip - derrotasRestantes, 0)}`)} derrotas de margem.</p>
-<p class="pequeno">O “+ 6” é um valor suposto para as unidades sobreviventes no estágio 4. Meça no jogo: depois de uma derrota, compare o dano recebido com o número de unidades inimigas vivas.</p>
-<p><b>Ligação com a física:</b> o “preço” de uma derrota cresce com o tempo: ${danoEstagio(2)} no estágio 2, ${danoEstagio(3)} no 3, ${danoEstagio(4)} no 4. É como uma taxa que aumenta: a mesma vida “compra” cada vez menos derrotas. Por isso perder é barato cedo e caro depois.</p>
+<div class="caixa resposta"><b>Resposta curta.</b> Você começa com ${VIDA_INICIAL}. Perder o estágio 2 inteiro custa ~${perdeCedo.vida} no nosso exemplo, um quarto da vida. Perder <b>todos</b> os combates dos estágios 2 e 3 custa ${danoEst2 + danoEst3} só de dano fixo e ~${perde.vida} somando os inimigos vivos: sobram ~${vidaDepoisPerdeTudo}, que no estágio 4 valem só umas ${fmt(derrotasRestantes, 1)} derrotas.</div>
+${md(String.raw`\text{dano de uma derrota} = \text{dano do estágio} + ${DANO_POR_INIMIGO_VIVO} \times (\text{inimigos vivos})`)}
+<p>${DADOS} Dano do estágio, por derrota (encontrado nos arquivos; a tabela bate com o modo padrão, mas o set não aponta para ela por nome):</p>
+<table><tr><th>Estágio</th>${[2, 3, 4, 5, 6, 7].map((e) => `<td>${e}</td>`).join("")}</tr><tr><th>Dano do estágio</th>${[2, 3, 4, 5, 6, 7].map((e) => `<td>${danoEstagio(e)}</td>`).join("")}</tr></table>
+<p class="pequeno">${REGRA} Fontes externas divergem nos estágios 3 e 4: o tft-boost (atualização 18.1) traz a mesma tabela dos arquivos; OP.GG e TFT Ninja trazem 5 e 8. Para tirar a dúvida, perca uma rodada no estágio 3 e subtraia do dano recebido o número de inimigos vivos.</p>
+<p>${MODELO}${HIPOTESE} Quantas derrotas ainda cabem? É a mesma conta do “tempo para derrubar o Ornn” da parte 1. Com ${inimigosVivosHip[4]} inimigos vivos por derrota no estágio 4:</p>
+${md(String.raw`\text{derrotas restantes} = \frac{\text{vida}}{\text{dano por derrota}} = \frac{${vidaDepoisPerdeTudo}}{${danoEstagio(4)} + ${inimigosVivosHip[4]}} \approx ${n(derrotasRestantes, 1)}`)}
+<p>Compare com quem perdeu só o estágio 2: ${mi(String.raw`\frac{${VIDA_INICIAL - perdeCedo.vida}}{${danoEstagio(4)} + ${inimigosVivosHip[4]}} \approx ${n((VIDA_INICIAL - perdeCedo.vida) / danoPorDerrotaEst4Hip, 1)}`)} derrotas ainda cabem no estágio 4. A diferença entre as duas estratégias é ${mi(String.raw`\approx ${n((VIDA_INICIAL - perdeCedo.vida) / danoPorDerrotaEst4Hip - derrotasRestantes, 0)}`)} derrotas de margem.</p>
+<p><b>Ligação com a física:</b> o dano de uma derrota é uma função afim, ${mi("y = a + bN")}: um termo fixo (o estágio) e um termo proporcional ao número ${mi("N")} de inimigos vivos, com inclinação ${mi(String.raw`b = ${DANO_POR_INIMIGO_VIVO}`)}. Como na posição ${mi(String.raw`x = x_0 + vt`)} do movimento uniforme.</p>
+<p><b>E o termo fixo cresce com o tempo:</b> ${danoEstagio(2)} no estágio 2, ${danoEstagio(3)} no 3, ${danoEstagio(4)} no 4. É como uma taxa que aumenta: a mesma vida “compra” cada vez menos derrotas. Por isso perder é barato cedo e caro depois.</p>
 <div class="caixa"><b>Como avaliar na partida</b><ol>
 <li>Divida a sua vida pelo dano típico de uma derrota no estágio atual: isso é o número de “vidas” que você ainda tem.</li>
 <li>Se esse número é menor que 3, a prioridade é estabilizar (gastar ouro para vencer), não economizar.</li>
@@ -265,12 +272,12 @@ ${md(String.raw`\text{força} \propto \text{DPS} \times \text{vida efetiva} \tim
 <tr><td class="nome">Nível abaixo com itens ${HIPOTESE}: 4 peças com +20% de DPS e +15% de vida efetiva contra 5 sem itens</td><td>${mi(String.raw`${n(multItensHip, 2)} \cdot 16 \approx ${n(forca(4, multItensHip), 1)}`)} contra ${mi("25")}</td><td class="nome">O de 5, por pouco.</td></tr>
 <tr><td class="nome">Quanto de item o nível abaixo precisa?</td><td>${mi(String.raw`x \cdot 16 = 25 \Rightarrow x = ${n(25 / 16, 2)}`)}</td><td class="nome">Itens que multipliquem o time por ~${fmt((25 / 16 - 1) * 100, 0)}%.</td></tr>
 </table>
-<p><b>E o dano no jogador?</b> As peças que sobram vivas causam dano (seção 2). Vencer 5 contra 4 deixa ~${fmt(sobreviventes(5, 4), 0)} vivas; vencer 5 contra 5 por pouco deixa quase nenhuma. Vencer “folgado” também protege mais vida.</p>
+<p><b>E o dano no jogador?</b> Cada peça que sobra viva causa ${DANO_POR_INIMIGO_VIVO} de dano a mais (seção 2). Vencer 5 contra 4 deixa ~${fmt(sobreviventes(5, 4), 0)} vivas; vencer 5 contra 5 por pouco deixa quase nenhuma. Ou seja: perder <b>apertado</b> custa só o dano do estágio, perder “de lavada” custa até ${mi("+5")} a mais.</p>
 <p class="pequeno">Limites do modelo: no TFT nem todos atacam todos (há linha de frente e de trás), habilidades em área e controle de grupo mudam a conta, e as peças não são iguais. Lanchester é uma primeira aproximação, boa para decidir “subo de nível ou não”, não para prever cada luta.</p>
 <div class="caixa"><b>Como avaliar na partida</b><ol>
 <li>Conte as peças: estou acima, igual ou abaixo do adversário?</li>
 <li>Se estou abaixo, meus itens compensam ~${fmt((25 / 16 - 1) * 100, 0)}% (4 contra 5)? Se não, subir de nível é a jogada.</li>
-<li>Peças de 2 estrelas contam como “mais força por peça”. ${MEDIR} Meça no jogo quanto a vida e o dano sobem.</li>
+<li>Peças de 2 estrelas contam como “mais força por peça”: vida ×${fmt(MULT_ESTRELA.vida[1], 1)} e dano de ataque ×${fmt(MULT_ESTRELA.dano[1], 1)} (<a href="${FONTE_ESTRELAS}">Wiki do LoL</a>), então DPS × vida sobe ${mi(String.raw`${n(MULT_ESTRELA.vida[1], 1)} \cdot ${n(MULT_ESTRELA.dano[1], 1)} = ${n(MULT_ESTRELA.vida[1] * MULT_ESTRELA.dano[1], 1)}`)} vezes ocupando a mesma vaga. ${MEDIR} Confira no jogo; a habilidade sobe por uma tabela própria de cada campeão.</li>
 </ol></div>
 
 <h2 class="quebra">6. Posicionamento: concentrar o dano ou espalhar?</h2>
@@ -301,7 +308,8 @@ ${md(String.raw`\text{concentrando: } ${n(dpsOrnn, 1)}\,(2 \cdot ${n(t1Foco, 1)}
 <h2>Fontes e limites</h2>
 <ul>
 <li>${esc(fonte)} Arquivos: <code>cdragon/tft/pt_br.json</code> e <code>game/data/maps/shipping/map22/map22.bin.json</code> (chances da loja do set ${SET}, rodadas por estágio, duração das fases, tabela de dano por estágio).</li>
-<li>Juros, renda, bônus de sequência, XP e dano por unidade sobrevivente não aparecem nos arquivos: estão no quadro “Regras usadas”, para conferir no jogo.</li>
+<li>Juros, renda, bônus de sequência e XP não aparecem nos arquivos: estão no quadro “Regras usadas”, para conferir no jogo.</li>
+<li>Dano por inimigo vivo: <a href="${FONTE_DANO_UNIDADE}">notas oficiais da atualização 14.8</a> (Riot). Multiplicadores de estrela: <a href="${FONTE_ESTRELAS}">Wiki do LoL</a>, também em TFT Codex e TFT Ninja (não oficiais).</li>
 <li>Os modelos (Lanchester, crescimento exponencial, área sob a curva) simplificam o jogo de propósito: servem para escolher a pergunta certa, não para prever o placar.</li>
 </ul>
 </body></html>`
