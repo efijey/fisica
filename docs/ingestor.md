@@ -2,6 +2,8 @@
 
 App interno para colar exercícios de física, catalogar fórmulas/variáveis/fenômenos e exportar exemplos aprovados para a explicadora.
 
+Contexto geral do monorepo: [mente.md](./mente.md).
+
 ## Setup Supabase
 
 1. Crie um projeto em [supabase.com](https://supabase.com)

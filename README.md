@@ -1,22 +1,27 @@
-# Física — Motor de Fórmulas
+# Física — Explicadora de Fenômenos
 
-Calculadora inteligente de física para estudantes. Selecione as grandezas que você já conhece em um problema e o sistema sugere quais fórmulas podem ser usadas para descobrir a variável que falta — já na forma isolada.
+App educacional para estudantes brasileiros: ajuda a entender **por que** cada fórmula se aplica, como as grandezas se relacionam e em quais fenômenos da natureza elas aparecem — não só a fazer a conta.
 
-## Funcionalidades
+> Contexto vivo do projeto (ler primeiro): [`docs/mente.md`](docs/mente.md)
 
-- **Inferência de fórmulas** — selecione variáveis conhecidas e veja quais expressões resolvem o que falta
-- **Catálogo navegável** — ~28 fórmulas organizadas por área (cinemática, dinâmica, energia, momento, rotação, gravitação)
-- **~55 variáveis físicas** — com símbolo, nome e unidade
-- **Interface responsiva** — abas Calculadora e Catálogo, construída com shadcn/ui
+## O que tem hoje
+
+- **Inferência de fórmulas** — selecione grandezas conhecidas; o motor sugere expressões onde falta exatamente uma variável
+- **Explorar / Catálogo / Gráficos** — ~28 fórmulas, ~55 variáveis, fenômenos e conexões
+- **Problemas** — treino conceitual + folha de cálculo mental (voz; LLM OpenAI opcional com fallback mock)
+- **Ingestor** (interno) — cola exercícios, cataloga no Supabase e exporta exemplos aprovados
 
 ## Stack
 
 | Camada | Tecnologia |
 |--------|------------|
-| Framework | Next.js 16 (App Router) |
-| UI | React 19, TypeScript 5 |
-| Estilo | Tailwind CSS 4, shadcn/ui |
-| Ícones | Lucide React |
+| Monorepo | npm workspaces |
+| Apps | Next.js 16, React 19, TypeScript 5 |
+| UI | Tailwind CSS 4, shadcn/ui |
+| Domínio | `@fisica/physics-core` |
+| Dados (ingestor) | Supabase |
+| LLM (opcional) | OpenAI (`OPENAI_API_KEY`) |
+| Testes | Vitest |
 
 ## Pré-requisitos
 
@@ -29,57 +34,85 @@ Calculadora inteligente de física para estudantes. Selecione as grandezas que v
 git clone https://github.com/efijey/fisica.git
 cd fisica
 npm install
-npm run dev
 ```
 
-Abra [http://localhost:3000](http://localhost:3000) no navegador.
+### Explicadora (app do estudante)
+
+```bash
+# Opcional: LLM real na mesa mental
+cp apps/explicadora/.env.example apps/explicadora/.env.local
+# edite OPENAI_API_KEY se quiser
+
+npm run dev:explicadora
+```
+
+Abra [http://localhost:3000](http://localhost:3000).
+
+### Ingestor (ferramenta interna)
+
+Ver [`docs/ingestor.md`](docs/ingestor.md).
+
+```bash
+cp apps/ingestor/.env.example apps/ingestor/.env.local
+# preencha Supabase; INGESTOR_SKIP_AUTH=true só em local
+
+npm run dev:ingestor
+```
+
+Abra [http://localhost:3001](http://localhost:3001).
 
 ## Scripts
 
 | Comando | Descrição |
 |---------|-----------|
-| `npm run dev` | Servidor de desenvolvimento |
-| `npm run build` | Build de produção |
-| `npm run start` | Servidor de produção |
-| `npm run lint` | Verificação ESLint |
-| `npm run test` | Testes unitários (Vitest) |
+| `npm run dev` / `dev:explicadora` | Explicadora na porta 3000 |
+| `npm run dev:ingestor` | Ingestor na porta 3001 |
+| `npm run build` | Build de produção da explicadora |
+| `npm run lint` | ESLint da explicadora |
+| `npm run test` | Testes (physics-core + parser) |
+| `npm run export-catalog` | Exporta exercícios aprovados → explicadora |
 
-## Estrutura do projeto
+## Estrutura
 
 ```
 fisica/
-├── app/
-│   ├── page.tsx                 # Entrada da aplicação
-│   ├── pages/Calculadora/       # UI principal
-│   └── physics/
-│       ├── engine/              # Motor de inferência
-│       ├── formulas/            # Catálogo de fórmulas
-│       └── variables/           # Catálogo de variáveis
-├── components/
-│   ├── physics/                 # Componentes de domínio
-│   └── ui/                      # Componentes shadcn
-├── docs/
-│   ├── git-workflow.md          # Padrões de branch e commit
-│   └── roadmap.md               # Visão e roadmap do projeto
+├── apps/
+│   ├── explicadora/     # Produto público (estudante)
+│   └── ingestor/        # Catálogo de exercícios (interno)
+├── packages/
+│   └── physics-core/    # Fórmulas, variáveis, fenômenos, engine
+├── supabase/            # Migrations
+└── docs/
+    ├── mente.md         # Contexto vivo (visão, estado, regras)
+    ├── roadmap.md       # Planejamento por sprints
+    ├── git-workflow.md  # Branches, commits, revert
+    ├── mvp-producao.md  # Checklist para colocar no ar
+    └── ingestor.md      # Setup do alimentador
 ```
 
-## Como funciona
+## Como funciona (inferência)
 
-1. O estudante seleciona as variáveis que possui (ex.: velocidade inicial, tempo, aceleração)
-2. O motor `inferirFormulas()` percorre o catálogo e encontra fórmulas onde **falta exatamente uma variável**
-3. Para cada match, exibe a expressão já isolada na variável desconhecida
+1. O estudante seleciona as variáveis que possui
+2. `inferirFormulas()` encontra fórmulas em que **falta exatamente uma variável**
+3. A UI mostra a expressão isolada + contexto explicativo
 
 ## Documentação
 
-- [Padrões de Git e commits](docs/git-workflow.md)
-- [Roadmap e backlog](docs/roadmap.md)
+| Doc | Para quê |
+|-----|----------|
+| [Mente do projeto](docs/mente.md) | Visão, estado real, arquitetura, prioridades |
+| [Roadmap](docs/roadmap.md) | Sprints e backlog |
+| [Git](docs/git-workflow.md) | Branches, commits, como reverter |
+| [MVP produção](docs/mvp-producao.md) | Checklist de deploy / demo |
+| [Ingestor](docs/ingestor.md) | Supabase e export |
 
 ## Contribuindo
 
-1. Leia os [padrões de Git](docs/git-workflow.md)
-2. Trabalhe na branch `sprint-1` (ou crie `feature/*` a partir dela)
-3. Siga [Conventional Commits](https://www.conventionalcommits.org/) em português
+1. Leia a [mente](docs/mente.md) e o [git-workflow](docs/git-workflow.md)
+2. Trabalhe em branch a partir da sprint ativa (próxima: `sprint-4` a partir de `main`)
+3. Commits pequenos ([Conventional Commits](https://www.conventionalcommits.org/) em português) + push + PR
+4. Mudanças de visão → atualize `docs/mente.md`
 
 ## Licença
 
-MIT — veja [LICENSE](LICENSE) para detalhes.
+MIT — veja [LICENSE](LICENSE).
