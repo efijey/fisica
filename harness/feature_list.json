@@ -213,13 +213,15 @@
       "area": "explicadora",
       "title": "Trilha de estudo: primeiro capítulo completo",
       "user_visible_behavior": "Um capítulo (capítulo 1: unidades, ordem de grandeza e vetores — escolha do autor em 2026-10-10) tem intuição, definição formal, derivação, porquê, armadilhas, exemplo resolvido, exercícios com juiz e citação do livro.",
-      "status": "not_started",
+      "status": "in_progress",
       "verification": [
         "Autor estuda o capítulo e dá feedback.",
         "npm run build"
       ],
-      "evidence": [],
-      "notes": "Validar um capítulo antes de escalar."
+      "evidence": [
+        "2026-10-10: texto formal do capítulo 1 (8 seções, Young & Freedman 1.3–1.10) em /estudo; npm run build ok; lint 0 erros; nenhum katex-error no HTML."
+      ],
+      "notes": "Validar um capítulo antes de escalar. Feito: intuição, definição, por quê, armadilhas, exemplo resolvido, referência da seção do livro (conferir numeração na edição do autor). Falta: revisão do autor, exercícios com juiz, lente (study-004). Conteúdo em app/estudo/capitulos/capitulo-1.ts."
     },
     {
       "id": "study-004",
