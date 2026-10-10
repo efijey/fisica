@@ -6,6 +6,8 @@ import { cardPorId } from "@/app/physics/personalizado/literatura/cards"
 import { mundoPorId } from "@/app/physics/personalizado/mundos/catalog"
 import type { ProblemaPersonalizado } from "@/app/physics/personalizado/tipos"
 
+const MODELO_PADRAO = "gpt-4o-mini"
+
 const geradoSchema = z.object({
   titulo: z.string(),
   contexto: z.string(),
@@ -147,21 +149,25 @@ export async function gerarProblemaPersonalizado(
     return gerarProblemaMock(pedido)
   }
 
+  const modelo = process.env.OPENAI_MODEL_PERSONALIZADO?.trim() || MODELO_PADRAO
+  // Modelos de raciocínio (gpt-5*, o*) rejeitam temperature.
+  const aceitaTemperatura = !/^(gpt-5|o\d)/.test(modelo)
+
   try {
     const openai = createOpenAI({ apiKey: key })
     const { object } = await generateObject({
-      model: openai("gpt-4o-mini"),
+      model: openai(modelo),
       schema: geradoSchema,
       system: systemPrompt(),
       prompt,
-      temperature: 0.7,
+      ...(aceitaTemperatura ? { temperature: 0.7 } : {}),
     })
 
     const problema = montarProblema(pedido.mundoId, pedido.cardId, object)
     if (!problema) {
       return { ok: false, erro: "Falha ao montar problema gerado" }
     }
-    return { ok: true, problema, modelo: "gpt-4o-mini" }
+    return { ok: true, problema, modelo }
   } catch (e) {
     const mensagem = e instanceof Error ? e.message : "Falha na geração"
     console.error("[personalizado/gerar]", mensagem)
