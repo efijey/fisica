@@ -1,32 +1,15 @@
 // Gera o material de apoio da aula "Física para vencer no TFT":
 // planilhas CSV (campeões, itens, habilidades) e um PDF para o professor.
 // Uso: node materiais/aula-tft/gerar.mjs  (TFT_SET=18 por padrão)
-import { execFileSync } from "node:child_process"
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
-import { dirname, join } from "node:path"
-import { fileURLToPath } from "node:url"
-import katex from "katex"
-
-const aqui = dirname(fileURLToPath(import.meta.url))
-const cache = join(aqui, ".cache")
-const saida = join(aqui, "saida")
-mkdirSync(cache, { recursive: true })
-mkdirSync(saida, { recursive: true })
-
-const SET = process.env.TFT_SET ?? "18"
-const BASE = "https://raw.communitydragon.org/latest"
-const CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-
-// O CDN recusa o user-agent padrão de scripts; curl é aceito.
-function baixar(url, arquivo) {
-  const destino = join(cache, arquivo)
-  if (!existsSync(destino)) execFileSync("curl", ["-s", "-f", "-o", destino, url])
-  return JSON.parse(readFileSync(destino, "utf8"))
-}
+import { writeFileSync } from "node:fs"
+import { join } from "node:path"
+import {
+  BASE, DADOS, HIPOTESE, MEDIR, MODELO, REGRA, SET,
+  baixar, esc, estilo, fmt, gerarPdf, legendaEtiquetas, md, mi, n, saida, versaoDoJogo,
+} from "./comum.mjs"
 
 const dados = baixar(`${BASE}/cdragon/tft/pt_br.json`, "pt_br.json")
-const meta = baixar(`${BASE}/content-metadata.json`, "content-metadata.json")
-const versao = meta.version.split("+")[0]
+const versao = versaoDoJogo()
 const baixadoEm = new Date().toISOString().slice(0, 10)
 const fonte = `CommunityDragon (dados extraídos dos arquivos do jogo; não oficial). Set ${SET}, versão ${versao}, baixado em ${baixadoEm}.`
 
@@ -134,15 +117,6 @@ const itens = dados.items
 const item = (n) => itens.find((i) => i.nome === n)
 
 // ---------- formatação ----------
-function fmt(n, casas = 2) {
-  if (n == null) return "—"
-  return n.toLocaleString("pt-BR", { maximumFractionDigits: casas })
-}
-const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
-const mi = (tex) => katex.renderToString(tex, { throwOnError: false })
-const md = (tex) => katex.renderToString(tex, { throwOnError: false, displayMode: true })
-const n = (v, casas = 2) => fmt(v, casas).replace(",", "{,}")
-
 function csv(arquivo, cabecalho, linhas) {
   const cel = (v) => {
     if (v == null) return ""
@@ -212,13 +186,6 @@ const ataquesAshe = tempoAproximar * ashe.vel
 const alcances = [...new Map(campeoes.filter((c) => c.alcanceUn).map((c) => [c.alcanceHex, c.alcanceUn])).entries()].sort((a, b) => a[0] - b[0])
 const movimentos = [...new Set(campeoes.map((c) => c.movimento))]
 
-const tag = (t) => `<span class="tag tag-${t.toLowerCase().normalize("NFD").replace(/[^a-z]/g, "")}">${t}</span>`
-const DADOS = tag("Dados")
-const REGRA = tag("Regra")
-const MODELO = tag("Modelo")
-const HIPOTESE = tag("Hipotético")
-const MEDIR = tag("Medir no jogo")
-
 const tabelaArmadura = [0, 20, 40, 60, 100, 200]
   .map((a) => `<tr><td>${a}</td><td>${fmt(100 * fatorArm(a), 1)}%</td><td>${fmt(100 - 100 * fatorArm(a), 1)}%</td><td>${fmt(1 + a / 100, 2)}×</td></tr>`)
   .join("")
@@ -242,33 +209,13 @@ const comArea = habilidades.filter((h) => h.area).map((h) => h.nome)
 const html = `<!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8">
 <title>Física para vencer no TFT — apoio do professor</title>
-<style>${readFileSync(join(aqui, "../../node_modules/katex/dist/katex.min.css"), "utf8").replace(/url\(fonts\//g, `url(file://${join(aqui, "../../node_modules/katex/dist/fonts/")}`)}
-@page { size: A4; margin: 16mm 14mm; }
-body { font-family: -apple-system, "Helvetica Neue", Arial, sans-serif; font-size: 10.5pt; line-height: 1.5; color: #1c1c1c; }
-h1 { font-size: 22pt; margin: 0 0 4pt; } h2 { font-size: 15pt; margin: 22pt 0 6pt; border-bottom: 2px solid #7c3aed; padding-bottom: 3pt; break-after: avoid; }
-h3 { font-size: 12pt; margin: 14pt 0 4pt; break-after: avoid; }
-.sub { color: #555; font-size: 11pt; } .pequeno { color: #666; font-size: 8.5pt; }
-.caixa { border: 1px solid #ddd; border-radius: 6px; padding: 8pt 10pt; margin: 8pt 0; break-inside: avoid; }
-.caixa.aula { border-left: 4px solid #7c3aed; } .caixa.resposta { background: #f6f3ff; border-color: #d9ccff; }
-.tag { display: inline-block; font-size: 7.5pt; font-weight: 600; padding: 0 5pt; border-radius: 8pt; margin-right: 3pt; vertical-align: 1pt; }
-.tag-dados { background: #dcfce7; color: #166534; } .tag-regra { background: #fef3c7; color: #92400e; }
-.tag-modelo { background: #dbeafe; color: #1e40af; } .tag-hipotetico { background: #fee2e2; color: #991b1b; } .tag-medirnojogo { background: #ede9fe; color: #5b21b6; }
-table { border-collapse: collapse; width: 100%; margin: 6pt 0; font-size: 8.5pt; }
-th, td { border-bottom: 1px solid #e5e5e5; padding: 2.5pt 4pt; text-align: right; vertical-align: top; }
-th { background: #f4f4f5; text-align: center; font-weight: 600; } td.nome, td.desc { text-align: left; } td.desc { font-size: 8pt; }
-table.texto td { text-align: left; } tr { break-inside: avoid; } .quebra { break-before: page; }
-.katex-display { margin: 4pt 0; } ol li, ul li { margin: 2pt 0; }
-</style></head><body>
+${estilo}</head><body>
 
 <h1>Física para vencer no TFT</h1>
-<div class="sub">Material de apoio do professor — roteiro, guia de mecânicas, contas prontas e tabelas</div>
+<div class="sub">Parte 1 — material de apoio do professor: roteiro, guia de mecânicas, contas prontas e tabelas</div>
 <p class="pequeno">${esc(fonte)}</p>
 
-<div class="caixa">
-<b>Como ler as etiquetas.</b> Cada afirmação deste material tem uma etiqueta dizendo de onde vem:<br>
-${DADOS} número tirado dos arquivos do jogo. ${REGRA} regra de mecânica conhecida da comunidade; não vem nos arquivos, então vale conferir no jogo antes de afirmar em aula.
-${MODELO} simplificação nossa para a conta caber no quadro. ${HIPOTESE} número inventado só para ilustrar. ${MEDIR} algo que dá para medir ao vivo durante a aula.
-</div>
+${legendaEtiquetas}
 
 <h2>1. Roteiro da aula (cerca de 45 minutos)</h2>
 <p>A ideia central: <b>cada atributo do jogo é uma grandeza física</b>, e entender a grandeza muda a decisão. A física não joga por você, mas te diz qual pergunta fazer.</p>
@@ -392,10 +339,7 @@ ${md(String.raw`\text{time agrupado: } N = 4 \Rightarrow 4 \cdot 300 = 1200 \qqu
 </ul>
 </body></html>`
 
-const arquivoHtml = join(saida, "guia-professor-tft.html")
-const arquivoPdf = join(saida, "guia-professor-tft.pdf")
-writeFileSync(arquivoHtml, html)
-execFileSync(CHROME, ["--headless", "--disable-gpu", "--no-pdf-header-footer", `--print-to-pdf=${arquivoPdf}`, `file://${arquivoHtml}`], { stdio: "ignore" })
+gerarPdf("guia-professor-tft", html)
 
 console.log(`Campeões: ${campeoes.length}, itens: ${itens.length}, habilidades com sinal de área: ${comArea.length}`)
 console.log(`Gerado em ${saida}`)
