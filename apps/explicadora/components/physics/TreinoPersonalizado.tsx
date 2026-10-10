@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
+import { ModoConceitos } from "@/components/physics/PainelRespostaProblema"
 import { cardsLiteratura } from "@/app/physics/personalizado/literatura/cards"
 import { mundosInteresse } from "@/app/physics/personalizado/mundos/catalog"
 import {
@@ -23,7 +24,7 @@ export function TreinoPersonalizado() {
   const [ativo, setAtivo] = useState<ProblemaPersonalizado | null>(null)
   const [status, setStatus] = useState<string>("")
   const [gerando, setGerando] = useState(false)
-  const [resposta, setResposta] = useState("")
+  const [julgado, setJulgado] = useState(false)
 
   useEffect(() => {
     const prefs = lerPrefs()
@@ -59,7 +60,7 @@ export function TreinoPersonalizado() {
       const next = salvarProblema(data.problema)
       setSalvos(next)
       setAtivo(data.problema)
-      setResposta("")
+      setJulgado(false)
       const modo = data.llmAtivo ? `LLM (${data.modelo})` : `mock (${data.modelo})`
       setStatus(`Pronto — ${modo}. Salvo só neste navegador.`)
     } catch (e) {
@@ -105,21 +106,25 @@ export function TreinoPersonalizado() {
               Abrir referência
             </a>
           ) : null}
-          <p className="text-muted-foreground pt-2">{ativo.explicacao}</p>
+          {julgado ? (
+            <p className="text-muted-foreground pt-2">{ativo.explicacao}</p>
+          ) : (
+            <p className="text-xs text-muted-foreground pt-2">
+              A explicação do conceito aparece depois que você enviar sua
+              resposta.
+            </p>
+          )}
         </div>
 
-        <div className="flex flex-col gap-2">
-          <Label htmlFor="resposta-pers">Sua explicação (treino livre)</Label>
-          <textarea
-            id="resposta-pers"
-            value={resposta}
-            onChange={(e) => setResposta(e.target.value)}
-            rows={5}
-            className="w-full rounded-md border bg-background px-3 py-2 text-sm"
-            placeholder="Explique o raciocínio com as grandezas certas…"
-          />
-          <p className="text-xs text-muted-foreground">Dica: {ativo.dica}</p>
-        </div>
+        <ModoConceitos
+          key={ativo.id}
+          problema={{
+            rubrica: ativo.rubrica,
+            dica: ativo.dica,
+            formulas: ativo.formulaIds,
+          }}
+          onJulgado={() => setJulgado(true)}
+        />
 
         {status ? (
           <p className="text-xs text-muted-foreground">{status}</p>
@@ -237,7 +242,7 @@ export function TreinoPersonalizado() {
                   className="text-left text-sm font-medium hover:underline"
                   onClick={() => {
                     setAtivo(p)
-                    setResposta("")
+                    setJulgado(false)
                   }}
                 >
                   {p.titulo}
