@@ -41,6 +41,23 @@ Como os textos por mundo nascem:
 
 Primeiro uso: a trilha de Física 1 (Young & Freedman) do semestre do autor, começando por um capítulo completo antes de escalar.
 
+## Dois tipos de mundo (decisão de 2026-10-10)
+
+| | Mundo de afinidade | Mundo de interesse (aplicação) |
+|---|---|---|
+| Exemplos | TFT, LoL, futebol, mountain bike | Nanopartículas para biomateriais, medicina, engenharia |
+| Objetivo | Baixar carga cognitiva com um cenário conhecido | Ponte da física básica para um tema complexo e interdisciplinar que o aluno quer dominar |
+| Fatos do mundo vêm de | Quem conhece o jogo/esporte (curadoria) | Fontes científicas citadas (artigos, livros), como os cards de literatura |
+| Risco principal | Inventar mecânica do jogo | Inventar ciência — mais grave, porque o aluno leva a sério |
+
+Regras para mundos de interesse:
+
+- Nível iniciante na **aplicação**, rigor total na **física**: o exercício usa a física do capítulo, e o tema avançado entra como contexto real, não simplificado a ponto de ficar errado.
+- Cada fato do mundo tem citação, e a UI mostra a fonte do contexto além da fonte da física.
+- Seriedade: nada de "historinha"; o exercício deve deixar o aluno entendendo um pouco mais do tema de interesse.
+
+Primeiro mundo de interesse (paciente zero): **nanopartículas para biomateriais**. Ganchos com Física 1: arrasto viscoso e velocidade terminal (leis de Newton), energia térmica vs. gravitacional (por que não sedimentam), movimento browniano (deslocamento vs. distância), razão área/volume.
+
 ---
 
 ## Evolução da “ingestora”
