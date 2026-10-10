@@ -14,6 +14,7 @@
     "build:ingestor": "npm run build -w @fisica/ingestor",
     "test": "npm run test -w @fisica/physics-core && npm run test -w @fisica/ingestor",
     "export-catalog": "npm run export-catalog -w @fisica/ingestor",
-    "lint": "npm run lint -w @fisica/explicadora"
+    "lint": "npm run lint -w @fisica/explicadora",
+    "snapshot-tft": "npm run snapshot-tft -w @fisica/explicadora"
   }
 }

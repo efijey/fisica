@@ -1,0 +1,1055 @@
+{
+  "fonte": "CommunityDragon (dados extraídos dos arquivos do jogo; não oficial)",
+  "url": "https://raw.communitydragon.org/latest/cdragon/tft/pt_br.json",
+  "versaoJogo": "16.20.8248524",
+  "set": 18,
+  "baixadoEm": "2026-10-10",
+  "observacao": "Atributos base de campeão com 1 estrela, sem itens. velocidadeAtaque em ataques por segundo; alcance em hexes.",
+  "campeoes": [
+    {
+      "nome": "Akali",
+      "custo": 1,
+      "caracteristicas": [
+        "Inferno",
+        "Adaptador",
+        "Devastador"
+      ],
+      "velocidadeAtaque": 0.75,
+      "dano": 40,
+      "vida": 650,
+      "armadura": 35,
+      "alcanceHexes": 1,
+      "mana": 25
+    },
+    {
+      "nome": "Camille",
+      "custo": 1,
+      "caracteristicas": [
+        "Congregação das Bruxas",
+        "Devastador"
+      ],
+      "velocidadeAtaque": 0.75,
+      "dano": 40,
+      "vida": 700,
+      "armadura": 40,
+      "alcanceHexes": 1,
+      "mana": 25
+    },
+    {
+      "nome": "Cascalho",
+      "custo": 1,
+      "caracteristicas": [
+        "Fera do Rift",
+        "Emanador"
+      ],
+      "velocidadeAtaque": 0.8,
+      "dano": 35,
+      "vida": 500,
+      "armadura": 25,
+      "alcanceHexes": 4,
+      "mana": 70
+    },
+    {
+      "nome": "Karma",
+      "custo": 1,
+      "caracteristicas": [
+        "Florescer",
+        "Enfeitiçador"
+      ],
+      "velocidadeAtaque": 0.7,
+      "dano": 25,
+      "vida": 500,
+      "armadura": 25,
+      "alcanceHexes": 4,
+      "mana": 40
+    },
+    {
+      "nome": "Kobuko",
+      "custo": 1,
+      "caracteristicas": [
+        "Vivaz",
+        "Lutador"
+      ],
+      "velocidadeAtaque": 0.65,
+      "dano": 55,
+      "vida": 700,
+      "armadura": 40,
+      "alcanceHexes": 1,
+      "mana": 90
+    },
+    {
+      "nome": "Leona",
+      "custo": 1,
+      "caracteristicas": [
+        "Solar",
+        "Defendente"
+      ],
+      "velocidadeAtaque": 0.65,
+      "dano": 50,
+      "vida": 750,
+      "armadura": 40,
+      "alcanceHexes": 1,
+      "mana": 90
+    },
+    {
+      "nome": "Ornn",
+      "custo": 1,
+      "caracteristicas": [
+        "Sabugueiro",
+        "Defendente"
+      ],
+      "velocidadeAtaque": 0.6,
+      "dano": 40,
+      "vida": 700,
+      "armadura": 40,
+      "alcanceHexes": 1,
+      "mana": 100
+    },
+    {
+      "nome": "Rakan",
+      "custo": 1,
+      "caracteristicas": [
+        "Feérico",
+        "Colosso",
+        "Vanguarda"
+      ],
+      "velocidadeAtaque": 0.6,
+      "dano": 45,
+      "vida": 700,
+      "armadura": 35,
+      "alcanceHexes": 1,
+      "mana": 105
+    },
+    {
+      "nome": "Rek'Sai",
+      "custo": 1,
+      "caracteristicas": [
+        "Espinhos Negros",
+        "Lutador"
+      ],
+      "velocidadeAtaque": 0.55,
+      "dano": 50,
+      "vida": 700,
+      "armadura": 40,
+      "alcanceHexes": 1,
+      "mana": 100
+    },
+    {
+      "nome": "Rubrivirim",
+      "custo": 1,
+      "caracteristicas": [
+        "Fera do Rift",
+        "Caçador"
+      ],
+      "velocidadeAtaque": 0.7,
+      "dano": 40,
+      "vida": 500,
+      "armadura": 25,
+      "alcanceHexes": 4,
+      "mana": 50
+    },
+    {
+      "nome": "Varus",
+      "custo": 1,
+      "caracteristicas": [
+        "Inferno",
+        "Fumegante"
+      ],
+      "velocidadeAtaque": 0.7,
+      "dano": 40,
+      "vida": 500,
+      "armadura": 25,
+      "alcanceHexes": 4,
+      "mana": 120
+    },
+    {
+      "nome": "Veigar",
+      "custo": 1,
+      "caracteristicas": [
+        "Espinhos Negros",
+        "Vivaz",
+        "Enfeitiçador"
+      ],
+      "velocidadeAtaque": 0.7,
+      "dano": 25,
+      "vida": 500,
+      "armadura": 25,
+      "alcanceHexes": 4,
+      "mana": 30
+    },
+    {
+      "nome": "Xayah",
+      "custo": 1,
+      "caracteristicas": [
+        "Sabugueiro",
+        "Feérico",
+        "Fumegante"
+      ],
+      "velocidadeAtaque": 0.7,
+      "dano": 45,
+      "vida": 450,
+      "armadura": 25,
+      "alcanceHexes": 4,
+      "mana": 50
+    },
+    {
+      "nome": "Yorick",
+      "custo": 1,
+      "caracteristicas": [
+        "Florescer",
+        "Colosso",
+        "Invocador"
+      ],
+      "velocidadeAtaque": 0.6,
+      "dano": 50,
+      "vida": 650,
+      "armadura": 35,
+      "alcanceHexes": 1,
+      "mana": 110
+    },
+    {
+      "nome": "Alistar",
+      "custo": 2,
+      "caracteristicas": [
+        "Sabugueiro",
+        "Lutador"
+      ],
+      "velocidadeAtaque": 0.6,
+      "dano": 50,
+      "vida": 950,
+      "armadura": 45,
+      "alcanceHexes": 1,
+      "mana": 90
+    },
+    {
+      "nome": "Aronguejo",
+      "custo": 2,
+      "caracteristicas": [
+        "Fera do Rift",
+        "Colosso"
+      ],
+      "velocidadeAtaque": 0.65,
+      "dano": 50,
+      "vida": 950,
+      "armadura": 45,
+      "alcanceHexes": 1,
+      "mana": 100
+    },
+    {
+      "nome": "Caitlyn",
+      "custo": 2,
+      "caracteristicas": [
+        "Congregação das Bruxas",
+        "Caçador"
+      ],
+      "velocidadeAtaque": 0.7,
+      "dano": 50,
+      "vida": 550,
+      "armadura": 30,
+      "alcanceHexes": 4,
+      "mana": 3
+    },
+    {
+      "nome": "Elise",
+      "custo": 2,
+      "caracteristicas": [
+        "Congregação das Bruxas",
+        "Vanguarda"
+      ],
+      "velocidadeAtaque": 0.65,
+      "dano": 20,
+      "vida": 900,
+      "armadura": 45,
+      "alcanceHexes": 1,
+      "mana": 70
+    },
+    {
+      "nome": "Grompe",
+      "custo": 2,
+      "caracteristicas": [
+        "Fera do Rift",
+        "Adaptador"
+      ],
+      "velocidadeAtaque": 0.7,
+      "dano": 30,
+      "vida": 550,
+      "armadura": 30,
+      "alcanceHexes": 4,
+      "mana": 45
+    },
+    {
+      "nome": "Kayle",
+      "custo": 2,
+      "caracteristicas": [
+        "Solar",
+        "Fumegante"
+      ],
+      "velocidadeAtaque": 0.75,
+      "dano": null,
+      "vida": 550,
+      "armadura": 30,
+      "alcanceHexes": 4,
+      "mana": 0
+    },
+    {
+      "nome": "LeBlanc",
+      "custo": 2,
+      "caracteristicas": [
+        "Sabugueiro",
+        "Enfeitiçador"
+      ],
+      "velocidadeAtaque": 0.7,
+      "dano": 30,
+      "vida": 550,
+      "armadura": 30,
+      "alcanceHexes": 4,
+      "mana": 40
+    },
+    {
+      "nome": "Lobo Trevoguari",
+      "custo": 2,
+      "caracteristicas": [
+        "Fera do Rift",
+        "Devastador"
+      ],
+      "velocidadeAtaque": 0.75,
+      "dano": 50,
+      "vida": 700,
+      "armadura": 40,
+      "alcanceHexes": 1,
+      "mana": 40
+    },
+    {
+      "nome": "Sejuani",
+      "custo": 2,
+      "caracteristicas": [
+        "Solar",
+        "Colosso"
+      ],
+      "velocidadeAtaque": 0.6,
+      "dano": 50,
+      "vida": 900,
+      "armadura": 45,
+      "alcanceHexes": 1,
+      "mana": 100
+    },
+    {
+      "nome": "Shen",
+      "custo": 2,
+      "caracteristicas": [
+        "Inferno",
+        "Defendente"
+      ],
+      "velocidadeAtaque": 0.65,
+      "dano": 50,
+      "vida": 900,
+      "armadura": 45,
+      "alcanceHexes": 1,
+      "mana": 90
+    },
+    {
+      "nome": "Teemo",
+      "custo": 2,
+      "caracteristicas": [
+        "Vivaz",
+        "Emanador"
+      ],
+      "velocidadeAtaque": 0.75,
+      "dano": 35,
+      "vida": 550,
+      "armadura": 30,
+      "alcanceHexes": 4,
+      "mana": 50
+    },
+    {
+      "nome": "Warwick",
+      "custo": 2,
+      "caracteristicas": [
+        "Espinhos Negros",
+        "Devastador"
+      ],
+      "velocidadeAtaque": 0.75,
+      "dano": 45,
+      "vida": 750,
+      "armadura": 45,
+      "alcanceHexes": 1,
+      "mana": 40
+    },
+    {
+      "nome": "Yunara",
+      "custo": 2,
+      "caracteristicas": [
+        "Florescer",
+        "Carrasco"
+      ],
+      "velocidadeAtaque": 0.75,
+      "dano": 42,
+      "vida": 550,
+      "armadura": 30,
+      "alcanceHexes": 4,
+      "mana": 35
+    },
+    {
+      "nome": "Azir",
+      "custo": 3,
+      "caracteristicas": [
+        "Espinhos Negros",
+        "Carrasco",
+        "Invocador"
+      ],
+      "velocidadeAtaque": 0.75,
+      "dano": 30,
+      "vida": 650,
+      "armadura": 35,
+      "alcanceHexes": 4,
+      "mana": 35
+    },
+    {
+      "nome": "Cassiopeia",
+      "custo": 3,
+      "caracteristicas": [
+        "Congregação das Bruxas",
+        "Enfeitiçador"
+      ],
+      "velocidadeAtaque": 0.75,
+      "dano": 30,
+      "vida": 650,
+      "armadura": 35,
+      "alcanceHexes": 4,
+      "mana": 30
+    },
+    {
+      "nome": "Diana",
+      "custo": 3,
+      "caracteristicas": [
+        "Lunar",
+        "Devastador",
+        "Vanguarda"
+      ],
+      "velocidadeAtaque": 0.8,
+      "dano": 30,
+      "vida": 850,
+      "armadura": 50,
+      "alcanceHexes": 1,
+      "mana": 40
+    },
+    {
+      "nome": "Fiddlesticks",
+      "custo": 3,
+      "caracteristicas": [
+        "Flora Fatalis",
+        "Defendente",
+        "Enfeitiçador"
+      ],
+      "velocidadeAtaque": 0.65,
+      "dano": 50,
+      "vida": 1000,
+      "armadura": 55,
+      "alcanceHexes": 1,
+      "mana": 90
+    },
+    {
+      "nome": "Hecarim",
+      "custo": 3,
+      "caracteristicas": [
+        "Sabugueiro",
+        "Vanguarda"
+      ],
+      "velocidadeAtaque": 0.65,
+      "dano": 50,
+      "vida": 1100,
+      "armadura": 50,
+      "alcanceHexes": 1,
+      "mana": 110
+    },
+    {
+      "nome": "Kha'Zix",
+      "custo": 3,
+      "caracteristicas": [
+        "Rival"
+      ],
+      "velocidadeAtaque": 0.85,
+      "dano": 40,
+      "vida": 950,
+      "armadura": 55,
+      "alcanceHexes": 1,
+      "mana": 25
+    },
+    {
+      "nome": "Kog'Maw",
+      "custo": 3,
+      "caracteristicas": [
+        "Cáustico",
+        "Adaptador",
+        "Emanador"
+      ],
+      "velocidadeAtaque": 0.8,
+      "dano": 40,
+      "vida": 650,
+      "armadura": 35,
+      "alcanceHexes": 4,
+      "mana": 55
+    },
+    {
+      "nome": "Krugue",
+      "custo": 3,
+      "caracteristicas": [
+        "Fera do Rift",
+        "Lutador"
+      ],
+      "velocidadeAtaque": 0.6,
+      "dano": 55,
+      "vida": 1100,
+      "armadura": 40,
+      "alcanceHexes": 1,
+      "mana": 135
+    },
+    {
+      "nome": "Mamãe Bicuda",
+      "custo": 3,
+      "caracteristicas": [
+        "Fera do Rift",
+        "Invocador",
+        "Fumegante"
+      ],
+      "velocidadeAtaque": 0.75,
+      "dano": 55,
+      "vida": 650,
+      "armadura": 35,
+      "alcanceHexes": 4,
+      "mana": 60
+    },
+    {
+      "nome": "Master Yi",
+      "custo": 3,
+      "caracteristicas": [
+        "Florescer",
+        "Adaptador"
+      ],
+      "velocidadeAtaque": 0.8,
+      "dano": 60,
+      "vida": 850,
+      "armadura": 55,
+      "alcanceHexes": 1,
+      "mana": 3
+    },
+    {
+      "nome": "Rammus",
+      "custo": 3,
+      "caracteristicas": [
+        "Vivaz",
+        "Defendente"
+      ],
+      "velocidadeAtaque": 0.6,
+      "dano": 50,
+      "vida": 1100,
+      "armadura": 50,
+      "alcanceHexes": 1,
+      "mana": 80
+    },
+    {
+      "nome": "Rengar",
+      "custo": 3,
+      "caracteristicas": [
+        "Rival"
+      ],
+      "velocidadeAtaque": 0.75,
+      "dano": 60,
+      "vida": 900,
+      "armadura": 55,
+      "alcanceHexes": 1,
+      "mana": 50
+    },
+    {
+      "nome": "Tristana",
+      "custo": 3,
+      "caracteristicas": [
+        "Feérico",
+        "Vivaz",
+        "Caçador"
+      ],
+      "velocidadeAtaque": 0.75,
+      "dano": 55,
+      "vida": 650,
+      "armadura": 35,
+      "alcanceHexes": 4,
+      "mana": 60
+    },
+    {
+      "nome": "Vi",
+      "custo": 3,
+      "caracteristicas": [
+        "Primordial",
+        "Colosso"
+      ],
+      "velocidadeAtaque": 0.75,
+      "dano": 45,
+      "vida": 1100,
+      "armadura": 50,
+      "alcanceHexes": 1,
+      "mana": 60
+    },
+    {
+      "nome": "Ahri",
+      "custo": 4,
+      "caracteristicas": [
+        "Florescer",
+        "Enfeitiçador"
+      ],
+      "velocidadeAtaque": 0.8,
+      "dano": 40,
+      "vida": 850,
+      "armadura": 40,
+      "alcanceHexes": 4,
+      "mana": 100
+    },
+    {
+      "nome": "Amumu",
+      "custo": 4,
+      "caracteristicas": [
+        "Inferno",
+        "Colosso"
+      ],
+      "velocidadeAtaque": 0.7,
+      "dano": 70,
+      "vida": 1300,
+      "armadura": 60,
+      "alcanceHexes": 1,
+      "mana": 125
+    },
+    {
+      "nome": "Aphelios",
+      "custo": 4,
+      "caracteristicas": [
+        "Lunar",
+        "Fumegante"
+      ],
+      "velocidadeAtaque": 0.8,
+      "dano": 60,
+      "vida": 850,
+      "armadura": 40,
+      "alcanceHexes": 4,
+      "mana": 70
+    },
+    {
+      "nome": "Azuporã",
+      "custo": 4,
+      "caracteristicas": [
+        "Fera do Rift",
+        "Vanguarda",
+        "Emanador"
+      ],
+      "velocidadeAtaque": 0.6,
+      "dano": 75,
+      "vida": 1300,
+      "armadura": 60,
+      "alcanceHexes": 1,
+      "mana": 150
+    },
+    {
+      "nome": "Ezreal",
+      "custo": 4,
+      "caracteristicas": [
+        "Sabugueiro",
+        "Carrasco"
+      ],
+      "velocidadeAtaque": 0.75,
+      "dano": 45,
+      "vida": 850,
+      "armadura": 40,
+      "alcanceHexes": 4,
+      "mana": 30
+    },
+    {
+      "nome": "Lillia",
+      "custo": 4,
+      "caracteristicas": [
+        "Feérico",
+        "Defendente"
+      ],
+      "velocidadeAtaque": 0.65,
+      "dano": 40,
+      "vida": 1300,
+      "armadura": 60,
+      "alcanceHexes": 1,
+      "mana": 140
+    },
+    {
+      "nome": "Malphite",
+      "custo": 4,
+      "caracteristicas": [
+        "Espinhos Negros",
+        "Monólito"
+      ],
+      "velocidadeAtaque": 0.55,
+      "dano": 70,
+      "vida": 1300,
+      "armadura": 70,
+      "alcanceHexes": 1,
+      "mana": 80
+    },
+    {
+      "nome": "Morgana",
+      "custo": 4,
+      "caracteristicas": [
+        "Congregação das Bruxas",
+        "Emanador"
+      ],
+      "velocidadeAtaque": 0.75,
+      "dano": 45,
+      "vida": 1100,
+      "armadura": 60,
+      "alcanceHexes": 2,
+      "mana": 65
+    },
+    {
+      "nome": "Nidalee",
+      "custo": 4,
+      "caracteristicas": [
+        "Primordial",
+        "Adaptador"
+      ],
+      "velocidadeAtaque": 0.8,
+      "dano": 35,
+      "vida": 850,
+      "armadura": 30,
+      "alcanceHexes": 1,
+      "mana": 45
+    },
+    {
+      "nome": "Rubrivira",
+      "custo": 4,
+      "caracteristicas": [
+        "Fera do Rift",
+        "Devastador"
+      ],
+      "velocidadeAtaque": 0.55,
+      "dano": 120,
+      "vida": 1100,
+      "armadura": 65,
+      "alcanceHexes": 1,
+      "mana": 40
+    },
+    {
+      "nome": "Sett",
+      "custo": 4,
+      "caracteristicas": [
+        "Florescer",
+        "Lutador"
+      ],
+      "velocidadeAtaque": 0.65,
+      "dano": 80,
+      "vida": 1200,
+      "armadura": 60,
+      "alcanceHexes": 1,
+      "mana": 135
+    },
+    {
+      "nome": "Sivir",
+      "custo": 4,
+      "caracteristicas": [
+        "Primordial",
+        "Caçador"
+      ],
+      "velocidadeAtaque": 0.8,
+      "dano": 50,
+      "vida": 850,
+      "armadura": 40,
+      "alcanceHexes": 4,
+      "mana": 40
+    },
+    {
+      "nome": "Soraka",
+      "custo": 4,
+      "caracteristicas": [
+        "Flora Fatalis",
+        "Carrasco"
+      ],
+      "velocidadeAtaque": 0.75,
+      "dano": 30,
+      "vida": 850,
+      "armadura": 40,
+      "alcanceHexes": 4,
+      "mana": 30
+    },
+    {
+      "nome": "Zyra",
+      "custo": 4,
+      "caracteristicas": [
+        "Dama de Espinhos",
+        "Invocador"
+      ],
+      "velocidadeAtaque": 0.75,
+      "dano": 40,
+      "vida": 850,
+      "armadura": 40,
+      "alcanceHexes": 4,
+      "mana": 45
+    },
+    {
+      "nome": "Alune",
+      "custo": 5,
+      "caracteristicas": [
+        "Comunhão",
+        "Lunar",
+        "Enfeitiçador"
+      ],
+      "velocidadeAtaque": 0.8,
+      "dano": 40,
+      "vida": 900,
+      "armadura": 45,
+      "alcanceHexes": 4,
+      "mana": 35
+    },
+    {
+      "nome": "Ashe",
+      "custo": 5,
+      "caracteristicas": [
+        "Florescer",
+        "Caçador"
+      ],
+      "velocidadeAtaque": 0.8,
+      "dano": 75,
+      "vida": 900,
+      "armadura": 45,
+      "alcanceHexes": 6,
+      "mana": 80
+    },
+    {
+      "nome": "Dragão Ancião",
+      "custo": 5,
+      "caracteristicas": [
+        "Predador Perfeito",
+        "Fera do Rift"
+      ],
+      "velocidadeAtaque": 0.5,
+      "dano": 125,
+      "vida": 1800,
+      "armadura": 75,
+      "alcanceHexes": 2,
+      "mana": 60
+    },
+    {
+      "nome": "Draven",
+      "custo": 5,
+      "caracteristicas": [
+        "Caça-recompensas"
+      ],
+      "velocidadeAtaque": 0.85,
+      "dano": 48,
+      "vida": 900,
+      "armadura": 45,
+      "alcanceHexes": 6,
+      "mana": 110
+    },
+    {
+      "nome": "Gnar",
+      "custo": 5,
+      "caracteristicas": [
+        "Sabugueiro",
+        "Vivaz",
+        "Lutador"
+      ],
+      "velocidadeAtaque": 0.9,
+      "dano": 100,
+      "vida": 900,
+      "armadura": 55,
+      "alcanceHexes": 2,
+      "mana": 70
+    },
+    {
+      "nome": "Ivern",
+      "custo": 5,
+      "caracteristicas": [
+        "Pai do Verde"
+      ],
+      "velocidadeAtaque": 0.8,
+      "dano": 60,
+      "vida": 1000,
+      "armadura": 55,
+      "alcanceHexes": 3,
+      "mana": 80
+    },
+    {
+      "nome": "Kennen",
+      "custo": 5,
+      "caracteristicas": [
+        "Inferno",
+        "Carrasco"
+      ],
+      "velocidadeAtaque": 0.85,
+      "dano": 50,
+      "vida": 1200,
+      "armadura": 60,
+      "alcanceHexes": 2,
+      "mana": 40
+    },
+    {
+      "nome": "Lux",
+      "custo": 5,
+      "caracteristicas": [
+        "Avatar"
+      ],
+      "velocidadeAtaque": 0.8,
+      "dano": 40,
+      "vida": 900,
+      "armadura": 40,
+      "alcanceHexes": 6,
+      "mana": 70
+    },
+    {
+      "nome": "Lux (Congregação das Bruxas)",
+      "custo": 5,
+      "caracteristicas": [
+        "Congregação das Bruxas",
+        "Avatar"
+      ],
+      "velocidadeAtaque": 0.8,
+      "dano": 40,
+      "vida": 900,
+      "armadura": 45,
+      "alcanceHexes": 6,
+      "mana": 70
+    },
+    {
+      "nome": "Lux (Espinhos Negros)",
+      "custo": 5,
+      "caracteristicas": [
+        "Espinhos Negros",
+        "Avatar"
+      ],
+      "velocidadeAtaque": 0.8,
+      "dano": 40,
+      "vida": 900,
+      "armadura": 45,
+      "alcanceHexes": 6,
+      "mana": 70
+    },
+    {
+      "nome": "Lux (Feérica)",
+      "custo": 5,
+      "caracteristicas": [
+        "Feérico",
+        "Avatar"
+      ],
+      "velocidadeAtaque": 0.8,
+      "dano": 40,
+      "vida": 900,
+      "armadura": 45,
+      "alcanceHexes": 6,
+      "mana": 70
+    },
+    {
+      "nome": "Lux (Florescer)",
+      "custo": 5,
+      "caracteristicas": [
+        "Florescer",
+        "Avatar"
+      ],
+      "velocidadeAtaque": 0.8,
+      "dano": 40,
+      "vida": 900,
+      "armadura": 45,
+      "alcanceHexes": 6,
+      "mana": 70
+    },
+    {
+      "nome": "Lux (Inferno)",
+      "custo": 5,
+      "caracteristicas": [
+        "Inferno",
+        "Avatar"
+      ],
+      "velocidadeAtaque": 0.8,
+      "dano": 40,
+      "vida": 900,
+      "armadura": 45,
+      "alcanceHexes": 6,
+      "mana": 70
+    },
+    {
+      "nome": "Lux (Lunar)",
+      "custo": 5,
+      "caracteristicas": [
+        "Lunar",
+        "Avatar"
+      ],
+      "velocidadeAtaque": 0.8,
+      "dano": 40,
+      "vida": 900,
+      "armadura": 45,
+      "alcanceHexes": 6,
+      "mana": 70
+    },
+    {
+      "nome": "Lux (Primordial)",
+      "custo": 5,
+      "caracteristicas": [
+        "Primordial",
+        "Avatar"
+      ],
+      "velocidadeAtaque": 0.8,
+      "dano": 40,
+      "vida": 900,
+      "armadura": 45,
+      "alcanceHexes": 6,
+      "mana": 70
+    },
+    {
+      "nome": "Lux (Sabugueiro)",
+      "custo": 5,
+      "caracteristicas": [
+        "Sabugueiro",
+        "Avatar"
+      ],
+      "velocidadeAtaque": 0.8,
+      "dano": 40,
+      "vida": 900,
+      "armadura": 45,
+      "alcanceHexes": 6,
+      "mana": 70
+    },
+    {
+      "nome": "Lux (Solar)",
+      "custo": 5,
+      "caracteristicas": [
+        "Solar",
+        "Avatar"
+      ],
+      "velocidadeAtaque": 0.8,
+      "dano": 40,
+      "vida": 900,
+      "armadura": 45,
+      "alcanceHexes": 6,
+      "mana": 70
+    },
+    {
+      "nome": "Maokai",
+      "custo": 5,
+      "caracteristicas": [
+        "Crescimento Antigo",
+        "Colosso"
+      ],
+      "velocidadeAtaque": 0.65,
+      "dano": 80,
+      "vida": 1150,
+      "armadura": 60,
+      "alcanceHexes": 1,
+      "mana": 100
+    },
+    {
+      "nome": "Taric",
+      "custo": 5,
+      "caracteristicas": [
+        "Aspecto Esmeralda",
+        "Vanguarda"
+      ],
+      "velocidadeAtaque": 0.75,
+      "dano": 55,
+      "vida": 1300,
+      "armadura": 65,
+      "alcanceHexes": 1,
+      "mana": 65
+    }
+  ]
+}
