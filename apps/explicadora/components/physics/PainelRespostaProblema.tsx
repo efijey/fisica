@@ -29,7 +29,7 @@ interface PainelRespostaProblemaProps {
   onProximo?: () => void
 }
 
-const VEREDITO_STYLE: Record<
+export const VEREDITO_STYLE: Record<
   ResultadoJuiz["veredito"],
   { label: string; className: string }
 > = {

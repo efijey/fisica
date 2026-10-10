@@ -14,7 +14,7 @@
 - Lint verde (`qa-002` passing): 0 erros, 2 avisos de variável não usada.
 - Rascunho da ementa em `docs/ementa-fisica-1.md` (`study-001`).
 - Equações em LaTeX com KaTeX (`study-002` passing), branch `feature/equacoes-katex`: componente `components/physics/Equacao.tsx` e página `/estudo` (prévia, vira a casa da trilha).
-- Capítulo 1 sem lente em `/estudo` (`study-003` in_progress), branch `feature/trilha-capitulo-1`: aguardando o autor ler; faltam exercícios com juiz.
+- Capítulo 1 sem lente em `/estudo` (`study-003` in_progress), branch `feature/trilha-capitulo-1`: 8 exercícios conceituais com juiz (um por seção); aguardando o autor ler e testar.
 - Fonte do site corrigida: `--font-sans` apontava para si mesma e o site todo caía em fonte serifada.
 
 ## Quebrado ou sem verificar
@@ -24,7 +24,7 @@
 
 ## Próximo passo
 
-- **Feature:** `study-003` (capítulo 1): autor revisa o texto em `/estudo`; depois exercícios com juiz e lente (`study-004`). `study-001` (ementa) também aguarda leitura do autor.
+- **Feature:** `study-003` (capítulo 1): autor revisa texto e exercícios em `/estudo`; depois a lente (`study-004`). `study-001` (ementa) também aguarda leitura do autor.
 - **Por quê:** o autor quer estudar o semestre com o app.
 - **Passing (study-001):** autor aprova a ementa.
 - **Não mexer:** auth do ingestor, cadeias de inferência, deploy.

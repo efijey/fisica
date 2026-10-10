@@ -219,9 +219,10 @@
         "npm run build"
       ],
       "evidence": [
-        "2026-10-10: texto formal do capítulo 1 (8 seções, Young & Freedman 1.3–1.10) em /estudo; npm run build ok; lint 0 erros; nenhum katex-error no HTML."
+        "2026-10-10: texto formal do capítulo 1 (8 seções, Young & Freedman 1.3–1.10) em /estudo; npm run build ok; lint 0 erros; nenhum katex-error no HTML.",
+        "2026-10-10: 8 exercícios conceituais com juiz (um por seção). Script tsx com resposta boa e ruim por exercício: 8/8 boa=certo, ruim=desviado. No navegador: resposta certa → Certo + explicação; resposta errada → Desviado, feedback sem revelar o número."
       ],
-      "notes": "Validar um capítulo antes de escalar. Feito: intuição, definição, por quê, armadilhas, exemplo resolvido, referência da seção do livro (conferir numeração na edição do autor). Falta: revisão do autor, exercícios com juiz, lente (study-004). Conteúdo em app/estudo/capitulos/capitulo-1.ts."
+      "notes": "Validar um capítulo antes de escalar. Feito: intuição, definição, por quê, armadilhas, exemplo resolvido, referência da seção do livro (conferir numeração na edição do autor), exercícios com juiz (components/physics/ExercicioConceitual.tsx; explicação só depois de enviar). Rótulo do conceito = primeiro sinônimo da rubrica: escrever legível e sem revelar a resposta. Falta: revisão do autor, lente (study-004). Conteúdo em app/estudo/capitulos/capitulo-1.ts."
     },
     {
       "id": "study-004",

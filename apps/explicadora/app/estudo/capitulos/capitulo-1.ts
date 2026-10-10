@@ -12,6 +12,19 @@ export const capitulo1: Capitulo = {
       id: "grandezas-unidades",
       titulo: "Grandezas físicas e unidades",
       referencia: "Young & Freedman, seção 1.3",
+      exercicio: {
+        pergunta: r`Um colega escreveu \(v = \dfrac{x}{t^2}\) para a velocidade. Sem usar nenhum número, como você mostra que essa fórmula está errada?`,
+        dica: "Olhe para as unidades de cada lado do sinal de igual.",
+        rubrica: {
+          conceitosObrigatorios: [
+            "unidades|unidade|dimens",
+            "comparar os dois lados|lado|batem|bate|iguais|mesma|compar|diferente",
+          ],
+          conceitosAlternativos: ["m/s|metro por segundo|metros por segundo|aceleracao"],
+          minObrigatorios: 1,
+        },
+        explicacao: r`Compare as unidades dos dois lados. À esquerda, velocidade: \(\mathrm{m/s}\). À direita, \(\mathrm{m/s^2}\), que é unidade de aceleração. Como não batem, a fórmula não pode estar certa.`,
+      },
       intuicao:
         "Dizer que uma mesa mede “2” não informa nada: 2 o quê? Toda medida em física é um número acompanhado de uma unidade, que diz com qual padrão você comparou.",
       definicao: r`Uma grandeza física é algo que se mede: comprimento, tempo, massa. O Sistema Internacional (SI) usa três unidades de base na mecânica: o metro (\(\mathrm{m}\)) para comprimento, o segundo (\(\mathrm{s}\)) para tempo e o quilograma (\(\mathrm{kg}\)) para massa. As outras unidades da mecânica são combinações delas; velocidade, por exemplo, sai em \(\mathrm{m/s}\). Prefixos indicam potências de 10: quilo \(= 10^{3}\), mili \(= 10^{-3}\), micro \(= 10^{-6}\), nano \(= 10^{-9}\).`,
@@ -30,6 +43,18 @@ export const capitulo1: Capitulo = {
       id: "conversao",
       titulo: "Conversão de unidades",
       referencia: "Young & Freedman, seção 1.4",
+      exercicio: {
+        pergunta: r`Um quarto tem área de \(12\ \mathrm{m}^2\). Um colega converte para \(\mathrm{cm}^2\) multiplicando por 100. Por que isso está errado?`,
+        dica: "Área tem duas dimensões. O que acontece com cada uma delas na conversão?",
+        rubrica: {
+          conceitosObrigatorios: [
+            "área ao quadrado|quadrado|elevado|duas dimens|dois lados|largura|comprimento|cada lado",
+            "o fator certo de conversão|10000|10.000|10 mil|dez mil|10 4|100 x 100|100 vezes 100|100 100|100.100",
+          ],
+          minObrigatorios: 1,
+        },
+        explicacao: r`Cada metro vira 100 cm na largura e também no comprimento, então \(1\ \mathrm{m}^2 = 100 \times 100\ \mathrm{cm}^2 = 10^{4}\ \mathrm{cm}^2\). O fator do comprimento entra ao quadrado.`,
+      },
       intuicao:
         "Trocar de unidade não muda o tamanho da coisa, só a régua. Uma estrada de 1 km continua do mesmo tamanho quando você diz 1000 m.",
       definicao: r`Para converter, multiplica-se por uma fração que vale 1, com a unidade nova em cima e a antiga embaixo: \[ \frac{1000\ \mathrm{m}}{1\ \mathrm{km}} = 1 \] As unidades se cancelam como se fossem números.`,
@@ -48,6 +73,18 @@ export const capitulo1: Capitulo = {
       id: "algarismos-significativos",
       titulo: "Incerteza e algarismos significativos",
       referencia: "Young & Freedman, seção 1.5",
+      exercicio: {
+        pergunta: r`Você mede uma tábua com uma trena e obtém \(1{,}2\ \mathrm{m}\). Para dividi-la em 3 pedaços iguais, faz a conta e a calculadora mostra \(0{,}4000000\). Por que não faz sentido escrever todos esses dígitos?`,
+        dica: "Quem decide quantos dígitos são confiáveis: a calculadora ou a medida?",
+        rubrica: {
+          conceitosObrigatorios: [
+            "precisão|precis|incerteza|algarismo|significativ|confiav",
+            "a medida|medida|medicao|medir|medi|instrumento|trena|dado",
+          ],
+          minObrigatorios: 1,
+        },
+        explicacao: r`O resultado não pode ser mais preciso que a medida. A trena deu 2 algarismos significativos, então o resultado fica com 2: \(0{,}40\ \mathrm{m}\). Os outros zeros foram inventados pela calculadora.`,
+      },
       intuicao:
         "Uma régua escolar não distingue décimos de milímetro. Escrever mais casas do que o instrumento mede é inventar informação.",
       definicao:
@@ -67,6 +104,20 @@ export const capitulo1: Capitulo = {
       id: "ordem-de-grandeza",
       titulo: "Estimativas e ordens de grandeza",
       referencia: "Young & Freedman, seção 1.6",
+      exercicio: {
+        pergunta:
+          "Sem pesquisar, estime a ordem de grandeza do número de segundos em um dia. Explique o caminho que você usou.",
+        dica: "Quebre o dia em horas, as horas em minutos e os minutos em segundos.",
+        rubrica: {
+          conceitosObrigatorios: [
+            "horas do dia|24|hora",
+            "minutos e segundos|60|minuto|3600",
+            "a potência de 10 do resultado|10 5|10 elevado a 5|dez elevado a cinco|100 mil|100000|100.000|cem mil|86400|86.400|86 mil",
+          ],
+          minObrigatorios: 2,
+        },
+        explicacao: r`\(24\) horas \(\times\ 60\) minutos \(\times\ 60\) segundos dá quase \(9 \times 10^{4}\ \mathrm{s}\), mais perto de \(10^{5}\) do que de \(10^{4}\). Ordem de grandeza: \(10^{5}\) segundos.`,
+      },
       intuicao:
         "Antes de calcular com precisão, vale saber o tamanho aproximado da resposta. É isso que permite perceber quando um resultado está absurdo.",
       definicao:
@@ -85,6 +136,21 @@ export const capitulo1: Capitulo = {
       id: "vetores",
       titulo: "Vetores e soma vetorial",
       referencia: "Young & Freedman, seção 1.7",
+      exercicio: {
+        pergunta:
+          "Duas pessoas puxam uma caixa, cada uma com uma força do mesmo tamanho. Em que situação a força total é zero, e em que situação ela é a maior possível? Por que somar só os tamanhos não basta?",
+        dica: "Força é vetor: além do tamanho, importa para onde cada pessoa puxa.",
+        rubrica: {
+          conceitosObrigatorios: [
+            "sentidos opostos|oposto|oposta|contrari|lados diferentes",
+            "mesmo sentido|mesma direcao|mesmo lado|mesma dire|juntas|alinhad|mesmo jeito",
+            "direção|sentido|vetor|angulo",
+          ],
+          minObrigatorios: 2,
+        },
+        explicacao:
+          "Força é vetor. Puxando em sentidos opostos, uma força cancela a outra e a soma é zero. Puxando no mesmo sentido, a soma tem o dobro do tamanho. Em qualquer outro ângulo, o resultado fica entre esses dois. Somar só os tamanhos ignora a direção.",
+      },
       intuicao:
         "Andar 3 quarteirões não diz onde você chegou: depende de para onde andou. Grandezas assim precisam de tamanho e direção.",
       definicao: r`Grandeza escalar tem só valor (massa, tempo, temperatura). Grandeza vetorial tem módulo, direção e sentido (deslocamento, velocidade, força). Escreve-se \(\vec{A}\), e o módulo é \(A = |\vec{A}|\). Somar vetores é colocar o início de um na ponta do outro: \(\vec{R} = \vec{A} + \vec{B}\) vai do início do primeiro até a ponta do último.`,
@@ -104,6 +170,18 @@ export const capitulo1: Capitulo = {
       id: "componentes",
       titulo: "Componentes de vetores",
       referencia: "Young & Freedman, seção 1.8",
+      exercicio: {
+        pergunta: r`Um vetor aponta para baixo e para a esquerda. Quais são os sinais das componentes \(A_x\) e \(A_y\)? Por que isso importa na hora de usar o \(\arctan\) da calculadora?`,
+        dica: "Divida uma componente negativa por outra negativa e veja o sinal que sobra.",
+        rubrica: {
+          conceitosObrigatorios: [
+            "sinais das componentes|negativ",
+            "quadrante|180|nao sabe|ambig|dois angulos|errad|primeiro",
+          ],
+          minObrigatorios: 1,
+        },
+        explicacao: r`As duas componentes são negativas: o vetor está no terceiro quadrante. Como \(A_y / A_x\) fica positivo, a calculadora devolve um ângulo do primeiro quadrante. É preciso somar \(180^\circ\) para chegar ao ângulo certo.`,
+      },
       intuicao: r`Desenhar setas funciona para dois vetores. Com muitos, é mais fácil quebrar cada vetor em “quanto anda em \(x\)” e “quanto anda em \(y\)” e somar números.`,
       definicao: r`Um vetor de módulo \(A\) que faz ângulo \(\theta\) com o eixo \(x\) positivo tem componentes \[ A_x = A\cos\theta, \qquad A_y = A\operatorname{sen}\theta \] e, no caminho de volta, \[ A = \sqrt{A_x^2 + A_y^2}, \qquad \tan\theta = \frac{A_y}{A_x} \] Para somar vetores, somam-se as componentes: \(R_x = A_x + B_x\) e \(R_y = A_y + B_y\).`,
       porque: r`Os eixos são independentes: o que acontece em \(x\) não interfere em \(y\). Essa ideia volta no movimento de projéteis (capítulo 3).`,
@@ -120,6 +198,18 @@ export const capitulo1: Capitulo = {
       id: "vetores-unitarios",
       titulo: "Vetores unitários",
       referencia: "Young & Freedman, seção 1.9",
+      exercicio: {
+        pergunta: r`O que muda e o que não muda entre os vetores \((3\ \mathrm{m})\,\hat{\imath}\) e \((-3\ \mathrm{m})\,\hat{\imath}\)?`,
+        dica: "Pense separadamente em tamanho, direção e sentido.",
+        rubrica: {
+          conceitosObrigatorios: [
+            "módulo|tamanho|modulo|comprimento|mesmo valor|3 m",
+            "sentido|oposto|contrari|inverte|ao contrario",
+          ],
+          minObrigatorios: 1,
+        },
+        explicacao: r`Os dois têm o mesmo módulo, 3 m, e a mesma direção, o eixo \(x\). Só o sentido muda: o primeiro aponta para \(+x\) e o segundo para \(-x\).`,
+      },
       intuicao:
         "Um vetor unitário é uma seta de tamanho 1 que só diz “para onde”. Multiplicando por um número, você diz “quanto”.",
       definicao: r`Os vetores \(\hat{\imath}\), \(\hat{\jmath}\) e \(\hat{k}\) têm módulo 1 e apontam nos sentidos positivos de \(x\), \(y\) e \(z\). Qualquer vetor se escreve como \[ \vec{A} = A_x\,\hat{\imath} + A_y\,\hat{\jmath} + A_z\,\hat{k} \]`,
@@ -133,6 +223,19 @@ export const capitulo1: Capitulo = {
       id: "produtos",
       titulo: "Produtos de vetores",
       referencia: "Young & Freedman, seção 1.10",
+      exercicio: {
+        pergunta:
+          "Você empurra um carrinho de supermercado que anda na horizontal, mas sua força aponta inclinada para baixo. Que parte da sua força ajuda o carrinho a andar? Que produto de vetores descreve isso?",
+        dica: "Quebre a força em uma parte horizontal e uma vertical.",
+        rubrica: {
+          conceitosObrigatorios: [
+            "componente na direção do movimento|horizontal|componente|direcao do movimento|paralel|direcao do desloc|mesma direcao",
+            "produto escalar|escalar|cos|produto ponto",
+          ],
+          minObrigatorios: 1,
+        },
+        explicacao: r`Só a componente da força na direção do movimento, a horizontal, ajuda o carrinho a andar. O produto escalar \(\vec{F} \cdot \vec{d} = Fd\cos\phi\) faz exatamente isso: pega só a parte paralela. É a ideia de trabalho, que volta no capítulo 6. A parte vertical só aperta o carrinho contra o chão.`,
+      },
       intuicao:
         "Há duas perguntas úteis sobre dois vetores: quanto um aponta na direção do outro, e quanto os dois “abrem” um plano entre si. Cada pergunta tem o seu produto.",
       definicao: r`O produto escalar dá um número: \[ \vec{A} \cdot \vec{B} = AB\cos\phi = A_xB_x + A_yB_y + A_zB_z \] O produto vetorial dá um vetor perpendicular aos dois, com módulo \[ |\vec{A} \times \vec{B}| = AB\operatorname{sen}\phi \] e sentido dado pela regra da mão direita. Aqui \(\phi\) é o ângulo entre os vetores.`,

@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 
 import { TextoComEquacoes } from "@/components/physics/Equacao"
+import { ExercicioConceitual } from "@/components/physics/ExercicioConceitual"
 
 import { capitulo1 } from "./capitulos/capitulo-1"
 import type { SecaoCapitulo } from "./capitulos/tipos"
@@ -58,6 +59,15 @@ function Secao({ secao }: { secao: SecaoCapitulo }) {
             texto={secao.exemplo.resolucao}
             className="leading-7"
           />
+        </div>
+      )}
+
+      {secao.exercicio && (
+        <div className="flex flex-col gap-2 rounded-lg border border-primary/30 p-4">
+          <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+            Sua vez
+          </h3>
+          <ExercicioConceitual exercicio={secao.exercicio} />
         </div>
       )}
     </section>

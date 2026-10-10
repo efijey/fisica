@@ -1,3 +1,5 @@
+import type { ExercicioTrilha } from "@/components/physics/ExercicioConceitual"
+
 /** Textos aceitam equações em `\( \)` (na linha) e `\[ \]` (em destaque). */
 export type SecaoCapitulo = {
   id: string
@@ -9,6 +11,7 @@ export type SecaoCapitulo = {
   porque: string
   armadilhas: string[]
   exemplo?: { enunciado: string; resolucao: string }
+  exercicio?: ExercicioTrilha
 }
 
 export type Capitulo = {
