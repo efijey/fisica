@@ -10,13 +10,14 @@ Ligação pedagógica: exemplos e problemas no **mundo familiar do aluno** reduz
 
 Hoje muitos exercícios usam cenários genéricos (avião, carro genérico) que o aluno pode não conhecer bem — isso gasta atenção antes mesmo da física.
 
-A proposta: o **esqueleto científico** (fórmula, grandezas, relações) fica estável; a **pele narrativa** (futebol, corrida, LoL, culinária…) vem dos interesses do usuário.
+A proposta: o **esqueleto científico** (fórmula, grandezas, relações) fica estável; a **pele narrativa** vem dos interesses do usuário — e esses interesses devem poder ser **nichados**, não só categorias largas.
 
 ```
-esqueleto (physics-core)     +     pele (interesses do usuário)
+esqueleto (physics-core)     +     pele (tags / interesses do usuário)
 ─────────────────────────────────────────────────────────────
-a = Δv / Δt                  →     arrancada do atacante
-                                 sprint na lane / pacing na corrida
+a = Δv / Δt                  →     arrancada do atacante (LoL)
+                                 Porsche em pista (não F1)
+                                 mountain bike em trilha
 ```
 
 ---
@@ -119,16 +120,79 @@ A ingestora (UI interna ou aba admin) é o lugar natural para **revisar** o que 
 
 ## Paciente zero — interesses iniciais (autor)
 
-Usar como seed da Fase 0/1:
+Usar como seed da Fase 0/1 (mundos largos para validar o pipeline):
 
 - Futebol  
-- Corrida  
+- Corrida *(categoria larga — ver tags abaixo)*  
 - Team Fight Tactics (TFT)  
 - League of Legends  
 - Xadrez  
 - Culinária  
 
 Não é lista fechada do produto — é o primeiro laboratório.
+
+---
+
+## Ideia registrada: tags nichadas (estilo “seguir perfil”)
+
+> Anotado para **próximas iterações** — não implementar rede social completa agora.  
+> Objetivo: lembrar que “corrida” / “jogos” é só o começo; o valor está no **nicho**.
+
+### Problema com categorias largas
+
+Se o sistema só oferece “corrida”, a pessoa ainda pode ter carga cognitiva (ou desinteresse):
+
+- alguém gosta de **corrida de mountain bike**  
+- outra pessoa gosta de **super carros em pista** (Porsche, BMW…) — **sem ser Fórmula 1**  
+
+São mundos mentais diferentes. Forçar um balde único (“corrida”) enfraquece a tese da personalização.
+
+### Tags como unidade de interesse
+
+| Conceito | Exemplo |
+|----------|---------|
+| Texto livre do usuário | “corrida de porsche em pista”, “mtb downhill” |
+| Normalização → **tag** | `corrida-porsche-pista`, `mtb-downhill` |
+| Conteúdo linkado à tag | exemplos, problemas, metáforas daquele nicho |
+| Perfil do aluno | conjunto de tags que ele “segue” |
+
+Fluxo mental:
+
+```
+pessoa escreve interesse
+        ↓
+sistema mapeia / sugere tags (e pode criar tag nova)
+        ↓
+feed de treino = conteúdo das tags do perfil
+        ↓
+outras pessoas podem recomendar tag (“essa é massa, coloca no perfil”)
+```
+
+### Analogia com redes sociais (estratégia de produto)
+
+Não é “virar Instagram”. É copiar o mecanismo que **segura atenção** e **afina identidade**:
+
+1. **Seguir tags** ≈ seguir perfis/temas — o que aparece no treino vem do que você segue.  
+2. **Nicho > genérico** — quanto mais específico o mundo, menor a carga extra e maior o “isso é pra mim”.  
+3. **Descoberta social leve** — comentários / “essa tag é daora” / sugerir tag a um colega (fase bem posterior).  
+4. **Tempo na ferramenta** — utilidade pedagógica também depende de a pessoa **querer voltar**; personalização nichada é a alavanca de engajamento alinhada ao aprendizado (não scroll vazio).  
+5. **Pool por tag** — conteúdo gerado/revisado para `mtb-downhill` reaproveita para todos que seguem essa tag (mesma lógica de reuso por interesse, só mais fina).
+
+### Implicações técnicas (quando for a hora)
+
+- Tags: slug estável + label legível + opcional hierarquia (`corrida` → `corrida-porsche-pista`)  
+- Entrada: campo de texto + autocomplete de tags existentes + “criar tag”  
+- Conteúdo: `content_items.tag_ids[]` (ou tabela N:N), sempre com `formulaIds` do core  
+- Geração: prompt recebe **fatos/restrições da tag** (não só do mundo largo)  
+- Social (depois): follow tag, sugestão entre usuários, comentário opcional — **fora** do paciente zero  
+
+### O que NÃO fazer agora
+
+- Rede social completa, likes, feed infinito  
+- Obrigatoriedade de tag perfeita no MVP do autor  
+- Substituir os mundos TFT/LoL atuais — eles continuam como primeiras tags/mundos de laboratório  
+
+Quando a Fase 0 agradar: próximo passo natural é **texto livre → tag** no perfil local, ainda sem comunidade.
 
 ---
 

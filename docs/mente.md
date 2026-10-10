@@ -3,7 +3,7 @@
 Documento vivo de contexto. Agentes e humanos devem ler isto **antes** de propor mudanças.
 Atualize este arquivo quando a visão, o estado ou o fluxo de trabalho mudarem.
 
-Última sincronização: 2026-10-10 (Fase 0: treino personalizado TFT/LoL + cards de literatura).
+Última sincronização: 2026-10-10 (tags nichadas anotadas; Fase 0 TFT/LoL + literatura).
 
 - Mapa do código: [`manual.md`](./manual.md)  
 - Personalização / ingestora → interesses: [`personalizacao.md`](./personalizacao.md)
@@ -48,7 +48,8 @@ O dono do projeto está aprendendo boas práticas: preferir explicações claras
 2. **Pele** (exemplos, enunciados, metáforas) vem dos **interesses** do usuário.  
 3. A ingestora evolui de “colar vestibular” para **mapear interesses + gerar/revisar conteúdo** (API), guardado no **banco ligado ao usuário** e/ou a um **pool por interesse** (reuso entre pessoas com o mesmo gosto).  
 4. Paciente zero: interesses seed do autor — futebol, corrida, TFT, League of Legends, xadrez, culinária.  
-5. Começar validando com pouco (perfil local + variantes), depois auth/Supabase/geração — ver fases em [`personalizacao.md`](./personalizacao.md).
+5. Começar validando com pouco (perfil local + variantes), depois auth/Supabase/geração — ver fases em [`personalizacao.md`](./personalizacao.md).  
+6. **Ideia anotada (próximas prompts):** interesses como **tags nichadas** que a pessoa escreve/segue (ex.: mountain bike, Porsche em pista — não só “corrida”), com descoberta leve estilo rede social e pool de conteúdo por tag — ver seção em [`personalizacao.md`](./personalizacao.md).
 
 ---
 

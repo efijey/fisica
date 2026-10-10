@@ -123,6 +123,7 @@ Visão completa: [personalizacao.md](./personalizacao.md).
 - Cadeias de inferência multi-etapa
 - Input de enunciado com identificação de contexto
 - Ligar `catalogoExemplos` / pool personalizado à UI do estudante
+- Tags nichadas (texto livre → tag; pool por tag; recomendação entre alunos) — ver [personalizacao.md](./personalizacao.md)
 - Expandir catálogo (termodinâmica, ondas, eletromagnetismo)
 - Histórico de treino do aluno
 - PWA básico (opcional)

@@ -7,7 +7,7 @@ alwaysApply: true
 
 Leia e respeite **`docs/mente.md`** como fonte de verdade viva (estado/prioridades).  
 Mapa estável do código (pastas, rotas, lógica, banco): **`docs/manual.md`**.  
-Personalização (interesses / ingestora → banco): **`docs/personalizacao.md`**.  
+Personalização (interesses / tags nichadas / ingestora → banco): **`docs/personalizacao.md`**.  
 Complementos: `docs/roadmap.md`, `docs/git-workflow.md`, `docs/mvp-producao.md`, `AGENTS.md`.
 
 ## O que é
