@@ -9,6 +9,16 @@ const ornn = campeaoTft("Ornn")
 const dpsXayah = xayah.dano * xayah.velocidadeAtaque
 const dpsReksai = reksai.dano * reksai.velocidadeAtaque
 
+const gnar = campeaoTft("Gnar")
+const malphite = campeaoTft("Malphite")
+const caitlyn = campeaoTft("Caitlyn")
+const ashe = campeaoTft("Ashe")
+const time = [xayah, caitlyn, ashe]
+const dpsTime = time.reduce((s, c) => s + c.dano * c.velocidadeAtaque, 0)
+
+const simplificacaoPadrao =
+  "Campeões com 1 estrela e sem itens; a conta ignora armadura, mana e habilidades."
+
 export const lenteTftCapitulo1: LenteCapitulo = {
   mundoId: "tft",
   nome: "TFT",
@@ -18,8 +28,7 @@ export const lenteTftCapitulo1: LenteCapitulo = {
       noJogo: {
         titulo: "Quem derruba o Ornn mais rápido: Xayah ou Rek'Sai?",
         texto: r`A Xayah dá \(${xayah.dano}\) de dano por ataque e ataca \(${texNum(xayah.velocidadeAtaque)}\) vezes por segundo. A Rek'Sai bate mais forte, \(${reksai.dano}\) por ataque, mas ataca só \(${texNum(reksai.velocidadeAtaque)}\) vezes por segundo. Multiplicando as duas grandezas, sai o dano por segundo (DPS), e as unidades mostram por quê: \[ \text{DPS} = \text{dano por ataque} \times \frac{\text{ataques}}{\mathrm{s}} \] \[ \text{Xayah: } ${xayah.dano} \times ${texNum(xayah.velocidadeAtaque)} = ${texNum(dpsXayah)}\ \tfrac{\text{dano}}{\mathrm{s}} \] \[ \text{Rek'Sai: } ${reksai.dano} \times ${texNum(reksai.velocidadeAtaque)} = ${texNum(dpsReksai)}\ \tfrac{\text{dano}}{\mathrm{s}} \] Dividindo a vida do Ornn (\(${ornn.vida}\)) pelo DPS, o “dano” se cancela e sobra tempo: \[ t = \frac{${ornn.vida}\ \text{dano}}{\text{DPS}\ \text{dano/s}} \] A Xayah leva cerca de \(${Math.round(ornn.vida / dpsXayah)}\ \mathrm{s}\); a Rek'Sai, cerca de \(${Math.round(ornn.vida / dpsReksai)}\ \mathrm{s}\). Bater mais forte não basta: o que decide é o produto das duas grandezas. E a análise de unidades diz qual conta faz sentido antes de você fazer qualquer uma.`,
-        simplificacao:
-          "Campeões com 1 estrela e sem itens; a conta ignora armadura, mana e habilidades.",
+        simplificacao: simplificacaoPadrao,
         fonte: fonteTft,
       },
       intuicao:
@@ -43,6 +52,12 @@ export const lenteTftCapitulo1: LenteCapitulo = {
       },
     },
     conversao: {
+      noJogo: {
+        titulo: "Quanto tempo entre um ataque e outro?",
+        texto: r`O jogo mostra a velocidade de ataque em ataques por segundo. Muitas vezes o que você quer saber é o contrário: quantos segundos o campeão espera entre um ataque e o próximo. A conversão é inverter a grandeza, e as unidades invertem junto: \[ \frac{1}{\text{ataques}/\mathrm{s}} = \frac{\mathrm{s}}{\text{ataque}} \] O Gnar ataca \(${texNum(gnar.velocidadeAtaque)}\) vezes por segundo, ou seja, um ataque a cada \(${texNum(1 / gnar.velocidadeAtaque, 1)}\ \mathrm{s}\). O Malphite ataca \(${texNum(malphite.velocidadeAtaque)}\) vezes por segundo: um ataque a cada \(${texNum(1 / malphite.velocidadeAtaque, 1)}\ \mathrm{s}\). Numa luta curta, essa espera decide se o campeão consegue dar mais um golpe antes de cair.`,
+        simplificacao: "Campeões com 1 estrela, sem itens nem bônus de velocidade de ataque.",
+        fonte: fonteTft,
+      },
       intuicao:
         "Um round que dura meio minuto continua do mesmo tamanho se você disser 30 segundos. Trocar de unidade não muda o tempo nem a distância, só a régua usada para contar.",
       exemplo: {
@@ -56,6 +71,12 @@ export const lenteTftCapitulo1: LenteCapitulo = {
       },
     },
     "algarismos-significativos": {
+      noJogo: {
+        titulo: "Os dígitos falsos dentro do próprio jogo",
+        texto: r`Nos arquivos do jogo, a velocidade de ataque da Xayah está guardada como \(0{,}699999988079071\), e não \(0{,}7\). Esses dígitos não são precisão: é o jeito como o computador guarda números decimais em binário, que nunca é exato. Quem copia todos os dígitos acha que sabe mais do que sabe. O mesmo vale para as suas contas: a Xayah derruba o Ornn em \(${texNum(ornn.vida / dpsXayah, 6)}\ \mathrm{s}\) segundo a calculadora, mas como a conta já ignora armadura e habilidades, escrever “cerca de \(${Math.round(ornn.vida / dpsXayah)}\ \mathrm{s}\)” é o honesto.`,
+        simplificacao: simplificacaoPadrao,
+        fonte: fonteTft,
+      },
       intuicao:
         "Se você cronometra um combate no olho, com o relógio do celular, não dá para afirmar que ele durou 27,384 segundos. Seu dedo no botão não é tão preciso: a medida só garante poucos dígitos.",
       exercicio: {
@@ -65,6 +86,12 @@ export const lenteTftCapitulo1: LenteCapitulo = {
       },
     },
     "ordem-de-grandeza": {
+      noJogo: {
+        titulo: "Quantos ataques até o tank cair?",
+        texto: r`Antes de qualquer conta, olhe as potências de 10. A vida de um campeão com 1 estrela fica na casa das centenas (\(10^{2}\) a \(10^{3}\)); o dano por ataque, na casa das dezenas (\(10^{1}\)). Então derrubar alguém leva da ordem de \(10^{3} / 10^{2} \sim 10^{1}\) ataques: dezenas, não centenas. Conferindo com números reais: a Xayah precisa de uns \(${Math.ceil(ornn.vida / xayah.dano)}\) ataques para derrubar o Ornn (\(${ornn.vida} / ${xayah.dano}\)). Se uma conta sua der 300 ataques, tem algo errado.`,
+        simplificacao: simplificacaoPadrao,
+        fonte: fonteTft,
+      },
       intuicao:
         "Antes de olhar o relógio, todo jogador sabe que uma partida de TFT dura dezenas de minutos, não segundos nem dias. Esse “tamanho aproximado” é a ordem de grandeza, e é o que faz você estranhar quando alguém diz um número absurdo.",
       exemplo: {
@@ -91,6 +118,12 @@ export const lenteTftCapitulo1: LenteCapitulo = {
       },
     },
     vetores: {
+      noJogo: {
+        titulo: "Alcance diz “quanto”, posicionamento diz “para onde”",
+        texto: r`A Caitlyn tem alcance de \(${caitlyn.alcanceHexes}\) hexes e a Ashe, de \(${ashe.alcanceHexes}\). O alcance é um tamanho, sem direção: vale para qualquer lado. Mas quem a sua carry alcança depende da posição de cada inimigo em relação a ela, e posição é vetor: dois inimigos a 4 hexes podem estar em lados opostos. Quando você coloca a carry no canto, está escolhendo as direções de onde os inimigos podem chegar, não só a distância.`,
+        simplificacao: "Alcance base, sem itens.",
+        fonte: fonteTft,
+      },
       intuicao:
         "Dizer que uma unidade andou 3 hexes não diz onde ela parou: depende da direção. Ela pode ter avançado 3 hexes rumo ao inimigo ou ter ido e voltado.",
       exemplo: {
@@ -111,6 +144,13 @@ export const lenteTftCapitulo1: LenteCapitulo = {
       },
     },
     componentes: {
+      noJogo: {
+        titulo: "Fileiras e colunas",
+        texto:
+          "O seu lado do tabuleiro tem 4 fileiras e 7 colunas. Para saber até onde um inimigo precisa andar para chegar à sua carry, ajuda separar o caminho em duas partes: quantas fileiras ele avança e quantas colunas ele anda para o lado. É a mesma ideia das componentes \\(A_x\\) e \\(A_y\\). Num tabuleiro de hexes a conta exata da distância é diferente da de Pitágoras, mas quebrar o movimento em duas direções independentes continua sendo o jeito mais simples de pensar.",
+        simplificacao: "Raciocínio geométrico; não usa atributos de campeão.",
+        fonte: "Tabuleiro de 4 fileiras por 7 colunas para cada jogador.",
+      },
       intuicao: r`Um movimento na diagonal do tabuleiro pode ser pensado como “quanto vai para o lado” mais “quanto vai para a frente”. Separar assim transforma vários movimentos em somas simples, uma para cada eixo.`,
       exercicio: {
         pergunta: r`Um assassino inimigo pula para a retaguarda do seu time, e o seu carry atira nele: o projétil vai para trás e para a esquerda. Tomando \(x\) para a direita e \(y\) para a frente, quais são os sinais das componentes \(A_x\) e \(A_y\) do vetor do projétil? Por que isso importa na hora de usar o \(\arctan\) da calculadora?`,
@@ -119,6 +159,12 @@ export const lenteTftCapitulo1: LenteCapitulo = {
       },
     },
     "vetores-unitarios": {
+      noJogo: {
+        titulo: "As 6 direções do hex",
+        texto: r`Num hex, há exatamente 6 vizinhos, então há 6 direções possíveis para um passo. Cada uma funciona como um vetor unitário do tabuleiro: diz só “para onde”, e o número de passos diz “quanto”. Qualquer caminho de uma unidade é uma soma de passos nessas direções, do mesmo jeito que qualquer vetor no plano é uma soma de \(\hat{\imath}\) e \(\hat{\jmath}\) multiplicados por números.`,
+        simplificacao: "Raciocínio geométrico; não usa atributos de campeão.",
+        fonte: "Geometria do tabuleiro hexagonal.",
+      },
       intuicao:
         "Pense no vetor unitário como a seta que diz para onde a unidade está indo. O número na frente diz quantos hexes ela anda nessa direção.",
       exercicio: {
@@ -128,6 +174,12 @@ export const lenteTftCapitulo1: LenteCapitulo = {
       },
     },
     produtos: {
+      noJogo: {
+        titulo: "O DPS do time é um produto escalar",
+        texto: r`Monte dois vetores com as suas carries Xayah, Caitlyn e Ashe: um com o dano por ataque de cada uma, outro com a velocidade de ataque de cada uma. \[ \vec{D} = (${time.map((c) => c.dano).join(";\\ ")}), \qquad \vec{V} = (${time.map((c) => texNum(c.velocidadeAtaque)).join(";\\ ")}) \] O dano por segundo do time é o produto escalar dos dois, componente com componente: \[ \vec{D} \cdot \vec{V} = ${time.map((c) => `${c.dano} \\cdot ${texNum(c.velocidadeAtaque)}`).join(" + ")} \approx ${texNum(dpsTime, 0)}\ \tfrac{\text{dano}}{\mathrm{s}} \] Isso ajuda numa decisão de item: um bônus percentual de velocidade de ataque multiplica uma das parcelas da soma, então rende mais na carry cuja parcela já é a maior. Aqui é a Ashe, com \(${texNum(ashe.dano * ashe.velocidadeAtaque, 1)}\) dos \(${texNum(dpsTime, 0)}\) de dano por segundo do time.`,
+        simplificacao: simplificacaoPadrao,
+        fonte: fonteTft,
+      },
       intuicao:
         "Nem todo empurrão ajuda uma unidade a chegar ao alvo: só a parte que aponta para o alvo conta. O produto escalar mede exatamente isso, quanto um vetor aponta na direção do outro.",
       exercicio: {
