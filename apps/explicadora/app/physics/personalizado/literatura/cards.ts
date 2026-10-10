@@ -27,6 +27,15 @@ export const cardsLiteratura: CardLiteratura[] = [
       "Average velocity is defined as the change in position (displacement) divided by the elapsed time. If x is position and t is time, the average velocity is v̄ = Δx / Δt. Average velocity depends only on the endpoints of the interval, not on the details of the path between them.",
     objetivoAprendizagem:
       "Explicar que velocidade média é a razão entre deslocamento e intervalo de tempo — sem confundir com velocidade instantânea.",
+    rubrica: {
+      conceitosObrigatorios: [
+        "deslocamento|posicao final|posição final|ponto de chegada|Δx|delta x|Δs|delta s",
+        "tempo|intervalo|Δt|delta t|segundos",
+        "dividi|razao|razão|por segundo",
+      ],
+      conceitosAlternativos: ["velocidade media|velocidade média"],
+      minObrigatorios: 2,
+    },
   },
   {
     id: "aceleracao_media",
@@ -51,6 +60,18 @@ export const cardsLiteratura: CardLiteratura[] = [
       "Average acceleration is the rate at which velocity changes: ā = Δv / Δt. A change in velocity can be a change in magnitude, in direction, or both. Instantaneous acceleration is the limit of average acceleration as the time interval approaches zero.",
     objetivoAprendizagem:
       "Relacionar aceleração à variação de velocidade no tempo; reconhecer freada como aceleração com sentido oposto à velocidade.",
+    rubrica: {
+      conceitosObrigatorios: [
+        "aceleracao|aceleração|acelera",
+        "variacao de velocidade|variação de velocidade|velocidade muda|muda a velocidade|mudança de velocidade|Δv|delta v",
+        "tempo|intervalo|Δt|delta t",
+      ],
+      conceitosAlternativos: [
+        "freia|freada|desacelera|sentido oposto|contrario|contrário",
+        "constante|nao muda|não muda",
+      ],
+      minObrigatorios: 2,
+    },
   },
   {
     id: "segunda_lei_newton",
@@ -70,6 +91,15 @@ export const cardsLiteratura: CardLiteratura[] = [
       "Newton's second law states that the net external force on a body is equal to the product of the body's mass and its acceleration: F_net = m a. Acceleration has the same direction as the net force. Mass is a measure of inertia — resistance to changes in motion.",
     objetivoAprendizagem:
       "Explicar que a força resultante é o que determina a aceleração, proporcionalmente à massa do corpo.",
+    rubrica: {
+      conceitosObrigatorios: [
+        "forca|força|forca resultante|força resultante",
+        "massa|inercia|inércia|pesado|leve",
+        "aceleracao|aceleração|acelera",
+      ],
+      conceitosAlternativos: ["f = m|f=m|m.a|m·a"],
+      minObrigatorios: 2,
+    },
   },
 ]
 

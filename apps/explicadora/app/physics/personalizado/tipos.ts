@@ -25,6 +25,8 @@ export interface CardLiteratura {
   trecho: string
   /** Frase-guia do que o aluno deve conseguir explicar. */
   objetivoAprendizagem: string
+  /** Rubrica do juiz: fixa por conceito para não depender do que a IA gerar. */
+  rubrica: RubricaProblema
 }
 
 export interface FatoMundo {

@@ -1,6 +1,7 @@
 import { generateObject } from "ai"
 import { createOpenAI } from "@ai-sdk/openai"
 import { z } from "zod"
+import { exemplosModelo } from "@/app/physics/personalizado/exemplos-modelo"
 import { cardPorId } from "@/app/physics/personalizado/literatura/cards"
 import { mundoPorId } from "@/app/physics/personalizado/mundos/catalog"
 import type { ProblemaPersonalizado } from "@/app/physics/personalizado/tipos"
@@ -11,9 +12,6 @@ const geradoSchema = z.object({
   pergunta: z.string(),
   explicacao: z.string(),
   dica: z.string(),
-  conceitosObrigatorios: z.array(z.string()).min(2).max(5),
-  conceitosProibidos: z.array(z.string()).max(4),
-  minObrigatorios: z.number().int().min(1).max(3),
 })
 
 export type PedidoGeracaoPersonalizada = {
@@ -35,9 +33,24 @@ REGRAS RÍGIDAS:
 3. O MUNDO (TFT/LoL) só fornece narrativa e entidades. Use APENAS os fatos do mundo listados — não invente números oficiais de patch, itens ou mecânicas não listadas.
 4. Números do enunciado podem ser hipotéticos e didáticos (ex.: "percorre 4 hexes em 2 s"), desde que o raciocínio peça o conceito certo.
 5. A pergunta deve pedir EXPLICAÇÃO do raciocínio (quais grandezas, como se relacionam), não só a conta.
-6. conceitosObrigatorios: termos em português que o juiz buscará (use | para sinônimos).
-7. conceitosProibidos: equívocos comuns que desviam do conceito deste card.
-8. Escreva em português do Brasil, tom de treino amigável, sem spoilers desnecessários de lore.`
+6. Escreva em português do Brasil, tom de treino amigável, sem spoilers desnecessários de lore.
+7. Imite o tom, o tamanho e a estrutura dos EXERCÍCIOS MODELO: situação curta e concreta, uma pergunta que obriga a comparar ou decidir algo, explicação que fecha a ideia.
+8. Os modelos são de OUTROS conceitos: copie o estilo, nunca a situação.
+9. Use unidades que o jogador daquele mundo reconhece, nunca "unidades de distância" genéricas. TFT: hexes e segundos. LoL: trechos do mapa ("meia lane", "da torre até a base") e segundos — LoL não tem hexes.`
+}
+
+function blocoExemplosModelo(cardId: string): string {
+  return exemplosModelo
+    .filter((e) => e.cardId !== cardId)
+    .map(
+      (e, i) => `MODELO ${i + 1} (mundo: ${e.mundoId}, conceito: ${e.cardId})
+- titulo: ${e.titulo}
+- contexto: ${e.contexto}
+- pergunta: ${e.pergunta}
+- explicacao: ${e.explicacao}
+- dica: ${e.dica}`
+    )
+    .join("\n\n")
 }
 
 function userPrompt(mundoId: string, cardId: string): string | null {
@@ -65,6 +78,9 @@ MUNDO DO INTERESSE (pele narrativa):
 - fatos permitidos:
 ${mundo.fatos.map((f) => `  - (${f.id}) ${f.texto}`).join("\n")}
 
+EXERCÍCIOS MODELO (referência de estilo):
+${blocoExemplosModelo(card.id)}
+
 Gere um único exercício personalizado nesse mundo, fiel ao trecho.`
 }
 
@@ -89,11 +105,7 @@ function montarProblema(
     variavelIds: card.variavelIds,
     citacao: card.citacao,
     dica: gerado.dica.trim(),
-    rubrica: {
-      conceitosObrigatorios: gerado.conceitosObrigatorios,
-      conceitosProibidos: gerado.conceitosProibidos,
-      minObrigatorios: gerado.minObrigatorios,
-    },
+    rubrica: card.rubrica,
   }
 }
 
@@ -116,26 +128,6 @@ export function gerarProblemaMock(
     pergunta: `Com suas palavras: quais grandezas você usaria para falar de ${card.conceito.toLowerCase()} nessa situação, e como elas se relacionam? (Não precisa calcular o número.)`,
     explicacao: `${card.objetivoAprendizagem} Base canônica (${card.citacao.obra}, ${card.citacao.autores}${card.citacao.secao ? `, ${card.citacao.secao}` : ""}): sentido de «${card.trecho.slice(0, 160)}…». A pele de ${mundo.nome} só ilustra; a definição vem da fonte.`,
     dica: card.objetivoAprendizagem,
-    conceitosObrigatorios:
-      card.id === "vm_deslocamento_tempo"
-        ? [
-            "velocidade media|velocidade média|vm",
-            "deslocamento|distancia|distância|delta s|Δs",
-            "tempo|intervalo|delta t|Δt",
-          ]
-        : card.id === "aceleracao_media"
-          ? [
-              "aceleracao|aceleração",
-              "velocidade|variação de velocidade|delta v|Δv",
-              "tempo|intervalo|delta t|Δt",
-            ]
-          : [
-              "forca|força|força resultante|forca resultante",
-              "massa",
-              "aceleracao|aceleração",
-            ],
-    conceitosProibidos: ["energia escura", "buraco negro"],
-    minObrigatorios: 2,
   })
 
   if (!problema) return { ok: false, erro: "Falha ao montar problema mock" }
