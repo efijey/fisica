@@ -21,6 +21,8 @@ export type SecaoCapitulo = {
 export type LenteSecao = {
   intuicao?: string
   exemplo?: SecaoCapitulo["exemplo"]
+  /** A física usada para jogar melhor, com dados reais e fonte. */
+  noJogo?: { titulo: string; texto: string; simplificacao: string; fonte: string }
   /** Sem `rubrica` ou `criterios`, valem os da versão formal. */
   exercicio?: Omit<ExercicioTrilha, "rubrica" | "criterios"> & {
     rubrica?: ExercicioTrilha["rubrica"]

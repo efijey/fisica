@@ -1,6 +1,13 @@
+import { campeaoTft, fonteTft, texNum } from "../../../dados/tft"
 import type { LenteCapitulo } from "../../tipos"
 
 const r = String.raw
+
+const xayah = campeaoTft("Xayah")
+const reksai = campeaoTft("Rek'Sai")
+const ornn = campeaoTft("Ornn")
+const dpsXayah = xayah.dano * xayah.velocidadeAtaque
+const dpsReksai = reksai.dano * reksai.velocidadeAtaque
 
 export const lenteTftCapitulo1: LenteCapitulo = {
   mundoId: "tft",
@@ -8,6 +15,13 @@ export const lenteTftCapitulo1: LenteCapitulo = {
   revisado: false,
   secoes: {
     "grandezas-unidades": {
+      noJogo: {
+        titulo: "Quem derruba o Ornn mais rápido: Xayah ou Rek'Sai?",
+        texto: r`A Xayah dá \(${xayah.dano}\) de dano por ataque e ataca \(${texNum(xayah.velocidadeAtaque)}\) vezes por segundo. A Rek'Sai bate mais forte, \(${reksai.dano}\) por ataque, mas ataca só \(${texNum(reksai.velocidadeAtaque)}\) vezes por segundo. Multiplicando as duas grandezas, sai o dano por segundo (DPS), e as unidades mostram por quê: \[ \text{DPS} = \text{dano por ataque} \times \frac{\text{ataques}}{\mathrm{s}} \] \[ \text{Xayah: } ${xayah.dano} \times ${texNum(xayah.velocidadeAtaque)} = ${texNum(dpsXayah)}\ \tfrac{\text{dano}}{\mathrm{s}} \] \[ \text{Rek'Sai: } ${reksai.dano} \times ${texNum(reksai.velocidadeAtaque)} = ${texNum(dpsReksai)}\ \tfrac{\text{dano}}{\mathrm{s}} \] Dividindo a vida do Ornn (\(${ornn.vida}\)) pelo DPS, o “dano” se cancela e sobra tempo: \[ t = \frac{${ornn.vida}\ \text{dano}}{\text{DPS}\ \text{dano/s}} \] A Xayah leva cerca de \(${Math.round(ornn.vida / dpsXayah)}\ \mathrm{s}\); a Rek'Sai, cerca de \(${Math.round(ornn.vida / dpsReksai)}\ \mathrm{s}\). Bater mais forte não basta: o que decide é o produto das duas grandezas. E a análise de unidades diz qual conta faz sentido antes de você fazer qualquer uma.`,
+        simplificacao:
+          "Campeões com 1 estrela e sem itens; a conta ignora armadura, mana e habilidades.",
+        fonte: fonteTft,
+      },
       intuicao:
         "Quando alguém diz que um carry tem alcance 4, você entende porque sabe que o TFT mede alcance em hexes. Sem a unidade, “4” poderia ser 4 segundos ou 4 de ouro. Em física é igual: o número só faz sentido junto com a unidade.",
       exemplo: {

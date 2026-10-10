@@ -105,6 +105,17 @@ function Secao({
         </div>
       )}
 
+      {pele?.noJogo && (
+        <div className="flex flex-col gap-2 rounded-lg border border-violet-500/40 bg-violet-500/5 p-4">
+          <Rotulo texto="No jogo" mundo={mundo} />
+          <p className="font-medium">{pele.noJogo.titulo}</p>
+          <TextoComEquacoes texto={pele.noJogo.texto} className="leading-7" />
+          <p className="text-xs text-muted-foreground">
+            {pele.noJogo.simplificacao} {pele.noJogo.fonte}
+          </p>
+        </div>
+      )}
+
       {exercicio && (
         <div className="flex flex-col gap-2 rounded-lg border border-primary/30 p-4">
           <Rotulo texto="Sua vez" mundo={pele?.exercicio ? mundo : undefined} />
