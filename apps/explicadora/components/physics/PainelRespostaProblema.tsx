@@ -47,12 +47,12 @@ const VEREDITO_STYLE: Record<
   },
 }
 
-function ModoConceitos({
+export function ModoConceitos({
   problema,
   onJulgado,
   onProximo,
 }: {
-  problema: ProblemaConceitual
+  problema: Pick<ProblemaConceitual, "rubrica" | "dica" | "formulas">
   onJulgado: (vereditoCerto: boolean) => void
   onProximo?: () => void
 }) {

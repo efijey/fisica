@@ -2,13 +2,25 @@
 
 Status operacional das features (o que está `passing` / `in_progress`): [`harness/feature_list.json`](../harness/feature_list.json). Este arquivo é visão de produto e histórico de fases — não é o tracker da sessão.
 
-Como o agente trabalha: [`docs/harness.md`](./harness.md) e [`AGENTS.md`](../AGENTS.md).
+Como o agente trabalha: [`docs/harness.md`](./harness.md) e [`AGENTS.md`](../AGENTS.md). Mapa do sistema para humanos: [`docs/manual.md`](./manual.md).
 
 ## Visão
 
-Construir uma **explicadora de física** para estudantes brasileiros (ensino médio e início do ensino superior). O app não se apoia na aritmética nem no cálculo numérico — o foco é o **porquê**: por que usar determinada fórmula, como as grandezas físicas se relacionam e o que isso representa na natureza.
+Construir uma **explicadora de física** para estudantes brasileiros. O foco é o **porquê**: por que usar determinada fórmula, como as grandezas físicas se relacionam e o que isso representa na natureza.
 
-O estudante deve sair com **compreensão**, não apenas com um resultado. A aplicação funciona como um catálogo vivo que conecta matemática e fenômenos reais: em quantas equações a aceleração aparece, em quais contextos ela surge (frear um carro, queda livre, curva em estrada) e por que é central na mecânica.
+O estudante deve sair com **compreensão**, não apenas com um resultado. A aplicação funciona como um catálogo vivo que conecta matemática e fenômenos reais.
+
+### Personalização por mundo (lente)
+
+Exemplos em cenários pouco familiares (avião decolando, por exemplo) gastam atenção antes mesmo da física. A tese do projeto: o **esqueleto científico** (definições, equações, derivações) é fixo; a **pele** (intuições, analogias, exemplos, exercícios) vem de um mundo que o aluno conhece — TFT, League of Legends, futebol, mountain bike.
+
+O mundo funciona como um **idioma do site**: assim como se escolhe ler em português ou inglês, escolhe-se ler na "versão TFT". A parte formal nunca muda; os textos da pele são gerados uma vez por tópico e mundo, revisados e salvos.
+
+Detalhes: [personalizacao.md](./personalizacao.md) e [fontes-cientificas.md](./fontes-cientificas.md).
+
+### Paciente zero
+
+O autor do projeto é estudante de física e vai usar a ferramenta durante o semestre de **Física 1** (cinemática, leis de Newton, trabalho e energia, com cálculo: limites, derivadas e integrais). Referência principal: **Young & Freedman (Sears & Zemansky)**. Validar com ele antes de pensar em outros usuários.
 
 ## Problema
 
@@ -17,17 +29,15 @@ Ao resolver exercícios de física, estudantes frequentemente:
 - Não sabem **por que** uma fórmula se aplica ao cenário do enunciado
 - Veem equações como receitas, sem entender a relação entre as grandezas
 - Não percebem que a mesma variável (ex.: aceleração) aparece em vários fenômenos e áreas
-- Perdem a conexão entre o exercício de vestibular e o que acontece no mundo real
+- Perdem a conexão entre o exercício e o que acontece no mundo real
 
 ## Solução atual
 
-O usuário **seleciona as variáveis conhecidas** em um problema. O motor de inferência percorre o catálogo de fórmulas e identifica aquelas em que **falta exatamente uma variável**, sugerindo a expressão isolada para a grandeza que falta — com contexto descritivo.
-
-Além disso, há um **catálogo navegável** de fórmulas organizadas por área da física.
-
-## Solução futura (visão de médio prazo)
-
-Campo de input onde o estudante cola ou digita um exercício de vestibular. O app identifica entidades no texto (carro, planeta, mola, projétil) e, pela base de fenômenos, sugere o contexto físico provável (ex.: carro → mecânica, aceleração, atrito) e as conexões relevantes do catálogo — antes mesmo de chegar ao cálculo.
+- **Inferência** — seleciona variáveis conhecidas; o motor sugere fórmulas em que falta exatamente uma variável.
+- **Explorar / Catálogo / Gráficos** — catálogo navegável com metadados, fenômenos e visualizações.
+- **Problemas** — treino conceitual com juiz de raciocínio; folha de cálculo mental com voz.
+- **Treino personalizado** — exercício gerado num mundo (TFT/LoL) a partir de um card de literatura, com citação e juiz.
+- **Ingestor** (interno) — listas em texto/PDF, rascunhos de catálogo, export para a explicadora.
 
 ## Arquitetura
 
@@ -42,124 +52,68 @@ docs/                 → visão, tópicos, git
 
 Mapa por app: `docs/explicadora.md`, `docs/ingestor.md`, `docs/physics-core.md`.
 
-### Fluxo de dados
-
-```
-Usuário seleciona variáveis
-        ↓
-inferirFormulas(variaveisDisponiveis)
-        ↓
-Para cada fórmula: faltando.length === 1?
-        ↓ sim
-Retorna expressão isolada + variável calculável + contexto explicativo
-        ↓
-ListaFormulas exibe resultados agrupados por área
-```
-
-## Estado do MVP
-
-| Pronto | Pendente |
-|--------|----------|
-| Catálogo de ~27 fórmulas em 6 áreas | Cadeias de inferência (várias etapas) |
-| Catálogo de ~55 variáveis físicas | Input de enunciado com identificação de contexto |
-| Motor de inferência (falta 1 variável) | Testes E2E |
-| UI responsiva com shadcn/ui | Deploy em produção |
-| Abas Inferência + Explorar + Catálogo | Passo a passo explicativo da resolução |
-| Separação engine / UI / dados | |
-| Testes unitários do motor de inferência | |
-| Metadados explicativos (variáveis, fórmulas, fenômenos) | |
-| Grafo de conexões variável ↔ fórmula | |
-| Vista de exploração por variável | |
-| Testes do grafo de conexões | |
-
 ## Roadmap por fases
 
-### Sprint 1 — Fundação
+### Sprint 1 — Fundação — Concluída
 
-**Objetivo:** organizar o projeto, versionar o código, corrigir pendências básicas e estabelecer qualidade mínima.
+Documentação, GitHub, metadata em português, bug do catálogo, testes do motor, limpeza de types, licença MIT.
 
-| Entrega | Status |
-|---------|--------|
-| Documentação (README, git-workflow, roadmap) | Concluído |
-| Repositório GitHub + branch `sprint-1` | Concluído |
-| Metadata em português (`layout.tsx`) | Concluído |
-| Corrigir bug `expressao` → `expressaoPrincipal` no catálogo | Concluído |
-| Testes unitários do motor `inferirFormulas()` | Concluído |
-| Remover `types/independentes/` (substituído pelo catálogo) | Concluído |
-| Adicionar licença MIT | Concluído |
-| Issues no GitHub para próximas sprints | Concluído |
+### Sprint 2 — Profundidade do catálogo — Concluída
 
-### Sprint 2 — Profundidade do catálogo
+Metadados explicativos, grafo de conexões variável ↔ fórmula, exploração por variável, fenômenos, testes do grafo.
 
-**Objetivo:** enriquecer a qualidade e a densidade de informações do catálogo — conexões entre natureza e matemática, não expansão em quantidade de fórmulas.
-
-Foco em responder perguntas como: *"Em quantas equações a aceleração aparece? Por quê ela é tão presente? Em quais fenômenos da natureza ela surge?"*
-
-| Entrega | Status |
-|---------|--------|
-| Metadados explicativos nas variáveis | Concluído |
-| Metadados explicativos nas fórmulas | Concluído |
-| Grafo de conexões variável ↔ fórmula | Concluído |
-| Vista de exploração por variável | Concluído |
-| Fenômenos / contextos no catálogo | Concluído |
-| Testes para o grafo de conexões | Concluído |
-
-**Fora do escopo desta sprint:** novas fórmulas, cálculo numérico, input de enunciado.
-
-### Sprint 3 — Ingestor de exercícios
-
-**Objetivo:** app interno que ingere exercícios em texto, cataloga fórmulas/variáveis/fenômenos via regras, armazena no Supabase e exporta exemplos aprovados para a explicadora.
+### Sprint 3 — Ingestor + Problemas — Concluída (com ressalvas)
 
 | Entrega | Status |
 |---------|--------|
 | Monorepo (`apps/explicadora`, `apps/ingestor`, `packages/physics-core`) | Concluído |
 | Schema Supabase + migrations | Concluído |
-| Parser por regras (opção A) | Concluído |
-| UI ingestor (colar, listar, aprovar/rejeitar) | Concluído |
-| Script `export-catalog` | Concluído |
+| Parser por regras + UI de aprovação + `export-catalog` | Concluído |
 | Testes do parser | Concluído |
-| Auth Supabase (login admin) | Pendente |
-| Explicadora consumindo `catalogoExemplos` | Pendente |
+| Aba Problemas + folha mental + LLM/mock | Concluído |
+| Gráficos na explicadora | Concluído |
 | Listas texto/PDF + split | Concluído |
-| Pré-resolução LLM + propostas de catálogo | Concluído |
-| UI `/catalogo/rascunhos` | Concluído |
+| Pré-resolução LLM + propostas de catálogo (`/catalogo/rascunhos`) | Concluído |
 | Export → problemas + `physics-core/generated` | Concluído |
-| Explicadora consumindo problemas gerados | Concluído |
+| Auth Supabase (login admin) | Pendente |
 
-Ver [ingestor.md](./ingestor.md) para setup.
+### Sprint 4 — Física 1 com lentes (paciente zero)
+
+**Objetivo:** transformar a explicadora em material de estudo do semestre de Física 1, com versão formal e versões por mundo. Uso local; deploy fica para depois.
+
+| Entrega | Status |
+|---------|--------|
+| Treino personalizado TFT/LoL + cards de literatura + juiz | Concluído (na branch de consolidação) |
+| Consolidar branches e documentação (harness como estrutura) | Em andamento |
+| Ementa típica de Física 1 (ajustável pelo autor) | Pendente |
+| Renderização de equações (derivadas, integrais) | Pendente |
+| Trilha de estudo: primeiro capítulo completo (cinemática 1D com cálculo) | Pendente |
+| Lente por mundo no capítulo (pele gerada uma vez, revisada, salva) | Pendente |
+| Repetir o formato para os demais capítulos | Pendente |
+
+**Fora do escopo:** login, multiusuário, deploy público, tags criadas pelo usuário.
 
 ### Backlog futuro
 
+**Personalização**
+- Tags nichadas (texto livre → tag; pool de conteúdo por tag; recomendação entre alunos)
+- Auth + interesses + conteúdo no Supabase
+- Desenho do tabuleiro/mapa no exercício para reduzir carga cognitiva
+
 **Cálculo e qualidade**
-- Campos de entrada para valores das variáveis selecionadas
-- Avaliação numérica da expressão isolada
-- Validação de unidades compatíveis
+- Avaliação numérica e validação de unidades
 - Testes E2E (Playwright)
 - CI com lint + build + testes
-- Deploy (Vercel ou similar)
-- Polish de UI e acessibilidade
+- Deploy (Vercel ou similar) — checklist em [mvp-producao.md](./mvp-producao.md)
 
 **Outros**
 - Expandir catálogo (termodinâmica, ondas, eletromagnetismo)
-- Histórico de problemas explorados (localStorage)
 - PWA básico (opcional)
-
-## Áreas de física cobertas
-
-| Área | Exemplos de fórmulas |
-|------|---------------------|
-| Cinemática | Velocidade média, MRU, MRUV, lançamento |
-| Dinâmica | 2ª lei de Newton, peso, atrito |
-| Energia | Trabalho, energia cinética, potencial gravitacional |
-| Momento | Quantidade de movimento, impulso |
-| Rotação | Velocidade angular, torque |
-| Gravitação | Lei da gravitação universal |
 
 ## Como contribuir
 
 1. Leia [git-workflow.md](./git-workflow.md) para padrões de branch e commit
-2. Trabalhe na branch `sprint-3` (ou crie `feature/*` a partir dela)
-3. Abra PR para `sprint-3` ao concluir uma feature
-4. Ao final da sprint, PR de `sprint-3` → `main`
+2. Trabalhe em `feature/*` a partir da branch ativa
+3. Commits pequenos são livres na branch; push, merge e PR só com aprovação do autor
 
-Agentes: uma feature por vez, verificação antes de `passing`, commit só se o usuário pedir.
+Agentes: uma feature por vez, verificação antes de `passing`, decisões apresentadas como perguntas com opções.

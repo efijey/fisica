@@ -141,7 +141,7 @@ function montarFeedback(
 }
 
 export function julgarResposta(
-  problema: ProblemaConceitual,
+  problema: Pick<ProblemaConceitual, "rubrica" | "dica">,
   resposta: string
 ): ResultadoJuiz {
   const textoNorm = normalizarTexto(resposta);

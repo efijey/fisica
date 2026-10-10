@@ -1,6 +1,6 @@
 {
   "project": "fisica",
-  "last_updated": "2026-09-09",
+  "last_updated": "2026-10-10",
   "rules": {
     "single_active_feature": true,
     "passing_requires_evidence": true,
@@ -114,7 +114,7 @@
       "area": "explicadora",
       "title": "Cálculo mental por voz (folha + STT + tutor)",
       "user_visible_behavior": "No problema, o estudante fala o raciocínio; a folha registra passos; o tutor responde sem entregar o número.",
-      "status": "in_progress",
+      "status": "blocked",
       "verification": [
         "Abrir um problema com mesa de cálculo mental.",
         "Falar um passo e ver a folha atualizar.",
@@ -122,7 +122,114 @@
         "Cobrir o caminho Whisper e o fallback Web Speech / mock."
       ],
       "evidence": [],
-      "notes": "WIP em MesaCalculoMental, BarraVoz, app/physics/problemas/mental/* e app/api/mental/*."
+      "notes": "Pausada em 2026-10-10 por decisão do autor: prioridade passou para a trilha de Física 1 (study-*). Código commitado em feature/harness-e-ingestor-listas, sem verificação ponta a ponta."
+    },
+    {
+      "id": "exp-005",
+      "priority": 6,
+      "area": "explicadora",
+      "title": "Treino personalizado por mundo (TFT/LoL) ancorado em literatura",
+      "user_visible_behavior": "Na aba Treino personalizado, o estudante escolhe mundo e conceito, gera um exercício com citação da fonte, responde em palavras e recebe o veredito do juiz; a explicação aparece só depois do envio.",
+      "status": "passing",
+      "verification": [
+        "npx tsc --noEmit -p apps/explicadora",
+        "npm run build",
+        "Gerar exercício via POST /api/personalizado/gerar com OPENAI_MODEL_PERSONALIZADO=gpt-4.1",
+        "Juiz: respostas certas → certo, vagas → desviado, nos 3 cards"
+      ],
+      "evidence": [
+        "2026-10-10: tsc ok; build ok (rota /api/personalizado/gerar).",
+        "2026-10-10: juiz com rubrica fixa por card — 3 respostas certas = certo, 3 vagas = desviado.",
+        "2026-10-10: comparação de modelos (gpt-4o-mini, gpt-4.1, gpt-5.4-mini, gpt-5.5); escolhido gpt-4.1.",
+        "2026-10-10: autor testou em localhost:3002 e aprovou o formato."
+      ],
+      "notes": "Rubrica vem do card (literatura/cards.ts), não da IA. Estilo guiado por exemplos-modelo.ts (modelos do mesmo conceito ficam de fora do prompt para não serem copiados). Ideia pendente: armadilha conceitual por card."
+    },
+    {
+      "id": "harness-002",
+      "priority": 6,
+      "area": "harness",
+      "title": "Consolidar branches da nuvem com o harness local",
+      "user_visible_behavior": "Uma branch única tem o trabalho local (harness, ingestor, voz) e o da nuvem (treino personalizado, docs de personalização), com uma só organização de docs.",
+      "status": "passing",
+      "verification": [
+        "./init.sh",
+        "npm run build",
+        "rg 'mente.md' sem referências quebradas"
+      ],
+      "evidence": [
+        "2026-10-10: merge de feature/treino-personalizado-qualidade em feature/consolidar-treino-personalizado; ./init.sh ok (physics-core e ingestor); build ok.",
+        "docs/mente.md removido; visão foi para docs/roadmap.md; manual.md, personalizacao.md, fontes-cientificas.md e mvp-producao.md mantidos como docs de tópico."
+      ],
+      "notes": "Regras da nuvem git-iterativo.mdc e project-context.mdc removidas (conflitavam com a regra de commit escolhida e duplicavam AGENTS.md)."
+    },
+    {
+      "id": "qa-002",
+      "priority": 7,
+      "area": "qa",
+      "title": "Lint da explicadora verde",
+      "user_visible_behavior": "npm run lint passa sem erros.",
+      "status": "in_progress",
+      "verification": [
+        "npm run lint"
+      ],
+      "evidence": [],
+      "notes": "2026-10-10: 2 erros react-hooks/set-state-in-effect pré-existentes em GraficosEquacoes.tsx e MesaCalculoMental.tsx."
+    },
+    {
+      "id": "study-001",
+      "priority": 8,
+      "area": "conteudo",
+      "title": "Ementa típica de Física 1 (Young & Freedman)",
+      "user_visible_behavior": "Existe uma lista de capítulos e tópicos do semestre, ajustável pelo autor, que orienta a trilha de estudo.",
+      "status": "not_started",
+      "verification": [
+        "Autor revisa e aprova a ementa."
+      ],
+      "evidence": [],
+      "notes": "Autor não tem a ementa oficial ainda; montar uma típica (cinemática 1D/2D, leis de Newton, trabalho e energia) com cálculo."
+    },
+    {
+      "id": "study-002",
+      "priority": 9,
+      "area": "explicadora",
+      "title": "Renderização de equações (derivadas, integrais)",
+      "user_visible_behavior": "Equações aparecem formatadas como em livro, incluindo dx/dt e integrais.",
+      "status": "not_started",
+      "verification": [
+        "Página com derivada e integral renderizadas no navegador.",
+        "npm run build"
+      ],
+      "evidence": [],
+      "notes": ""
+    },
+    {
+      "id": "study-003",
+      "priority": 10,
+      "area": "explicadora",
+      "title": "Trilha de estudo: primeiro capítulo completo",
+      "user_visible_behavior": "Um capítulo (cinemática 1D com cálculo) tem intuição, definição formal, derivação, porquê, armadilhas, exemplo resolvido, exercícios com juiz e citação do livro.",
+      "status": "not_started",
+      "verification": [
+        "Autor estuda o capítulo e dá feedback.",
+        "npm run build"
+      ],
+      "evidence": [],
+      "notes": "Validar um capítulo antes de escalar."
+    },
+    {
+      "id": "study-004",
+      "priority": 11,
+      "area": "explicadora",
+      "title": "Lente por mundo na trilha (mundo como idioma do site)",
+      "user_visible_behavior": "Um seletor troca o capítulo para a versão TFT/LoL: intuição, analogias, exemplos e exercícios mudam; a parte formal fica igual.",
+      "status": "not_started",
+      "verification": [
+        "Trocar o mundo e ver só a pele mudar.",
+        "Textos por mundo salvos no repositório e revisados pelo autor."
+      ],
+      "evidence": [],
+      "notes": "Gerados uma vez, revisados, salvos (como traduções). Ver docs/personalizacao.md."
     },
     {
       "id": "ing-002",

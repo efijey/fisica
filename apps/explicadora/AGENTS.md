@@ -8,11 +8,13 @@ Antes de mudar rotas, APIs ou convenções do Next, leia `node_modules/next/dist
 
 | Caminho | O que é |
 |---------|---------|
-| `app/pages/Calculadora/index.tsx` | Shell: abas Inferência, Explorar, Catálogo, Gráficos, Problemas |
+| `app/pages/Calculadora/index.tsx` | Shell: abas Inferência, Explorar, Catálogo, Gráficos, Problemas, Treino personalizado |
 | `components/physics/` | UI de domínio |
 | `app/physics/problemas/` | Problemas conceituais, juiz e cálculo mental |
+| `app/physics/personalizado/` | Treino por mundo (TFT/LoL): cards de literatura, mundos, exercícios modelo, gerador |
 | `app/physics/examples/` | Exemplos exportados do ingestor |
 | `app/api/mental/` | STT e turno do tutor |
+| `app/api/personalizado/gerar` | Gera exercício personalizado (modelo em `OPENAI_MODEL_PERSONALIZADO`) |
 
 Fórmulas, variáveis, fenômenos e o motor vêm de `@fisica/physics-core`. Não duplique catálogo aqui.
 

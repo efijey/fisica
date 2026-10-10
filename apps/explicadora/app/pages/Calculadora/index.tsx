@@ -10,6 +10,12 @@ import { ExploradorVariavel } from "@/components/physics/ExploradorVariavel";
 import { GraficosEquacoes } from "@/components/physics/GraficosEquacoes";
 import { ProblemasConceituais } from "@/components/physics/ProblemasConceituais";
 import { inferirFormulas } from "@fisica/physics-core";
+import dynamic from "next/dynamic";
+
+const TreinoPersonalizado = dynamic(
+  () => import("@/components/physics/TreinoPersonalizado"),
+  { ssr: false }
+);
 
 export default function Calculadora() {
   const [selecionadas, setSelecionadas] = useState<string[]>([]);
@@ -64,6 +70,9 @@ export default function Calculadora() {
             <TabsTrigger value="problemas" className="flex-1 sm:flex-none">
               Problemas
             </TabsTrigger>
+            <TabsTrigger value="personalizado" className="flex-1 sm:flex-none">
+              Treino personalizado
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="inferencia" className="mt-6">
@@ -97,6 +106,10 @@ export default function Calculadora() {
 
           <TabsContent value="problemas" className="mt-6">
             <ProblemasConceituais />
+          </TabsContent>
+
+          <TabsContent value="personalizado" className="mt-6">
+            <TreinoPersonalizado />
           </TabsContent>
         </Tabs>
 

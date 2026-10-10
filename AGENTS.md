@@ -58,6 +58,11 @@ npm run export-catalog    # aprovados do Supabase → código gerado
 - Ingestor e Supabase: `docs/ingestor.md`
 - Motor e catálogos: `docs/physics-core.md`
 - Git e commits: `docs/git-workflow.md`
+- Personalização por mundo (TFT/LoL, tags): `docs/personalizacao.md`
+- Fontes científicas e cards de literatura: `docs/fontes-cientificas.md`
+- Mapa do sistema para humanos (pastas, rotas, banco): `docs/manual.md`
+
+O autor está aprendendo boas práticas: explicar em português simples e apresentar decisões como perguntas com opções.
 
 AGENTS.md locais (página do diretório): `apps/explicadora/AGENTS.md`, `apps/ingestor/AGENTS.md`, `packages/physics-core/AGENTS.md`.
 

@@ -4,6 +4,9 @@ App interno para colar listas/exercícios de física (texto ou PDF), pré-resolv
 
 Mapa curto do pacote: [`apps/ingestor/AGENTS.md`](../apps/ingestor/AGENTS.md).
 
+Contexto geral do monorepo: [manual.md](./manual.md).  
+Visão futura (interesses / personalização): [personalizacao.md](./personalizacao.md).
+
 ## Setup Supabase
 
 1. Crie um projeto em [supabase.com](https://supabase.com)

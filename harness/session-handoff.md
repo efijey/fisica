@@ -2,30 +2,29 @@
 
 ## Verificado agora
 
-- Harness mínimo no repo: `AGENTS.md`, `init.sh`, `harness/*`, AGENTS.md nos três pacotes.
-- Baseline: `./init.sh` passou (physics-core 19, ingestor 3).
+- Branch `feature/consolidar-treino-personalizado`: trabalho local + treino personalizado da nuvem juntos.
+- `./init.sh` ok (physics-core + ingestor); `npm run build` ok.
 
 ## Mudou nesta sessão
 
-- Organização do harness (instruções + estado + ciclo de sessão).
-- Docs de tópico em `docs/` e índice em `docs/README.md`.
-- README e roadmap apontam para o harness como estado operacional.
+- Treino personalizado (`exp-005`): juiz ligado, rubrica fixa por card, exercícios modelo, modelo configurável (`OPENAI_MODEL_PERSONALIZADO`, autor usa `gpt-4.1`).
+- Docs híbridos: `mente.md` removido; visão e paciente zero em `docs/roadmap.md`; `manual.md`, `personalizacao.md`, `fontes-cientificas.md`, `mvp-producao.md` como docs de tópico.
+- Regras: commit livre em branch, push/merge com aprovação; decisões por perguntas com opções.
 
 ## Quebrado ou sem verificar
 
-- `exp-003` (cálculo mental por voz) está a meio — arquivos novos/modificados na explicadora, sem evidência de verificação ponta a ponta.
-- Há WIP grande no ingestor (listas, PDF, rascunhos, análise LLM) ainda não commitado.
-- Sem E2E (`qa-001`). Features de UI marcadas `passing` com evidência visual/unitária só.
+- `npm run lint`: 2 erros pré-existentes (`GraficosEquacoes.tsx:518`, `MesaCalculoMental.tsx:97`) — `qa-002`.
+- `exp-003` (voz) pausada sem verificação ponta a ponta.
+- Sem E2E (`qa-001`).
 
 ## Próximo passo
 
-- **Feature:** `exp-003`
-- **Por quê:** é a única `in_progress`; o resto do harness já está no lugar.
-- **Passing:** mesa mental atualiza a folha com fala; tutor não vaza gabarito; Whisper e fallback funcionam ou estão documentados como limitação.
-- **Não mexer:** auth do ingestor, cadeias de inferência, cálculo numérico, CI.
+- **Feature:** `qa-002`, depois a trilha de Física 1 (`study-001` → `study-004`).
+- **Por quê:** baseline precisa estar verde antes de feature nova; o autor quer estudar o semestre com o app.
+- **Passing (qa-002):** `npm run lint` sem erros.
+- **Não mexer:** auth do ingestor, cadeias de inferência, deploy.
 
 ## Comandos
 
 - Startup: `./init.sh` → `npm run dev`
-- Verificação: `npm test`
-- Foco de debug: `apps/explicadora/components/physics/MesaCalculoMental.tsx` e `apps/explicadora/app/physics/problemas/mental/`
+- Verificação: `npm test`, `npm run lint`, `npm run build`

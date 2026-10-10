@@ -87,6 +87,19 @@ chore(deps): atualizar next para 16.2.10
 - **Descrição no imperativo** — "adicionar", "corrigir", "atualizar" (não "adicionado" ou "adicionando").
 - **Corpo opcional** — use quando o *porquê* não couber na linha de assunto.
 
+### Agentes
+
+Commits pequenos são livres, sempre numa branch `feature/*`. Push, merge e PR só com aprovação explícita do autor (regra em `.cursor/rules/no-commit-without-approval.mdc`).
+
+## Reverter com segurança
+
+| Situação | Ação |
+|----------|------|
+| PR ainda aberta | Fechar PR ou fazer novos commits na branch |
+| Já mergeada, mudança ruim | `git revert <sha>` numa branch + PR (não reescrever `main`) |
+| Experimento descartável | Abandonar a branch; não mergear |
+| Precisa pausar uma feature | Deixar a PR em draft |
+
 ## Arquivos que nunca devem ser commitados
 
 - `.env` e variantes (`.env.local`, etc.)

@@ -7,6 +7,7 @@ Explicadora de física para estudantes: o foco é o *porquê* da fórmula, não 
 - **Inferência de fórmulas** — selecione grandezas conhecidas e veja quais expressões isolam o que falta
 - **Catálogo navegável** — fórmulas por área, com variáveis, fenômenos e gráficos
 - **Problemas conceituais** — resposta em palavras (certo / no caminho / desviado)
+- **Treino personalizado** — exercício gerado num mundo que você conhece (TFT, LoL), ancorado num trecho de livro citado
 - **Ingestor** — listas em texto/PDF, rascunhos de catálogo, export para a explicadora
 
 ## Stack
@@ -63,15 +64,18 @@ fisica/
 
 ## Documentação
 
+- [Manual do sistema](docs/manual.md) — pastas, rotas, lógica e banco, para explicar o projeto
 - [Índice dos docs](docs/README.md)
-- [Como o agente trabalha](docs/harness.md)
 - [Roadmap](docs/roadmap.md)
+- [Personalização por mundo](docs/personalizacao.md)
+- [Fontes científicas](docs/fontes-cientificas.md)
+- [Como o agente trabalha](docs/harness.md)
 - [Padrões de Git](docs/git-workflow.md)
 
 ## Contribuindo
 
 1. Leia os [padrões de Git](docs/git-workflow.md)
-2. Trabalhe na branch `sprint-3` (ou crie `feature/*` a partir dela)
+2. Crie `feature/*` a partir da branch ativa
 3. Siga [Conventional Commits](https://www.conventionalcommits.org/) em português
 
 ## Licença
