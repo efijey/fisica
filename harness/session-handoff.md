@@ -11,17 +11,19 @@
 - Docs híbridos: `mente.md` removido; visão e paciente zero em `docs/roadmap.md`; `manual.md`, `personalizacao.md`, `fontes-cientificas.md`, `mvp-producao.md` como docs de tópico.
 - Regras: commit livre em branch, push/merge com aprovação; decisões por perguntas com opções.
 
+- Lint verde (`qa-002` passing): 0 erros, 2 avisos de variável não usada.
+- Rascunho da ementa em `docs/ementa-fisica-1.md` (`study-001`).
+
 ## Quebrado ou sem verificar
 
-- `npm run lint`: 2 erros pré-existentes (`GraficosEquacoes.tsx:518`, `MesaCalculoMental.tsx:97`) — `qa-002`.
-- `exp-003` (voz) pausada sem verificação ponta a ponta.
+- `exp-003` (voz) pausada sem verificação ponta a ponta. A troca do modo de voz (efeito → `useSyncExternalStore`) passou em lint/build, mas não foi testada no navegador.
 - Sem E2E (`qa-001`).
 
 ## Próximo passo
 
-- **Feature:** `qa-002`, depois a trilha de Física 1 (`study-001` → `study-004`).
-- **Por quê:** baseline precisa estar verde antes de feature nova; o autor quer estudar o semestre com o app.
-- **Passing (qa-002):** `npm run lint` sem erros.
+- **Feature:** `study-001` (autor revisa a ementa), depois `study-002` → `study-004`.
+- **Por quê:** o autor quer estudar o semestre com o app.
+- **Passing (study-001):** autor aprova a ementa.
 - **Não mexer:** auth do ingestor, cadeias de inferência, deploy.
 
 ## Comandos

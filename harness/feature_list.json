@@ -169,12 +169,14 @@
       "area": "qa",
       "title": "Lint da explicadora verde",
       "user_visible_behavior": "npm run lint passa sem erros.",
-      "status": "in_progress",
+      "status": "passing",
       "verification": [
         "npm run lint"
       ],
-      "evidence": [],
-      "notes": "2026-10-10: 2 erros react-hooks/set-state-in-effect pré-existentes em GraficosEquacoes.tsx e MesaCalculoMental.tsx."
+      "evidence": [
+        "2026-10-10: npm run lint → 0 errors, 2 warnings (no-unused-vars em turno-para-ops.ts e CatalogoFormulas.tsx); npm run build ok; tsc ok."
+      ],
+      "notes": "2026-10-10: GraficosEquacoes usa o item derivado (sem efeito); MesaCalculoMental detecta o modo de voz com useSyncExternalStore e guarda só a troca manual (fallback whisper → webspeech)."
     },
     {
       "id": "study-001",
@@ -182,12 +184,12 @@
       "area": "conteudo",
       "title": "Ementa típica de Física 1 (Young & Freedman)",
       "user_visible_behavior": "Existe uma lista de capítulos e tópicos do semestre, ajustável pelo autor, que orienta a trilha de estudo.",
-      "status": "not_started",
+      "status": "in_progress",
       "verification": [
         "Autor revisa e aprova a ementa."
       ],
       "evidence": [],
-      "notes": "Autor não tem a ementa oficial ainda; montar uma típica (cinemática 1D/2D, leis de Newton, trabalho e energia) com cálculo."
+      "notes": "Autor não tem a ementa oficial ainda; montar uma típica (cinemática 1D/2D, leis de Newton, trabalho e energia) com cálculo. 2026-10-10: rascunho em docs/ementa-fisica-1.md, aguardando revisão."
     },
     {
       "id": "study-002",

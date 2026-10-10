@@ -53,6 +53,7 @@ npm run export-catalog    # aprovados do Supabase → código gerado
 ## Docs de tópico — ler só o da tarefa
 
 - Visão e fases: `docs/roadmap.md`
+- Ementa de Física 1 (trilha de estudo): `docs/ementa-fisica-1.md`
 - Como o harness funciona: `docs/harness.md`
 - Explicadora (UI, problemas, voz): `docs/explicadora.md`
 - Ingestor e Supabase: `docs/ingestor.md`

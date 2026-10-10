@@ -6,6 +6,7 @@ Leia só o arquivo do tópico da tarefa. O mapa do agente está em `/AGENTS.md`;
 |-----|------------|
 | [harness.md](./harness.md) | Como o agente deve trabalhar neste repo |
 | [roadmap.md](./roadmap.md) | Visão de produto e fases |
+| [ementa-fisica-1.md](./ementa-fisica-1.md) | Ementa de Física 1 que orienta a trilha de estudo |
 | [explicadora.md](./explicadora.md) | App do estudante |
 | [ingestor.md](./ingestor.md) | App interno, Supabase, export |
 | [physics-core.md](./physics-core.md) | Motor e catálogos |
