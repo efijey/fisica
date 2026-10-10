@@ -60,6 +60,10 @@ export const lenteTftCapitulo1: LenteCapitulo = {
       },
       exercicio: {
         pergunta: r`Um amigo diz que uma partida de TFT dura uns \(10^{5}\) segundos. Sem calcular com precisão, como você mostra que isso não faz sentido?`,
+        criterios: [
+          "Converta a duração típica de uma partida para segundos, mesmo que aproximada.",
+          "Compare com o número do amigo e diga o tamanho do erro.",
+        ],
         dica: "Converta a duração típica de uma partida para segundos e compare as potências de 10.",
         rubrica: {
           conceitosObrigatorios: [
@@ -83,6 +87,10 @@ export const lenteTftCapitulo1: LenteCapitulo = {
       exercicio: {
         pergunta:
           "Imagine que dois campeões empurram o mesmo inimigo ao mesmo tempo, cada um com um empurrão do mesmo tamanho. Em que situação o inimigo não sai do lugar, e em que situação ele é empurrado o mais longe possível? Por que somar só os tamanhos dos empurrões não basta?",
+        criterios: [
+          "Descreva as duas situações: inimigo parado e inimigo empurrado o mais longe possível.",
+          "Explique o que, além do tamanho, entra na soma dos empurrões.",
+        ],
         dica: "Empurrão é vetor: além do tamanho, importa para onde cada campeão empurra.",
         explicacao:
           "Empurrão é vetor. Empurrando em sentidos opostos, um cancela o outro e o inimigo fica parado. Empurrando no mesmo sentido, o efeito dobra. Em qualquer outro ângulo, o resultado fica entre esses dois. Somar só os tamanhos ignora a direção.",
@@ -111,6 +119,10 @@ export const lenteTftCapitulo1: LenteCapitulo = {
       exercicio: {
         pergunta:
           "Uma unidade caminha em linha reta rumo ao alvo, mas um efeito a empurra na diagonal, um pouco para o lado e um pouco para a frente. Que parte desse empurrão ajuda a unidade a chegar ao alvo? Que produto de vetores descreve isso?",
+        criterios: [
+          "Diga qual parte do empurrão ajuda, usando a ideia de componente.",
+          "Diga o nome do produto de vetores que faz essa conta.",
+        ],
         dica: "Quebre o empurrão em uma parte na direção do alvo e uma parte de lado.",
         rubrica: {
           conceitosObrigatorios: [

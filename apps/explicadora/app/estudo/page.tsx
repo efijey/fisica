@@ -59,6 +59,7 @@ function Secao({
       ? {
           ...pele.exercicio,
           rubrica: pele.exercicio.rubrica ?? secao.exercicio.rubrica,
+          criterios: pele.exercicio.criterios ?? secao.exercicio.criterios,
         }
       : secao.exercicio
 

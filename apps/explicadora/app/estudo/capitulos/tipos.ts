@@ -21,9 +21,10 @@ export type SecaoCapitulo = {
 export type LenteSecao = {
   intuicao?: string
   exemplo?: SecaoCapitulo["exemplo"]
-  /** Sem `rubrica`, o juiz usa a da versão formal. */
-  exercicio?: Omit<ExercicioTrilha, "rubrica"> & {
+  /** Sem `rubrica` ou `criterios`, valem os da versão formal. */
+  exercicio?: Omit<ExercicioTrilha, "rubrica" | "criterios"> & {
     rubrica?: ExercicioTrilha["rubrica"]
+    criterios?: string[]
   }
 }
 

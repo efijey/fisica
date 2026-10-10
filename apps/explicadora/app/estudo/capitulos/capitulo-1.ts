@@ -14,6 +14,10 @@ export const capitulo1: Capitulo = {
       referencia: "Young & Freedman, seção 1.3",
       exercicio: {
         pergunta: r`Um colega escreveu \(v = \dfrac{x}{t^2}\) para a velocidade. Sem usar nenhum número, como você mostra que essa fórmula está errada?`,
+        criterios: [
+          "Diga o que você compararia nos dois lados da equação.",
+          "Explique por que essa comparação já basta para descartar a fórmula.",
+        ],
         dica: "Olhe para as unidades de cada lado do sinal de igual.",
         rubrica: {
           conceitosObrigatorios: [
@@ -45,6 +49,10 @@ export const capitulo1: Capitulo = {
       referencia: "Young & Freedman, seção 1.4",
       exercicio: {
         pergunta: r`Um quarto tem área de \(12\ \mathrm{m}^2\). Um colega converte para \(\mathrm{cm}^2\) multiplicando por 100. Por que isso está errado?`,
+        criterios: [
+          "Diga o que muda entre converter um comprimento e converter uma área.",
+          "Explique qual deveria ser o fator de conversão, ou como chegar nele.",
+        ],
         dica: "Área tem duas dimensões. O que acontece com cada uma delas na conversão?",
         rubrica: {
           conceitosObrigatorios: [
@@ -75,6 +83,10 @@ export const capitulo1: Capitulo = {
       referencia: "Young & Freedman, seção 1.5",
       exercicio: {
         pergunta: r`Você mede uma tábua com uma trena e obtém \(1{,}2\ \mathrm{m}\). Para dividi-la em 3 pedaços iguais, faz a conta e a calculadora mostra \(0{,}4000000\). Por que não faz sentido escrever todos esses dígitos?`,
+        criterios: [
+          "Diga o que limita a quantidade de dígitos confiáveis.",
+          "Explique com quantos dígitos o resultado deveria ficar, e por quê.",
+        ],
         dica: "Quem decide quantos dígitos são confiáveis: a calculadora ou a medida?",
         rubrica: {
           conceitosObrigatorios: [
@@ -107,6 +119,10 @@ export const capitulo1: Capitulo = {
       exercicio: {
         pergunta:
           "Sem pesquisar, estime a ordem de grandeza do número de segundos em um dia. Explique o caminho que você usou.",
+        criterios: [
+          "Mostre o caminho: em que partes você quebrou o dia.",
+          "Diga a potência de 10 a que você chegou.",
+        ],
         dica: "Quebre o dia em horas, as horas em minutos e os minutos em segundos.",
         rubrica: {
           conceitosObrigatorios: [
@@ -139,6 +155,10 @@ export const capitulo1: Capitulo = {
       exercicio: {
         pergunta:
           "Duas pessoas puxam uma caixa, cada uma com uma força do mesmo tamanho. Em que situação a força total é zero, e em que situação ela é a maior possível? Por que somar só os tamanhos não basta?",
+        criterios: [
+          "Descreva as duas situações: força total zero e força total máxima.",
+          "Explique o que, além do tamanho, entra na soma das forças.",
+        ],
         dica: "Força é vetor: além do tamanho, importa para onde cada pessoa puxa.",
         rubrica: {
           conceitosObrigatorios: [
@@ -172,6 +192,10 @@ export const capitulo1: Capitulo = {
       referencia: "Young & Freedman, seção 1.8",
       exercicio: {
         pergunta: r`Um vetor aponta para baixo e para a esquerda. Quais são os sinais das componentes \(A_x\) e \(A_y\)? Por que isso importa na hora de usar o \(\arctan\) da calculadora?`,
+        criterios: [
+          r`Diga o sinal de \(A_x\) e o sinal de \(A_y\).`,
+          "Explique o que a calculadora erra e como corrigir.",
+        ],
         dica: "Divida uma componente negativa por outra negativa e veja o sinal que sobra.",
         rubrica: {
           conceitosObrigatorios: [
@@ -200,6 +224,10 @@ export const capitulo1: Capitulo = {
       referencia: "Young & Freedman, seção 1.9",
       exercicio: {
         pergunta: r`O que muda e o que não muda entre os vetores \((3\ \mathrm{m})\,\hat{\imath}\) e \((-3\ \mathrm{m})\,\hat{\imath}\)?`,
+        criterios: [
+          "Compare o tamanho (módulo) dos dois vetores.",
+          "Compare a direção e o sentido de cada um.",
+        ],
         dica: "Pense separadamente em tamanho, direção e sentido.",
         rubrica: {
           conceitosObrigatorios: [
@@ -226,6 +254,10 @@ export const capitulo1: Capitulo = {
       exercicio: {
         pergunta:
           "Você empurra um carrinho de supermercado que anda na horizontal, mas sua força aponta inclinada para baixo. Que parte da sua força ajuda o carrinho a andar? Que produto de vetores descreve isso?",
+        criterios: [
+          "Diga qual parte da força ajuda, usando a ideia de componente.",
+          "Diga o nome do produto de vetores que faz essa conta.",
+        ],
         dica: "Quebre a força em uma parte horizontal e uma vertical.",
         rubrica: {
           conceitosObrigatorios: [

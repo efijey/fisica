@@ -1,7 +1,7 @@
 "use client"
 
 import { useId, useState } from "react"
-import { Send } from "lucide-react"
+import { Lightbulb, Send } from "lucide-react"
 
 import type { RubricaProblema } from "@/app/physics/problemas/catalog"
 import { julgarResposta, type ResultadoJuiz } from "@/app/physics/problemas/juiz"
@@ -13,6 +13,8 @@ import { cn } from "@/lib/utils"
 
 export type ExercicioTrilha = {
   pergunta: string
+  /** O que uma boa resposta precisa ter. Orienta sem revelar a resposta. */
+  criterios: string[]
   dica: string
   rubrica: RubricaProblema
   /** Mostrada só depois da primeira resposta enviada. */
@@ -24,6 +26,7 @@ export function ExercicioConceitual({ exercicio }: { exercicio: ExercicioTrilha 
   const [texto, setTexto] = useState("")
   const [resultado, setResultado] = useState<ResultadoJuiz | null>(null)
   const [julgado, setJulgado] = useState(false)
+  const [verDica, setVerDica] = useState(false)
 
   function enviar() {
     setResultado(julgarResposta(exercicio, texto))
@@ -33,6 +36,36 @@ export function ExercicioConceitual({ exercicio }: { exercicio: ExercicioTrilha 
   return (
     <div className="flex flex-col gap-3">
       <TextoComEquacoes texto={exercicio.pergunta} className="leading-7 font-medium" />
+
+      <div className="rounded-lg bg-muted/50 p-3 text-sm">
+        <p className="font-medium">Uma boa resposta:</p>
+        <ul className="list-disc pl-5">
+          {exercicio.criterios.map((c, i) => (
+            <li key={i}>
+              <TextoComEquacoes texto={c} />
+            </li>
+          ))}
+        </ul>
+        <p className="mt-1 text-muted-foreground">
+          Duas a quatro frases bastam.
+        </p>
+        {verDica ? (
+          <p className="mt-2">
+            <span className="font-medium">Dica:</span> {exercicio.dica}
+          </p>
+        ) : (
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            onClick={() => setVerDica(true)}
+            className="mt-1 -ml-2"
+          >
+            <Lightbulb data-icon="inline-start" />
+            Ver dica
+          </Button>
+        )}
+      </div>
 
       <label htmlFor={id} className="sr-only">
         Sua explicação
