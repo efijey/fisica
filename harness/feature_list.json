@@ -1,0 +1,184 @@
+{
+  "project": "fisica",
+  "last_updated": "2026-09-09",
+  "rules": {
+    "single_active_feature": true,
+    "passing_requires_evidence": true,
+    "do_not_skip_verification": true
+  },
+  "status_legend": {
+    "not_started": "Ainda não começou.",
+    "in_progress": "Única feature ativa desta sessão.",
+    "blocked": "Não avança até o blocker documentado ser resolvido.",
+    "passing": "Verificação rodou e a evidência está registrada."
+  },
+  "features": [
+    {
+      "id": "harness-001",
+      "priority": 0,
+      "area": "harness",
+      "title": "Harness mínimo do repositório",
+      "user_visible_behavior": "Um agente novo lê AGENTS.md, retoma o estado em harness/ e verifica o baseline com ./init.sh.",
+      "status": "passing",
+      "verification": [
+        "Ler AGENTS.md na raiz e os AGENTS.md dos três pacotes.",
+        "Confirmar harness/feature_list.json, harness/progress.md e harness/session-handoff.md.",
+        "Rodar ./init.sh (ou npm test) e registrar o resultado."
+      ],
+      "evidence": [
+        "2026-09-09: ./init.sh — physics-core 19 testes ok, ingestor 3 testes ok."
+      ],
+      "notes": "Estado operacional vive em harness/. Visão de produto continua em docs/roadmap.md."
+    },
+    {
+      "id": "core-001",
+      "priority": 1,
+      "area": "physics-core",
+      "title": "Motor de inferência (falta exatamente 1 variável)",
+      "user_visible_behavior": "Dadas as grandezas conhecidas, o motor sugere fórmulas em que falta uma variável, já isolada.",
+      "status": "passing",
+      "verification": [
+        "npm run test -w @fisica/physics-core"
+      ],
+      "evidence": [
+        "packages/physics-core/src/physics/engine/inferencia.test.ts"
+      ],
+      "notes": "Ainda não faz cadeias de várias etapas — ver core-005."
+    },
+    {
+      "id": "core-002",
+      "priority": 2,
+      "area": "physics-core",
+      "title": "Catálogos de fórmulas, variáveis, fenômenos e gráficos",
+      "user_visible_behavior": "O app navega fórmulas por área e explica grandezas e fenômenos associados.",
+      "status": "passing",
+      "verification": [
+        "npm run test -w @fisica/physics-core",
+        "Conferir packages/physics-core/src/physics/*/catalog.ts"
+      ],
+      "evidence": [
+        "conexoes.test.ts + catálogos manuais em physics-core"
+      ],
+      "notes": "Itens novos entram por rascunho no ingestor e npm run export-catalog, não por edição direta em generated/."
+    },
+    {
+      "id": "exp-001",
+      "priority": 3,
+      "area": "explicadora",
+      "title": "UI de inferência, exploração, catálogo e gráficos",
+      "user_visible_behavior": "O estudante seleciona grandezas, explora conexões, lê o catálogo e vê gráficos das equações.",
+      "status": "passing",
+      "verification": [
+        "Abrir npm run dev e exercitar as abas Inferência, Explorar, Catálogo e Gráficos."
+      ],
+      "evidence": [
+        "apps/explicadora/app/pages/Calculadora/index.tsx — verificação visual; E2E ainda não existe (qa-001)."
+      ],
+      "notes": ""
+    },
+    {
+      "id": "exp-002",
+      "priority": 4,
+      "area": "explicadora",
+      "title": "Problemas conceituais (manuais + exportados)",
+      "user_visible_behavior": "A aba Problemas lista exercícios conceituais e avalia a resposta em palavras (certo / no caminho / desviado).",
+      "status": "passing",
+      "verification": [
+        "Abrir a aba Problemas na explicadora.",
+        "Confirmar catalog.ts (manuais) + catalog.generated.ts (export)."
+      ],
+      "evidence": [
+        "apps/explicadora/app/physics/problemas/catalog.ts e juiz.ts"
+      ],
+      "notes": "Gabarito numérico não aparece para o estudante."
+    },
+    {
+      "id": "ing-001",
+      "priority": 5,
+      "area": "ingestor",
+      "title": "Ingestão de listas (texto/PDF), análise e export do catálogo",
+      "user_visible_behavior": "Um operador cola texto ou envia PDF, revisa exercícios, aprova rascunhos de catálogo e exporta para a explicadora.",
+      "status": "passing",
+      "verification": [
+        "npm run test -w @fisica/ingestor",
+        "Fluxo manual: /listas/nova, /exercicios, /catalogo/rascunhos, npm run export-catalog"
+      ],
+      "evidence": [
+        "apps/ingestor/lib/parser/analisar.test.ts; docs/ingestor.md"
+      ],
+      "notes": "Auth admin ainda não existe — ver ing-002."
+    },
+    {
+      "id": "exp-003",
+      "priority": 6,
+      "area": "explicadora",
+      "title": "Cálculo mental por voz (folha + STT + tutor)",
+      "user_visible_behavior": "No problema, o estudante fala o raciocínio; a folha registra passos; o tutor responde sem entregar o número.",
+      "status": "in_progress",
+      "verification": [
+        "Abrir um problema com mesa de cálculo mental.",
+        "Falar um passo e ver a folha atualizar.",
+        "Pedir ajuda e conferir que não vaza gabarito.",
+        "Cobrir o caminho Whisper e o fallback Web Speech / mock."
+      ],
+      "evidence": [],
+      "notes": "WIP em MesaCalculoMental, BarraVoz, app/physics/problemas/mental/* e app/api/mental/*."
+    },
+    {
+      "id": "ing-002",
+      "priority": 7,
+      "area": "ingestor",
+      "title": "Auth admin no ingestor",
+      "user_visible_behavior": "Só um operador autenticado cria, aprova e exporta exercícios.",
+      "status": "not_started",
+      "verification": [
+        "Sem sessão: rotas de escrita recusam.",
+        "Com sessão admin: fluxo de ingestão e aprovação funciona."
+      ],
+      "evidence": [],
+      "notes": "INGESTOR_SKIP_AUTH=true é atalho de desenvolvimento."
+    },
+    {
+      "id": "core-005",
+      "priority": 8,
+      "area": "physics-core",
+      "title": "Cadeias de inferência (várias etapas)",
+      "user_visible_behavior": "O motor sugere um caminho quando faltam duas ou mais grandezas, encadeando fórmulas.",
+      "status": "not_started",
+      "verification": [
+        "Testes unitários com cadeia de pelo menos duas fórmulas.",
+        "A UI de inferência mostra os passos, não só o match de falta-1."
+      ],
+      "evidence": [],
+      "notes": ""
+    },
+    {
+      "id": "exp-004",
+      "priority": 9,
+      "area": "explicadora",
+      "title": "Avaliação numérica e checagem de unidades",
+      "user_visible_behavior": "O estudante informa valores; o app calcula a grandeza isolada e recusa unidade incompatível.",
+      "status": "not_started",
+      "verification": [
+        "Entrar valores compatíveis e ver o resultado.",
+        "Entrar unidade errada e ver a recusa."
+      ],
+      "evidence": [],
+      "notes": "A explicadora não deve virar calculadora; o número é apoio à explicação."
+    },
+    {
+      "id": "qa-001",
+      "priority": 10,
+      "area": "qa",
+      "title": "CI + testes E2E",
+      "user_visible_behavior": "Push/PR roda lint, testes e um smoke E2E da explicadora.",
+      "status": "not_started",
+      "verification": [
+        "Pipeline verde em um PR de exemplo.",
+        "E2E cobre inferência e abertura de um problema."
+      ],
+      "evidence": [],
+      "notes": ""
+    }
+  ]
+}

@@ -1,5 +1,9 @@
 # Roadmap — Física: Explicadora de Fenômenos
 
+Status operacional das features (o que está `passing` / `in_progress`): [`harness/feature_list.json`](../harness/feature_list.json). Este arquivo é visão de produto e histórico de fases — não é o tracker da sessão.
+
+Como o agente trabalha: [`docs/harness.md`](./harness.md) e [`AGENTS.md`](../AGENTS.md).
+
 ## Visão
 
 Construir uma **explicadora de física** para estudantes brasileiros (ensino médio e início do ensino superior). O app não se apoia na aritmética nem no cálculo numérico — o foco é o **porquê**: por que usar determinada fórmula, como as grandezas físicas se relacionam e o que isso representa na natureza.
@@ -28,26 +32,15 @@ Campo de input onde o estudante cola ou digita um exercício de vestibular. O ap
 ## Arquitetura
 
 ```
-app/
-├── page.tsx                    → entrada da aplicação
-├── pages/Calculadora/          → UI principal (abas Inferência + Catálogo)
-└── physics/
-    ├── engine/
-    │   ├── inferencia.ts       → motor de inferência
-    │   └── conexoes.ts         → grafo variável ↔ fórmula ↔ fenômeno
-    ├── formulas/
-    │   ├── catalog.ts            → catálogo de fórmulas
-    │   └── metadata.ts           → metadados explicativos das fórmulas
-    ├── variables/
-    │   ├── catalog.ts            → catálogo de variáveis
-    │   └── metadata.ts           → metadados explicativos das variáveis
-    └── phenomena/
-        └── catalog.ts            → fenômenos da natureza e entidades
-
-components/
-├── physics/                    → SeletorVariavel, ListaFormulas, CatalogoFormulas, Card*
-└── ui/                         → componentes shadcn (tabs, card, badge, etc.)
+apps/explicadora/     → app do estudante (:3000)
+apps/ingestor/        → ingestão e aprovação de exercícios (:3001)
+packages/physics-core → catálogos + motor de inferência
+supabase/migrations/  → schema Postgres
+harness/              → estado do agente (feature list, progresso, handoff)
+docs/                 → visão, tópicos, git
 ```
+
+Mapa por app: `docs/explicadora.md`, `docs/ingestor.md`, `docs/physics-core.md`.
 
 ### Fluxo de dados
 
@@ -127,6 +120,11 @@ Foco em responder perguntas como: *"Em quantas equações a aceleração aparece
 | Testes do parser | Concluído |
 | Auth Supabase (login admin) | Pendente |
 | Explicadora consumindo `catalogoExemplos` | Pendente |
+| Listas texto/PDF + split | Concluído |
+| Pré-resolução LLM + propostas de catálogo | Concluído |
+| UI `/catalogo/rascunhos` | Concluído |
+| Export → problemas + `physics-core/generated` | Concluído |
+| Explicadora consumindo problemas gerados | Concluído |
 
 Ver [ingestor.md](./ingestor.md) para setup.
 
@@ -163,3 +161,5 @@ Ver [ingestor.md](./ingestor.md) para setup.
 2. Trabalhe na branch `sprint-3` (ou crie `feature/*` a partir dela)
 3. Abra PR para `sprint-3` ao concluir uma feature
 4. Ao final da sprint, PR de `sprint-3` → `main`
+
+Agentes: uma feature por vez, verificação antes de `passing`, commit só se o usuário pedir.

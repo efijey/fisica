@@ -1,0 +1,13 @@
+---
+description: Catálogo gerado pelo ingestor — não editar à mão
+globs:
+  - packages/physics-core/src/generated/**
+  - apps/explicadora/app/physics/problemas/catalog.generated.ts
+  - apps/explicadora/app/physics/examples/catalog.ts
+---
+
+# Arquivos gerados
+
+Estes arquivos saem de `npm run export-catalog`. Alteração manual some no próximo export.
+
+Para mudar o catálogo: aprove no ingestor e rode o export. Exceção só se o usuário pedir um hotfix pontual e souber que vai ser sobrescrito.

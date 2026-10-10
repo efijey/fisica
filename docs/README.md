@@ -1,0 +1,14 @@
+# Docs
+
+Leia só o arquivo do tópico da tarefa. O mapa do agente está em `/AGENTS.md`; o estado da sessão em `/harness/`.
+
+| Doc | Quando ler |
+|-----|------------|
+| [harness.md](./harness.md) | Como o agente deve trabalhar neste repo |
+| [roadmap.md](./roadmap.md) | Visão de produto e fases |
+| [explicadora.md](./explicadora.md) | App do estudante |
+| [ingestor.md](./ingestor.md) | App interno, Supabase, export |
+| [physics-core.md](./physics-core.md) | Motor e catálogos |
+| [git-workflow.md](./git-workflow.md) | Branches e commits |
+
+Status operacional das features: [`harness/feature_list.json`](../harness/feature_list.json).

@@ -1,22 +1,17 @@
-# Física — Motor de Fórmulas
+# Física — Explicadora de Fenômenos
 
-Calculadora inteligente de física para estudantes. Selecione as grandezas que você já conhece em um problema e o sistema sugere quais fórmulas podem ser usadas para descobrir a variável que falta — já na forma isolada.
+Explicadora de física para estudantes: o foco é o *porquê* da fórmula, não o número. Há também um ingestor interno que cataloga exercícios e alimenta o app.
 
 ## Funcionalidades
 
-- **Inferência de fórmulas** — selecione variáveis conhecidas e veja quais expressões resolvem o que falta
-- **Catálogo navegável** — ~28 fórmulas organizadas por área (cinemática, dinâmica, energia, momento, rotação, gravitação)
-- **~55 variáveis físicas** — com símbolo, nome e unidade
-- **Interface responsiva** — abas Calculadora e Catálogo, construída com shadcn/ui
+- **Inferência de fórmulas** — selecione grandezas conhecidas e veja quais expressões isolam o que falta
+- **Catálogo navegável** — fórmulas por área, com variáveis, fenômenos e gráficos
+- **Problemas conceituais** — resposta em palavras (certo / no caminho / desviado)
+- **Ingestor** — listas em texto/PDF, rascunhos de catálogo, export para a explicadora
 
 ## Stack
 
-| Camada | Tecnologia |
-|--------|------------|
-| Framework | Next.js 16 (App Router) |
-| UI | React 19, TypeScript 5 |
-| Estilo | Tailwind CSS 4, shadcn/ui |
-| Ícones | Lucide React |
+Next.js 16 (App Router), React 19, TypeScript, Tailwind 4, shadcn/ui, Vitest, Supabase.
 
 ## Pré-requisitos
 
@@ -28,39 +23,36 @@ Calculadora inteligente de física para estudantes. Selecione as grandezas que v
 ```bash
 git clone https://github.com/efijey/fisica.git
 cd fisica
-npm install
-npm run dev
+./init.sh          # npm install se faltar + testes
+npm run dev        # explicadora em http://localhost:3000
 ```
 
-Abra [http://localhost:3000](http://localhost:3000) no navegador.
+Ingestor: copie `apps/ingestor/.env.example` → `.env.local` e veja [docs/ingestor.md](docs/ingestor.md).
 
 ## Scripts
 
 | Comando | Descrição |
 |---------|-----------|
-| `npm run dev` | Servidor de desenvolvimento |
-| `npm run build` | Build de produção |
-| `npm run start` | Servidor de produção |
-| `npm run lint` | Verificação ESLint |
-| `npm run test` | Testes unitários (Vitest) |
+| `./init.sh` | Baseline do harness (deps + testes) |
+| `npm run dev` | Explicadora (porta 3000) |
+| `npm run dev:ingestor` | Ingestor (porta 3001) |
+| `npm run build` | Build da explicadora |
+| `npm run lint` | ESLint da explicadora |
+| `npm test` | Testes do physics-core e do ingestor |
+| `npm run export-catalog` | Exporta aprovados do Supabase para o código |
 
 ## Estrutura do projeto
 
 ```
 fisica/
-├── app/
-│   ├── page.tsx                 # Entrada da aplicação
-│   ├── pages/Calculadora/       # UI principal
-│   └── physics/
-│       ├── engine/              # Motor de inferência
-│       ├── formulas/            # Catálogo de fórmulas
-│       └── variables/           # Catálogo de variáveis
-├── components/
-│   ├── physics/                 # Componentes de domínio
-│   └── ui/                      # Componentes shadcn
-├── docs/
-│   ├── git-workflow.md          # Padrões de branch e commit
-│   └── roadmap.md               # Visão e roadmap do projeto
+├── AGENTS.md                    # Mapa do agente (não o manual)
+├── init.sh                      # Install + verificação
+├── harness/                     # Estado da sessão (feature list, progresso)
+├── apps/explicadora/            # App do estudante
+├── apps/ingestor/               # App interno de exercícios
+├── packages/physics-core/       # Catálogos + motor
+├── supabase/migrations/         # Schema
+└── docs/                        # Visão e docs de tópico
 ```
 
 ## Como funciona
@@ -71,13 +63,15 @@ fisica/
 
 ## Documentação
 
-- [Padrões de Git e commits](docs/git-workflow.md)
-- [Roadmap e backlog](docs/roadmap.md)
+- [Índice dos docs](docs/README.md)
+- [Como o agente trabalha](docs/harness.md)
+- [Roadmap](docs/roadmap.md)
+- [Padrões de Git](docs/git-workflow.md)
 
 ## Contribuindo
 
 1. Leia os [padrões de Git](docs/git-workflow.md)
-2. Trabalhe na branch `sprint-1` (ou crie `feature/*` a partir dela)
+2. Trabalhe na branch `sprint-3` (ou crie `feature/*` a partir dela)
 3. Siga [Conventional Commits](https://www.conventionalcommits.org/) em português
 
 ## Licença

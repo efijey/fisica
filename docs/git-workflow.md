@@ -65,7 +65,7 @@ Corpo opcional com contexto adicional.
 
 ### Escopos sugeridos
 
-`engine`, `catalogo`, `ui`, `docs`, `readme`, `deps`, `test`
+`engine`, `catalogo`, `ui`, `docs`, `readme`, `deps`, `test`, `explicadora`, `ingestor`, `harness`
 
 ### Exemplos
 
