@@ -266,14 +266,18 @@
       "area": "explicadora",
       "title": "Bloco 'No jogo' na lente TFT com dados reais",
       "user_visible_behavior": "Cada seção da versão TFT mostra uma aplicação da física que ajuda a jogar melhor, com números reais do set atual e a fonte.",
-      "status": "not_started",
+      "status": "in_progress",
       "verification": [
         "Snapshot dos dados com set, versão e data salvo no repo.",
         "Autor confere os números usados.",
         "npm run build"
       ],
-      "evidence": [],
-      "notes": "Fonte: CommunityDragon (Data Dragon oficial não tem atributos). Dados brutos precisam de interpretação (ex.: 'damage' 230 num campeão de custo 1). Ver docs/personalizacao.md, seção 'Física para jogar melhor'."
+      "evidence": [
+        "2026-10-10: npm run snapshot-tft → apps/explicadora/app/estudo/dados/tft-set18.json (74 entradas, versão 16.20, set 18 confirmado pelo autor).",
+        "2026-10-10: primeiro bloco 'No jogo' (Grandezas e unidades): Xayah × Rek'Sai contra Ornn, DPS e tempo para derrubar calculados a partir do snapshot; equações cabem no quadro (medido via CDP); build, lint e tsc ok.",
+        "Pendente: autor conferir os números; blocos 'No jogo' das outras 7 seções."
+      ],
+      "notes": "Fonte: CommunityDragon (Data Dragon oficial não tem atributos). O 'damage' 230 era de monstro PvE, não de campeão. O snapshot inclui algumas criaturas invocadas e variantes da Lux; Kayle vem sem dano. campeaoTft() falha no build se o campeão sumir ou vier sem dano. Ver docs/personalizacao.md, seção 'Física para jogar melhor'."
     },
     {
       "id": "ing-002",
