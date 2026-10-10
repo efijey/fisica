@@ -184,11 +184,13 @@
       "area": "conteudo",
       "title": "Ementa típica de Física 1 (Young & Freedman)",
       "user_visible_behavior": "Existe uma lista de capítulos e tópicos do semestre, ajustável pelo autor, que orienta a trilha de estudo.",
-      "status": "in_progress",
+      "status": "passing",
       "verification": [
         "Autor revisa e aprova a ementa."
       ],
-      "evidence": [],
+      "evidence": [
+        "2026-10-10: autor aprovou a ementa (capítulos 1 a 7, 8 opcional; trilha começa pelo capítulo 1)."
+      ],
       "notes": "Autor não tem a ementa oficial ainda; montar uma típica (cinemática 1D/2D, leis de Newton, trabalho e energia) com cálculo. 2026-10-10: rascunho em docs/ementa-fisica-1.md, aguardando revisão."
     },
     {
@@ -213,14 +215,15 @@
       "area": "explicadora",
       "title": "Trilha de estudo: primeiro capítulo completo",
       "user_visible_behavior": "Um capítulo (capítulo 1: unidades, ordem de grandeza e vetores — escolha do autor em 2026-10-10) tem intuição, definição formal, derivação, porquê, armadilhas, exemplo resolvido, exercícios com juiz e citação do livro.",
-      "status": "in_progress",
+      "status": "passing",
       "verification": [
         "Autor estuda o capítulo e dá feedback.",
         "npm run build"
       ],
       "evidence": [
         "2026-10-10: texto formal do capítulo 1 (8 seções, Young & Freedman 1.3–1.10) em /estudo; npm run build ok; lint 0 erros; nenhum katex-error no HTML.",
-        "2026-10-10: 8 exercícios conceituais com juiz (um por seção). Script tsx com resposta boa e ruim por exercício: 8/8 boa=certo, ruim=desviado. No navegador: resposta certa → Certo + explicação; resposta errada → Desviado, feedback sem revelar o número."
+        "2026-10-10: 8 exercícios conceituais com juiz (um por seção). Script tsx com resposta boa e ruim por exercício: 8/8 boa=certo, ruim=desviado. No navegador: resposta certa → Certo + explicação; resposta errada → Desviado, feedback sem revelar o número.",
+        "2026-10-10: autor leu a página e aprovou (\"ficou bom\"). Não testou os exercícios pessoalmente (optou por pular)."
       ],
       "notes": "Validar um capítulo antes de escalar. Feito: intuição, definição, por quê, armadilhas, exemplo resolvido, referência da seção do livro (conferir numeração na edição do autor), exercícios com juiz (components/physics/ExercicioConceitual.tsx; explicação só depois de enviar). Rótulo do conceito = primeiro sinônimo da rubrica: escrever legível e sem revelar a resposta. Falta: revisão do autor, lente (study-004). Conteúdo em app/estudo/capitulos/capitulo-1.ts."
     },
