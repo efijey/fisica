@@ -42,7 +42,7 @@ npm run export-catalog    # aprovados do Supabase → código gerado
 
 ## Restrições (não negociar)
 
-- Não commitar, fazer push, merge ou abrir PR sem o usuário pedir.
+- Commits pequenos são livres, sempre numa branch. Push, merge e PR só com aprovação do usuário.
 - Uma feature por vez. Não reescrever `feature_list.json` para esconder trabalho inacabado.
 - `passing` só com verificação **rodada** e evidência no harness.
 - Não editar à mão `packages/physics-core/src/generated/*` nem `apps/explicadora/app/physics/problemas/catalog.generated.ts` — saem de `npm run export-catalog`.
@@ -75,4 +75,4 @@ A feature só está `passing` quando:
 1. Atualizar `harness/progress.md` e `harness/session-handoff.md`.
 2. Atualizar o status em `harness/feature_list.json`.
 3. Registrar o que ficou quebrado ou sem verificar.
-4. Mostrar `git status` / `git diff` e **perguntar** se o usuário quer commit.
+4. Mostrar os commits feitos (`git log --oneline`) e **perguntar** se o usuário quer push / PR.

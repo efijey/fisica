@@ -1,25 +1,26 @@
 ---
-description: Nunca commitar ou fazer push sem aprovação explícita do usuário
 alwaysApply: true
 ---
 
-# Commits e push — exigem aprovação
+# Commits livres na branch; push e merge exigem aprovação
 
-**Nunca** execute `git commit`, `git push`, `git merge`, nem crie PRs sem o usuário pedir ou aprovar explicitamente antes.
+## Pode fazer sem perguntar
 
-## O que fazer
+1. Trabalhar sempre numa branch (`feature/*`, `fix/*`, `docs/*`), nunca direto em `main` ou `sprint-N`.
+2. Fazer commits pequenos e específicos (Conventional Commits em português), um por mudança lógica.
 
-1. Implementar alterações normalmente (código, docs, testes).
-2. Ao terminar, **mostrar um resumo** do que mudou (`git status` / `git diff`).
-3. **Perguntar** se o usuário quer commitar — e, se sim, qual mensagem ou agrupamento.
-4. Só então executar `git add`, `git commit` e `git push` (se solicitado).
+## Só com aprovação explícita do usuário
 
-## O que não fazer
+- `git push`
+- `git merge` e rebase em `main` ou `sprint-N`
+- Abrir, aprovar ou mergear PR
 
-- Não commitar "por iniciativa própria" ao concluir uma tarefa.
-- Não commitar várias mudanças em sequência sem consultar entre cada commit.
-- Não fazer push para `origin` sem confirmação explícita.
+## Ao terminar uma tarefa
 
-## Exceção
+1. Mostrar o resumo dos commits feitos (`git log --oneline`) e o que ficou sem commit.
+2. Perguntar se o usuário quer fazer push e/ou abrir PR.
 
-Se o usuário disser explicitamente na mensagem atual algo como "commita isso", "pode commitar" ou "faz o push", aí sim proceder conforme o pedido.
+## Nunca
+
+- Commitar `.env`, `.env.local` ou chaves.
+- Reescrever histórico já enviado ao GitHub (`push --force`) sem pedido explícito.
