@@ -144,6 +144,19 @@ def base(r, chave):
     return v.get("baseValue") if isinstance(v, dict) else None
 
 
+MULT_VIDA = {1: 1, 2: 1.8, 3: 3.24}
+MULT_DANO = {1: 1, 2: 1.5, 3: 2.25}
+
+
+def por_estrela(s, loja):
+    vida, dano, vel = s.get("hp"), s.get("damage"), s.get("attackSpeed")
+    if not loja or vida is None or dano is None or vel is None:
+        return [None] * 7
+    dps = lambda e: num(dano * MULT_DANO[e] * vel, 1)
+    return [dps(1), num(vida * MULT_VIDA[2], 0), num(dano * MULT_DANO[2], 1), dps(2),
+            num(vida * MULT_VIDA[3], 0), num(dano * MULT_DANO[3], 1), dps(3)]
+
+
 campeoes, camp_carac, hab_var = [], [], []
 for c in sorted(conf["champions"], key=lambda c: (c["cost"], c["name"])):
     s, r = c["stats"], raiz_bin(c["apiName"])
@@ -151,7 +164,7 @@ for c in sorted(conf["champions"], key=lambda c: (c["cost"], c["name"])):
     campeoes.append([
         c["name"], c["apiName"], "Campeão da loja" if loja else "Invocação ou objeto", c["cost"],
         ", ".join(c["traits"]), num(s.get("hp")), num(s.get("armor")), num(s.get("magicResist")),
-        num(s.get("damage")), num(s.get("attackSpeed"), 3), num(s.get("critChance")), num(s.get("critMultiplier"), 3),
+        num(s.get("damage")), num(s.get("attackSpeed"), 3), *por_estrela(s, loja), num(s.get("critChance")), num(s.get("critMultiplier"), 3),
         num(s.get("initialMana")), num(s.get("mana")), num(s.get("range")),
         num(base(r, "attackRangeModifiable")), num(base(r, "baseMoveSpeedModifiable")), num(base(r, "attackSpeedRatioModifiable"), 3),
         c["ability"]["name"], limpa(c["ability"]["desc"]),
@@ -296,17 +309,23 @@ for e, est in enumerate(mapa[cfg_set["StageRoundData"]]["stages"], start=1):
 
 tabela_dano = next(o["mConstants"] for o in mapa.values() if isinstance(o, dict) and (o.get("mConstants") or {}).get("PlayerDamageStage3", {}).get("mValue") == 6
                    and o["mConstants"].get("PlayerDamageStage2", {}).get("mValue") == 2)
-dano = [[e, (tabela_dano.get(f"PlayerDamageStage{e}") or {}).get("mValue", 0)] for e in range(1, 8)]
+dano = [[e, (tabela_dano.get(f"PlayerDamageStage{e}") or {}).get("mValue", 0), 1] for e in range(1, 8)]
 
 # ---------- tabelas e dicionário ----------
 fonte = f"CommunityDragon (dados extraídos dos arquivos do jogo; não oficial). Set {SET}, versão {versao}, baixado em {hoje}."
 TABELAS = [
-    ("Campeoes", "Todos os campeões e invocações do set, com atributos de 1 estrela.", [
+    ("Campeoes", "Todos os campeões e invocações do set: atributos de 1 estrela e, para campeões da loja, vida, dano e DPS calculados para 2 e 3 estrelas.", [
         ("Nome", "Nome em português."), ("Nome interno", "Identificador nos arquivos do jogo."),
         ("Tipo", "Campeão comprável na loja ou invocação/objeto (plantas, monstros, bigornas…)."), ("Custo", "Custo em ouro (valores acima de 5 são de objetos especiais)."),
         ("Características", "Origens e classes do campeão."), ("Vida", "Vida com 1 estrela."), ("Armadura", "Reduz dano físico: dano × 100/(100 + armadura) (regra conhecida; conferir)."),
         ("Resistência mágica", "Reduz dano mágico pela mesma fórmula da armadura."), ("Dano de ataque", "Dano por ataque básico com 1 estrela."),
-        ("Velocidade de ataque", "Ataques por segundo."), ("Chance de crítico", "Probabilidade de crítico (0,25 = 25%)."),
+        ("Velocidade de ataque", "Ataques por segundo."),
+        ("DPS 1 estrela", "Dano de ataque × velocidade de ataque, sem crítico, armadura nem habilidade."),
+        ("Vida 2 estrelas", "Vida × 1,8 (Wiki do LoL, TFT Codex, TFT Ninja; não oficial: conferir no jogo)."),
+        ("Dano de ataque 2 estrelas", "Dano de ataque × 1,5 (Wiki do LoL, TFT Ninja; conferir no jogo)."),
+        ("DPS 2 estrelas", "Dano de ataque 2 estrelas × velocidade de ataque (a velocidade não muda com estrelas)."),
+        ("Vida 3 estrelas", "Vida × 3,24 (= 1,8²)."), ("Dano de ataque 3 estrelas", "Dano de ataque × 2,25 (= 1,5²)."),
+        ("DPS 3 estrelas", "Dano de ataque 3 estrelas × velocidade de ataque."), ("Chance de crítico", "Probabilidade de crítico (0,25 = 25%)."),
         ("Multiplicador de crítico", "Dano do crítico em relação ao normal (1,4 = 140%)."), ("Mana inicial", "Mana no começo do combate."),
         ("Mana máxima", "Mana para conjurar a habilidade."), ("Alcance (hexes)", "Alcance mostrado no jogo."),
         ("Alcance (unidades do jogo)", "Mesmo alcance em unidades internas."), ("Velocidade de movimento (unidades/s)", "Unidades internas por segundo."),
@@ -364,9 +383,10 @@ TABELAS = [
         ("Tipo", "Combate contra jogador, carrossel ou monstros."), ("Nome interno", "Identificador da rodada."),
         ("Planejamento (s)", "Duração da fase de compra e posicionamento."), ("Combate (s)", "Duração da fase de combate."),
     ], rodadas),
-    ("Dano_por_Estagio", "Dano fixo ao jogador por derrota, por estágio (soma-se o dano das unidades sobreviventes).", [
+    ("Dano_por_Estagio", "Dano ao jogador por derrota = dano do estágio + 1 por unidade inimiga viva (regra oficial da Riot desde a atualização 14.8).", [
         ("Estágio", "Número do estágio."),
-        ("Dano fixo por derrota", "Tabela encontrada nos arquivos que bate com o modo padrão; o set não aponta para ela por nome, então conferir."),
+        ("Dano fixo por derrota", "Tabela encontrada nos arquivos (igual à do tft-boost, atualização 18.1). OP.GG e TFT Ninja dão 5 e 8 nos estágios 3 e 4: conferir."),
+        ("Dano por inimigo vivo", "Somar este valor por unidade inimiga viva, sem importar custo ou estrelas."),
     ], dano),
 ]
 
