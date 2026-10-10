@@ -2,7 +2,8 @@
 
 App educacional para estudantes brasileiros: ajuda a entender **por que** cada fórmula se aplica, como as grandezas se relacionam e em quais fenômenos da natureza elas aparecem — não só a fazer a conta.
 
-> Contexto vivo do projeto (ler primeiro): [`docs/mente.md`](docs/mente.md)
+> **Manual do sistema** (organização, pastas, rotas, banco): [`docs/manual.md`](docs/manual.md)  
+> Contexto vivo / prioridades da sprint: [`docs/mente.md`](docs/mente.md)
 
 ## O que tem hoje
 
@@ -83,6 +84,7 @@ fisica/
 │   └── physics-core/    # Fórmulas, variáveis, fenômenos, engine
 ├── supabase/            # Migrations
 └── docs/
+    ├── manual.md        # Mapa do sistema (consultar sempre)
     ├── mente.md         # Contexto vivo (visão, estado, regras)
     ├── roadmap.md       # Planejamento por sprints
     ├── git-workflow.md  # Branches, commits, revert
@@ -100,7 +102,8 @@ fisica/
 
 | Doc | Para quê |
 |-----|----------|
-| [Mente do projeto](docs/mente.md) | Visão, estado real, arquitetura, prioridades |
+| [Manual do sistema](docs/manual.md) | Mapa estável: pastas, rotas, lógica, banco — por onde procurar |
+| [Mente do projeto](docs/mente.md) | Visão, estado real, prioridades da sprint |
 | [Roadmap](docs/roadmap.md) | Sprints e backlog |
 | [Git](docs/git-workflow.md) | Branches, commits, como reverter |
 | [MVP produção](docs/mvp-producao.md) | Checklist de deploy / demo |

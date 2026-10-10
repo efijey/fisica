@@ -5,7 +5,9 @@ alwaysApply: true
 
 # Contexto do projeto (sempre)
 
-Leia e respeite **`docs/mente.md`** como fonte de verdade viva. Complementos: `docs/roadmap.md`, `docs/git-workflow.md`, `docs/mvp-producao.md`, `AGENTS.md`.
+Leia e respeite **`docs/mente.md`** como fonte de verdade viva (estado/prioridades).  
+Mapa estável do código (pastas, rotas, lógica, banco): **`docs/manual.md`**.  
+Complementos: `docs/roadmap.md`, `docs/git-workflow.md`, `docs/mvp-producao.md`, `AGENTS.md`.
 
 ## O que é
 
@@ -20,11 +22,7 @@ Leia e respeite **`docs/mente.md`** como fonte de verdade viva. Complementos: `d
 - Não invente escopo “legal”; alinhe com a mente / o pedido atual.
 - Next.js deste repo pode diferir do treino → consulte `node_modules/next/dist/docs/`.
 
-## Quando atualizar a mente
+## Quando atualizar docs
 
-Atualize `docs/mente.md` (e o roadmap se necessário) quando mudar:
-
-- visão do produto
-- arquitetura ou pastas importantes
-- status de sprint / prioridades do MVP
-- decisões de fluxo de trabalho acordadas na conversa
+- **`docs/mente.md`** (+ roadmap se preciso): visão, status de sprint, prioridades do MVP, decisões de fluxo.
+- **`docs/manual.md`**: só quando a *arquitetura* mudar (nova região de pastas, novo papel do banco, novas regras de rotas). Não encher o manual com detalhes de sprint.

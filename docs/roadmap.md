@@ -1,6 +1,6 @@
 # Roadmap — Física: Explicadora de Fenômenos
 
-> Fonte de planejamento. Contexto vivo e estado detalhado: [mente.md](./mente.md).
+> Fonte de planejamento. Contexto vivo: [mente.md](./mente.md). Mapa do sistema: [manual.md](./manual.md).
 
 ## Visão
 

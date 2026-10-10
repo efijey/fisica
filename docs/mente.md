@@ -3,6 +3,8 @@
 Documento vivo de contexto. Agentes e humanos devem ler isto **antes** de propor mudanças.
 Atualize este arquivo quando a visão, o estado ou o fluxo de trabalho mudarem.
 
+Para **organização de pastas, rotas, lógica e banco** (mapa estável), use [`manual.md`](./manual.md).
+
 Última sincronização: 2026-10-10 (auditoria pré–sprint de MVP / apresentação).
 
 ---
@@ -194,6 +196,8 @@ npm run export-catalog    # após aprovar exercícios no ingestor
 ---
 
 ## Onde olhar no código
+
+Índice completo (perguntas → pastas): [`manual.md`](./manual.md) §4.
 
 | Assunto | Caminho |
 |---------|---------|
