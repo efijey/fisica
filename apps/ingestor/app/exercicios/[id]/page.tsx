@@ -64,24 +64,74 @@ export default function ExercicioDetalhePage() {
           ← Voltar
         </Link>
         <div className="flex items-center gap-2 mt-2">
-          <h1 className="text-xl font-bold">Detalhe do exercício</h1>
+          <h1 className="text-xl font-bold">
+            {String(exercicio.titulo || "Detalhe do exercício")}
+          </h1>
           <span className="text-xs rounded-full border px-2 py-0.5 uppercase">
             {String(exercicio.status)}
           </span>
+          {analysis?.resolver_method ? (
+            <span className="text-xs rounded-full bg-zinc-100 px-2 py-0.5">
+              {String(analysis.resolver_method)}
+            </span>
+          ) : null}
         </div>
+        {exercicio.area ? (
+          <p className="text-xs text-zinc-500 mt-1">Área: {String(exercicio.area)}</p>
+        ) : null}
       </div>
 
       <div className="rounded-xl border bg-white p-4">
         <p className="text-sm leading-relaxed">{String(exercicio.enunciado)}</p>
       </div>
 
+      {Boolean(exercicio.pergunta || exercicio.dica) && (
+        <div className="rounded-xl border bg-white p-4 text-sm flex flex-col gap-2">
+          {exercicio.contexto ? (
+            <p>
+              <span className="font-medium">Contexto: </span>
+              {String(exercicio.contexto)}
+            </p>
+          ) : null}
+          {exercicio.pergunta ? (
+            <p>
+              <span className="font-medium">Pergunta: </span>
+              {String(exercicio.pergunta)}
+            </p>
+          ) : null}
+          {exercicio.dica ? (
+            <p className="text-zinc-600">
+              <span className="font-medium">Dica: </span>
+              {String(exercicio.dica)}
+            </p>
+          ) : null}
+        </div>
+      )}
+
       {analysis && (
         <div className="rounded-xl border bg-white p-4 text-sm flex flex-col gap-2">
           <p>Confiança: {Math.round((analysis.confidence as number) * 100)}%</p>
           <p>Método: {String(analysis.resolver_method)}</p>
+          {Array.isArray(
+            (analysis.raw_extraction as { passosPreResolucao?: string[] })
+              ?.passosPreResolucao
+          ) && (
+            <div>
+              <p className="font-medium mb-1">Pré-resolução</p>
+              <ol className="list-decimal pl-5 space-y-1 text-zinc-700">
+                {(
+                  (analysis.raw_extraction as { passosPreResolucao?: string[] })
+                    .passosPreResolucao ?? []
+                ).map((p, i) => (
+                  <li key={i}>{p}</li>
+                ))}
+              </ol>
+            </div>
+          )}
           {analysis.computed_answer != null && (
             <p className="text-zinc-500 text-xs">
-              Validação interna: {String(analysis.computed_answer)} {String(analysis.computed_unit)}
+              Validação interna: {String(analysis.computed_answer)}{" "}
+              {String(analysis.computed_unit)}
             </p>
           )}
         </div>
@@ -92,7 +142,15 @@ export default function ExercicioDetalhePage() {
         <TagList title="Variáveis" items={exercicio.variables as string[]} />
         <TagList title="Fenômenos" items={exercicio.phenomena as string[]} />
         <TagList title="Entidades" items={exercicio.entities as string[]} />
+        <TagList title="Gráficos" items={exercicio.graphs as string[]} />
       </div>
+
+      <Link
+        href="/catalogo/rascunhos"
+        className="text-sm text-zinc-600 underline w-fit"
+      >
+        Revisar propostas de catálogo →
+      </Link>
 
       <div className="flex gap-2 flex-wrap">
         <button

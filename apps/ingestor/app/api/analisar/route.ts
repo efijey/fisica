@@ -1,5 +1,5 @@
-import { analisarExercicio } from "@/lib/parser/analisar";
 import { NextResponse } from "next/server";
+import { analisarExercicioPreferindoLlm } from "@/lib/llm/analisar-exercicio";
 
 export async function POST(request: Request) {
   try {
@@ -10,7 +10,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Enunciado é obrigatório" }, { status: 400 });
     }
 
-    const analise = analisarExercicio(enunciado.trim());
+    const analise = await analisarExercicioPreferindoLlm(enunciado.trim());
     return NextResponse.json(analise);
   } catch (error) {
     const message = error instanceof Error ? error.message : "Erro na análise";

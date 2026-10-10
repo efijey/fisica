@@ -20,7 +20,7 @@ export interface ResultadoAnalise {
   valores: ValorExtraido[];
   area?: AreaFisica;
   confidence: number;
-  resolverMethod: "regras";
+  resolverMethod: "regras" | "llm";
   rawExtraction: Record<string, unknown>;
   computedAnswer?: number;
   computedUnit?: string;

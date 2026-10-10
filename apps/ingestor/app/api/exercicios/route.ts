@@ -22,13 +22,19 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { enunciado, fonte } = body as { enunciado?: string; fonte?: string };
+    const { enunciado, fonte, listId } = body as {
+      enunciado?: string;
+      fonte?: string;
+      listId?: string;
+    };
 
     if (!enunciado?.trim()) {
       return NextResponse.json({ error: "Enunciado é obrigatório" }, { status: 400 });
     }
 
-    const resultado = await salvarExercicioComAnalise(enunciado.trim(), fonte);
+    const resultado = await salvarExercicioComAnalise(enunciado.trim(), fonte, {
+      listId,
+    });
     return NextResponse.json(resultado, { status: 201 });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Erro ao salvar exercício";

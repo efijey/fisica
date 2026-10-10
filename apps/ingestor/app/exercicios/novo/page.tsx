@@ -45,6 +45,8 @@ export default function NovoExercicioPage() {
     router.push(`/exercicios/${data.exercise.id}`);
   }
 
+  const propostas = (preview?.propostas as { proposedId: string; kind: string }[]) ?? [];
+
   return (
     <main className="max-w-3xl mx-auto px-4 py-8 flex flex-col gap-6">
       <div>
@@ -53,7 +55,12 @@ export default function NovoExercicioPage() {
         </Link>
         <h1 className="text-xl font-bold mt-2">Novo exercício</h1>
         <p className="text-sm text-zinc-600">
-          Cole o enunciado. O sistema cataloga fórmulas, variáveis e fenômenos automaticamente.
+          Cole o enunciado. Com OPENAI_API_KEY, a análise usa LLM (com fallback por
+          regras). Para listas/PDF, use{" "}
+          <Link href="/listas/nova" className="underline">
+            Nova lista
+          </Link>
+          .
         </p>
       </div>
 
@@ -96,8 +103,16 @@ export default function NovoExercicioPage() {
 
       {preview && (
         <div className="rounded-xl border bg-white p-4 text-sm flex flex-col gap-3">
-          <h2 className="font-semibold">Pré-visualização (regras)</h2>
+          <h2 className="font-semibold">
+            Pré-visualização ({String(preview.resolverMethod)})
+          </h2>
           <p>Confiança: {Math.round((preview.confidence as number) * 100)}%</p>
+          {preview.titulo ? (
+            <p>
+              <span className="font-medium">Título: </span>
+              {String(preview.titulo)}
+            </p>
+          ) : null}
           <div>
             <span className="font-medium">Fórmulas: </span>
             {(preview.formulas as string[])?.join(", ") || "—"}
@@ -110,9 +125,20 @@ export default function NovoExercicioPage() {
             <span className="font-medium">Fenômenos: </span>
             {(preview.fenomenos as string[])?.join(", ") || "—"}
           </div>
+          <div>
+            <span className="font-medium">Gráficos: </span>
+            {(preview.graphs as string[])?.join(", ") || "—"}
+          </div>
+          {propostas.length > 0 && (
+            <div>
+              <span className="font-medium">Propostas: </span>
+              {propostas.map((p) => `${p.kind}:${p.proposedId}`).join(", ")}
+            </div>
+          )}
           {preview.computedAnswer != null && (
             <p className="text-xs text-zinc-500">
-              Validação interna: {String(preview.computedAnswer)} {String(preview.computedUnit)} (não vai para o estudante)
+              Validação interna: {String(preview.computedAnswer)}{" "}
+              {String(preview.computedUnit)} (não vai para o estudante)
             </p>
           )}
         </div>

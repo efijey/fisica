@@ -40,12 +40,26 @@ export default function ExerciciosPage() {
           <h1 className="text-xl font-bold">Exercícios catalogados</h1>
           <p className="text-sm text-zinc-600">Revise rascunhos antes de exportar.</p>
         </div>
-        <Link
-          href="/exercicios/novo"
-          className="rounded-lg bg-zinc-900 text-white px-3 py-2 text-sm"
-        >
-          + Novo
-        </Link>
+        <div className="flex gap-2 shrink-0 flex-wrap">
+          <Link
+            href="/listas/nova"
+            className="rounded-lg bg-zinc-900 text-white px-3 py-2 text-sm"
+          >
+            + Lista
+          </Link>
+          <Link
+            href="/exercicios/novo"
+            className="rounded-lg border px-3 py-2 text-sm"
+          >
+            + Único
+          </Link>
+          <Link
+            href="/catalogo/rascunhos"
+            className="rounded-lg border px-3 py-2 text-sm"
+          >
+            Catálogo
+          </Link>
+        </div>
       </div>
 
       <div className="flex gap-2 flex-wrap">
@@ -76,14 +90,23 @@ export default function ExerciciosPage() {
             className="rounded-xl border bg-white p-4 hover:shadow-sm transition-shadow"
           >
             <div className="flex items-center justify-between gap-2 mb-2">
-              <span className="text-xs font-medium uppercase tracking-wide text-zinc-500">
-                {STATUS_LABEL[ex.status] ?? ex.status}
-              </span>
+              <div className="flex gap-2 items-center">
+                <span className="text-xs font-medium uppercase tracking-wide text-zinc-500">
+                  {STATUS_LABEL[ex.status] ?? ex.status}
+                </span>
+                {(ex as { area?: string }).area && (
+                  <span className="text-xs rounded-full bg-zinc-100 px-2 py-0.5">
+                    {(ex as { area?: string }).area}
+                  </span>
+                )}
+              </div>
               <span className="text-xs text-zinc-400">
                 {new Date(ex.created_at).toLocaleDateString("pt-BR")}
               </span>
             </div>
-            <p className="text-sm line-clamp-2">{ex.enunciado}</p>
+            <p className="text-sm line-clamp-2">
+              {(ex as { titulo?: string }).titulo || ex.enunciado}
+            </p>
           </Link>
         ))}
 

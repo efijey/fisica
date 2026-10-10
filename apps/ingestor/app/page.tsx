@@ -6,23 +6,35 @@ export default function HomePage() {
       <div>
         <h1 className="text-2xl font-bold">Ingestor de Exercícios</h1>
         <p className="text-sm text-zinc-600 mt-1">
-          Cole exercícios de física, cataloga fórmulas, variáveis e fenômenos — sem expor
-          respostas numéricas ao estudante.
+          Cole listas (texto ou PDF), pré-resolva com OpenAI, aprove propostas de
+          catálogo e exporte para a explicadora.
         </p>
       </div>
 
-      <div className="flex gap-3">
+      <div className="flex flex-wrap gap-3">
         <Link
-          href="/exercicios/novo"
+          href="/listas/nova"
           className="rounded-lg bg-zinc-900 text-white px-4 py-2 text-sm font-medium hover:bg-zinc-800"
         >
-          Novo exercício
+          Nova lista
+        </Link>
+        <Link
+          href="/exercicios/novo"
+          className="rounded-lg border border-zinc-300 px-4 py-2 text-sm font-medium hover:bg-white"
+        >
+          Exercício único
         </Link>
         <Link
           href="/exercicios"
           className="rounded-lg border border-zinc-300 px-4 py-2 text-sm font-medium hover:bg-white"
         >
-          Ver exercícios
+          Exercícios
+        </Link>
+        <Link
+          href="/catalogo/rascunhos"
+          className="rounded-lg border border-zinc-300 px-4 py-2 text-sm font-medium hover:bg-white"
+        >
+          Rascunhos de catálogo
         </Link>
       </div>
     </main>
