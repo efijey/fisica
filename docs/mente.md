@@ -3,15 +3,16 @@
 Documento vivo de contexto. Agentes e humanos devem ler isto **antes** de propor mudanças.
 Atualize este arquivo quando a visão, o estado ou o fluxo de trabalho mudarem.
 
-Para **organização de pastas, rotas, lógica e banco** (mapa estável), use [`manual.md`](./manual.md).
+Última sincronização: 2026-10-10 (visão de personalização por interesses + pré–sprint MVP).
 
-Última sincronização: 2026-10-10 (auditoria pré–sprint de MVP / apresentação).
+- Mapa do código: [`manual.md`](./manual.md)  
+- Personalização / ingestora → interesses: [`personalizacao.md`](./personalizacao.md)
 
 ---
 
 ## Em uma frase
 
-App educacional que ajuda estudantes brasileiros a **entender o porquê** das fórmulas de física — não só a fazer a conta.
+App educacional que ajuda estudantes brasileiros a **entender o porquê** das fórmulas de física — e, na direção do produto, a **treinar esses conceitos em cenários do mundo deles** (interesses), reduzindo carga cognitiva.
 
 ## Público e objetivo próximo
 
@@ -19,9 +20,9 @@ App educacional que ajuda estudantes brasileiros a **entender o porquê** das f�
 |------|--------|
 | Público | Ensino médio e início do ensino superior |
 | Idioma | Português (Brasil) |
-| Meta imediata | MVP apresentável em site (ex.: professora / demo) |
-| Produto público | `apps/explicadora` |
-| Ferramenta interna | `apps/ingestor` (não precisa ir pro ar no MVP demo) |
+| Meta imediata | MVP apresentável + validar personalização (autor = paciente zero) |
+| Produto público | `apps/explicadora` (treino do estudante) |
+| App irmão | `apps/ingestor` — hoje alimenta exercícios; **visão:** mapeadora de interesses + estúdio de conteúdo personalizado |
 
 O dono do projeto está aprendendo boas práticas: preferir explicações claras, mudanças pequenas, branches e commits fáceis de reverter.
 
@@ -34,11 +35,20 @@ O dono do projeto está aprendendo boas práticas: preferir explicações claras
 - Catálogo vivo: fórmulas ↔ variáveis ↔ fenômenos
 - Treino conceitual (explicar raciocínio sem necessariamente calcular)
 - Mesa de cálculo mental / voz (com LLM opcional)
+- **Direção:** treino personalizado por interesses (pele narrativa ≠ esqueleto científico)
 
 **Não é (ainda)**
 - Calculadora numérica completa de vestibular
-- Plataforma com login de alunos
+- Plataforma com login de alunos em produção (previsto na evolução da personalização)
 - Substituta de professor — é apoio de compreensão
+
+### Direção de produto (acordada na conversa)
+
+1. **Esqueleto** fica em `physics-core` (fórmulas, grandezas, motor).  
+2. **Pele** (exemplos, enunciados, metáforas) vem dos **interesses** do usuário.  
+3. A ingestora evolui de “colar vestibular” para **mapear interesses + gerar/revisar conteúdo** (API), guardado no **banco ligado ao usuário** e/ou a um **pool por interesse** (reuso entre pessoas com o mesmo gosto).  
+4. Paciente zero: interesses seed do autor — futebol, corrida, TFT, League of Legends, xadrez, culinária.  
+5. Começar validando com pouco (perfil local + variantes), depois auth/Supabase/geração — ver fases em [`personalizacao.md`](./personalizacao.md).
 
 ---
 
@@ -70,7 +80,7 @@ fisica/
 4. **Gráficos** — visualizações de equações do catálogo
 5. **Problemas** — treino conceitual + folha de cálculo mental (voz / LLM / mock)
 
-### Fluxo do ingestor
+### Fluxo do ingestor (hoje)
 
 ```
 colar enunciado → parser por regras → rascunho no Supabase
@@ -80,6 +90,15 @@ colar enunciado → parser por regras → rascunho no Supabase
 
 `catalogoExemplos` ainda está vazio até haver exercícios aprovados exportados.
 A aba Problemas usa `catalogoProblemas` (estático), não o export do ingestor.
+
+### Fluxo alvo (personalização — ver personalizacao.md)
+
+```
+usuário escolhe interesses → (opcional) API gera variantes do esqueleto
+→ itens no Supabase (por user e/ou pool do interesse)
+→ explicadora serve treino filtrado pelo perfil
+→ revisão na ingestora/estúdio antes de virar pool compartilhado
+```
 
 ---
 
@@ -139,20 +158,23 @@ Issues #1–#5 ainda abertas falam em “Sprint 2/4” com escopos antigos (valo
 
 ---
 
-## Direção: MVP em produção (próxima onda)
+## Direção: próxima onda (sprint 4+)
 
-Objetivo: site público estável para **apresentar a ideia**, não plataforma completa.
+Dois eixos que podem caminhar juntos (PRs separados):
 
-Prioridade sugerida (ajustável na sprint):
+### A — MVP no ar (apresentação)
 
-1. **Deploy da explicadora** (Vercel ou similar) com build verde
-2. **CI** mínimo: lint + test + build
-3. **Polish de demo** — o que a professora vê em 5 minutos (Problemas + Inferência + Explorar)
-4. Secrets só no host (OpenAI opcional; demo deve funcionar sem chave, via mock)
-5. Ingestor: opcional offline / local; não bloqueia a demo pública
-6. Documentar URL, pitch e roteiro de apresentação (quando o deploy existir)
+1. Deploy da explicadora + CI mínimo  
+2. Polish do caminho feliz da demo  
+3. URL + roteiro — [mvp-producao.md](./mvp-producao.md)
 
-Detalhes operacionais: [mvp-producao.md](./mvp-producao.md).
+### B — Personalização (tese de aprendizagem)
+
+1. Fase 0 paciente zero: perfil de interesses + variantes nos mundos do autor  
+2. Depois: auth + banco + pool por interesse  
+3. Depois: geração via API + revisão na ingestora evoluíída  
+
+Detalhes: [personalizacao.md](./personalizacao.md).
 
 ---
 

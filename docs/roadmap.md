@@ -75,11 +75,15 @@ Metadados, grafo, explorar variável, fenômenos, testes. Sem cálculo numérico
 | Auth Supabase (login admin) | Pendente |
 | Explicadora consumindo `catalogoExemplos` | Pendente |
 
-### Sprint 4 — MVP no ar (planejada)
+### Sprint 4 — Dois eixos (planejada)
 
-**Objetivo:** URL pública estável para apresentar o produto (demo para professora / stakeholders).
+Pode ser uma sprint com PRs separados, ou 4a / 4b.
 
-Ver checklist em [mvp-producao.md](./mvp-producao.md).
+#### Eixo A — MVP no ar
+
+**Objetivo:** URL pública para apresentar o produto.
+
+Ver [mvp-producao.md](./mvp-producao.md).
 
 | Entrega | Status |
 |---------|--------|
@@ -88,9 +92,22 @@ Ver checklist em [mvp-producao.md](./mvp-producao.md).
 | CI mínimo (lint + test + build) | Pendente |
 | Demo usável sem OpenAI | Em grande parte pronto (mock) |
 | Atualizar docs com URL e roteiro | Pendente |
-| Alinhar issues GitHub com este roadmap | Pendente |
 
-**Fora do escopo sugerido da sprint 4:** expandir áreas da física, PWA, histórico localStorage, cálculo numérico completo.
+#### Eixo B — Personalização por interesses
+
+**Objetivo:** validar a tese (paciente zero) e preparar o caminho banco/login/pool.
+
+Visão completa: [personalizacao.md](./personalizacao.md).
+
+| Entrega | Status |
+|---------|--------|
+| Docs de visão (este eixo) | Em andamento (docs) |
+| Fase 0: perfil de interesses (local) + variantes manuais | Pendente |
+| Fase 1: auth + interesses + conteúdo no Supabase | Pendente |
+| Fase 2: geração via API + revisão + pool por interesse | Pendente |
+| Evoluir papel da ingestora → mapeadora / estúdio | Pendente (visão) |
+
+**Fora do escopo imediato:** expandir áreas da física, PWA, cálculo numérico completo, métricas avançadas de pesquisa.
 
 ### Backlog futuro
 
@@ -104,9 +121,9 @@ Ver checklist em [mvp-producao.md](./mvp-producao.md).
 **Produto**
 - Cadeias de inferência multi-etapa
 - Input de enunciado com identificação de contexto
-- Ligar `catalogoExemplos` à UI do estudante
+- Ligar `catalogoExemplos` / pool personalizado à UI do estudante
 - Expandir catálogo (termodinâmica, ondas, eletromagnetismo)
-- Histórico de problemas (localStorage)
+- Histórico de treino do aluno
 - PWA básico (opcional)
 
 ## Áreas de física cobertas

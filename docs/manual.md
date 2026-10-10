@@ -8,6 +8,7 @@ Não é um inventário de cada arquivo (isso muda a cada sprint). É um mapa men
 |-----------|-------------|
 | **Este manual** | “Onde fica X?” / explicar a arquitetura para alguém |
 | [`mente.md`](./mente.md) | Visão do produto, estado atual, prioridades da sprint |
+| [`personalizacao.md`](./personalizacao.md) | Tese: interesses, pele vs esqueleto, ingestora → banco/usuário |
 | [`roadmap.md`](./roadmap.md) | O que já foi feito e o que vem depois |
 | [`git-workflow.md`](./git-workflow.md) | Branches, commits, como reverter |
 | [`mvp-producao.md`](./mvp-producao.md) | Checklist para colocar no ar |
@@ -211,13 +212,14 @@ Aqui entra o **banco**. A explicadora, no fluxo atual de Problemas, ainda usa ca
 
 ### 6.1 Papel do Supabase neste projeto
 
-| Sim | Não (ainda) |
-|-----|-------------|
-| Guardar exercícios colados e análises | Ser o “cérebro” da física |
-| Status: rascunho / aprovado / rejeitado… | Login de alunos na explicadora |
-| Usado pelo **ingestor** | Obrigatório para a demo pública da explicadora |
+| Hoje | Direção (personalização) |
+|------|--------------------------|
+| Guardar exercícios colados e análises | Perfil / interesses do usuário |
+| Status: rascunho / aprovado / rejeitado… | Pool de problemas/exemplos por interesse |
+| Usado pelo **ingestor** | Explicadora **lendo** treino personalizado do banco |
+| Não obrigatório na demo pública | Login quando sair do “paciente zero” local |
 
-A física “de verdade” (fórmulas, motor) vive em **código** (`physics-core`). O banco guarda **instâncias de exercícios** e metadados de análise.
+A física “de verdade” (fórmulas, motor) vive em **código** (`physics-core`). O banco guarda **instâncias** (exercícios, e depois narrativas/problemas ligados a usuário ou interesse). Visão: [`personalizacao.md`](./personalizacao.md).
 
 ### 6.2 Onde está a “verdade” do schema
 

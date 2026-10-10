@@ -3,7 +3,8 @@
 App educacional para estudantes brasileiros: ajuda a entender **por que** cada fórmula se aplica, como as grandezas se relacionam e em quais fenômenos da natureza elas aparecem — não só a fazer a conta.
 
 > **Manual do sistema** (organização, pastas, rotas, banco): [`docs/manual.md`](docs/manual.md)  
-> Contexto vivo / prioridades da sprint: [`docs/mente.md`](docs/mente.md)
+> Contexto vivo / prioridades da sprint: [`docs/mente.md`](docs/mente.md)  
+> Personalização por interesses: [`docs/personalizacao.md`](docs/personalizacao.md)
 
 ## O que tem hoje
 
@@ -104,6 +105,7 @@ fisica/
 |-----|----------|
 | [Manual do sistema](docs/manual.md) | Mapa estável: pastas, rotas, lógica, banco — por onde procurar |
 | [Mente do projeto](docs/mente.md) | Visão, estado real, prioridades da sprint |
+| [Personalização](docs/personalizacao.md) | Interesses, pele vs esqueleto, evolução da ingestora |
 | [Roadmap](docs/roadmap.md) | Sprints e backlog |
 | [Git](docs/git-workflow.md) | Branches, commits, como reverter |
 | [MVP produção](docs/mvp-producao.md) | Checklist de deploy / demo |
