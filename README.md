@@ -4,7 +4,8 @@ App educacional para estudantes brasileiros: ajuda a entender **por que** cada f
 
 > **Manual do sistema** (organização, pastas, rotas, banco): [`docs/manual.md`](docs/manual.md)  
 > Contexto vivo / prioridades da sprint: [`docs/mente.md`](docs/mente.md)  
-> Personalização por interesses: [`docs/personalizacao.md`](docs/personalizacao.md)
+> Personalização por interesses: [`docs/personalizacao.md`](docs/personalizacao.md)  
+> Fontes científicas / PDFs: [`docs/fontes-cientificas.md`](docs/fontes-cientificas.md)
 
 ## O que tem hoje
 

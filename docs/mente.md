@@ -3,7 +3,7 @@
 Documento vivo de contexto. Agentes e humanos devem ler isto **antes** de propor mudanças.
 Atualize este arquivo quando a visão, o estado ou o fluxo de trabalho mudarem.
 
-Última sincronização: 2026-10-10 (visão de personalização por interesses + pré–sprint MVP).
+Última sincronização: 2026-10-10 (Fase 0: treino personalizado TFT/LoL + cards de literatura).
 
 - Mapa do código: [`manual.md`](./manual.md)  
 - Personalização / ingestora → interesses: [`personalizacao.md`](./personalizacao.md)
@@ -79,6 +79,7 @@ fisica/
 3. **Catálogo de fórmulas** — navegação por área
 4. **Gráficos** — visualizações de equações do catálogo
 5. **Problemas** — treino conceitual + folha de cálculo mental (voz / LLM / mock)
+6. **Treino personalizado** — paciente zero: mundo (TFT/LoL) + card de literatura → exercício gerado (API) com citação; salva em localStorage
 
 ### Fluxo do ingestor (hoje)
 

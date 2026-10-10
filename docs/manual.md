@@ -9,6 +9,7 @@ Não é um inventário de cada arquivo (isso muda a cada sprint). É um mapa men
 | **Este manual** | “Onde fica X?” / explicar a arquitetura para alguém |
 | [`mente.md`](./mente.md) | Visão do produto, estado atual, prioridades da sprint |
 | [`personalizacao.md`](./personalizacao.md) | Tese: interesses, pele vs esqueleto, ingestora → banco/usuário |
+| [`fontes-cientificas.md`](./fontes-cientificas.md) | Como ancorar física em literatura / PDFs (cards + citação) |
 | [`roadmap.md`](./roadmap.md) | O que já foi feito e o que vem depois |
 | [`git-workflow.md`](./git-workflow.md) | Branches, commits, como reverter |
 | [`mvp-producao.md`](./mvp-producao.md) | Checklist para colocar no ar |
@@ -143,6 +144,7 @@ Use esta tabela como índice. É o coração do manual.
 | Componentes genéricos de UI (botão, tabs…) | `apps/explicadora/components/ui/` (shadcn) |
 | Problemas conceituais (enunciados + rubrica) | `apps/explicadora/app/physics/problemas/` |
 | Mesa mental / voz / LLM | `.../problemas/mental/` + `app/api/mental/` |
+| Treino personalizado (TFT/LoL + literatura) | `apps/explicadora/app/physics/personalizado/` + `app/api/personalizado/gerar` |
 | Exemplos exportados do ingestor | `apps/explicadora/app/physics/examples/` |
 | Utilitários CSS/classes | `apps/explicadora/lib/` |
 

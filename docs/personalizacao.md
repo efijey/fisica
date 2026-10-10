@@ -85,13 +85,15 @@ A ingestora (UI interna ou aba admin) é o lugar natural para **revisar** o que 
 
 ## Fases sugeridas (paciente zero → plataforma)
 
-### Fase 0 — Paciente zero (sem login)
+### Fase 0 — Paciente zero (sem login) — em construção
 
-- Selecionar interesses na explicadora (multi-select)
-- Guardar em `localStorage`
-- Poucas variantes **manuais** nos mundos do autor (futebol, corrida, TFT, LoL, xadrez, culinária)
-- Problemas / exemplos das grandezas respeitam o perfil; fallback neutro se faltar variante
-- Objetivo: validar a tese na própria aprendizagem
+- Aba **Treino personalizado** na explicadora
+- Mundos iniciais: **TFT** e **League of Legends** (fatos curados; sem inventar patch)
+- Conceitos ancorados em **cards de literatura** (`literatura/cards.ts`) + citação na UI
+- Geração via OpenAI (`OPENAI_API_KEY`) com fallback mock
+- Persistência só em `localStorage` (este navegador)
+- Como alimentar fontes dos seus PDFs: [`fontes-cientificas.md`](./fontes-cientificas.md)
+- Objetivo: validar a tese na própria aprendizagem antes de login/multi-usuário
 
 ### Fase 1 — Conta + banco de interesses
 

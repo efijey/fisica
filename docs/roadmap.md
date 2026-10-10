@@ -101,8 +101,9 @@ Visão completa: [personalizacao.md](./personalizacao.md).
 
 | Entrega | Status |
 |---------|--------|
-| Docs de visão (este eixo) | Em andamento (docs) |
-| Fase 0: perfil de interesses (local) + variantes manuais | Pendente |
+| Docs de visão + fontes científicas | Concluído (docs) |
+| Fase 0: aba Treino personalizado + geração TFT/LoL + cards | Em andamento |
+| Fase 0: trocar seed OpenStax pelos PDFs do autor | Pendente (colar trechos) |
 | Fase 1: auth + interesses + conteúdo no Supabase | Pendente |
 | Fase 2: geração via API + revisão + pool por interesse | Pendente |
 | Evoluir papel da ingestora → mapeadora / estúdio | Pendente (visão) |
