@@ -1,0 +1,39 @@
+---
+description: Versionamento iterável — branches, commits pequenos, GitHub sempre atualizado
+alwaysApply: true
+---
+
+# Git iterativo (sempre)
+
+Objetivo: tudo que conversarmos deve poder virar versão no GitHub e ser **revertida com facilidade**.
+
+Detalhes: `docs/git-workflow.md`.
+
+## Fluxo padrão
+
+1. Trabalhar em **branch** (`feature/*`, `cursor/*` ou `sprint-N`) — nunca commit solto só em `main`.
+2. Fazer **commits pequenos** e específicos (Conventional Commits em português).
+3. **Push** para `origin` e abrir/atualizar **PR** para a sprint ativa (ou `main` ao fechar sprint).
+4. Uma ideia / um pedido ≈ uma branch (ou poucos commits claros na mesma branch).
+
+## Commits e push
+
+- **Pode e deve** versionar o trabalho no GitHub ao concluir uma unidade de mudança (não deixar só local).
+- Agrupe logicamente; não misture refactor enorme + feature + docs sem necessidade.
+- Se o usuário pedir explicitamente para **não** commitar ainda, respeite.
+- Em sessão puramente exploratória (“só me explica”), não precisa criar branch/commit.
+
+## Reversão
+
+- Prefira novos commits / `git revert` + PR a reescrever histórico em `main`.
+- PR em draft ou branch abandonada = forma válida de descartar experimento.
+
+## Mensagens
+
+```
+feat(escopo): descrição curta
+fix(escopo): …
+docs(mente): …
+```
+
+Escopos comuns: `explicadora`, `ingestor`, `engine`, `catalogo`, `mental`, `docs`, `ci`, `deploy`.

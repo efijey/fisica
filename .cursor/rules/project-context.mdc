@@ -1,0 +1,29 @@
+---
+description: Contexto implícito do projeto Física Explicadora em toda iteração
+alwaysApply: true
+---
+
+# Contexto do projeto (sempre)
+
+Leia e respeite **`docs/mente.md`** como fonte de verdade viva (estado/prioridades).  
+Mapa estável do código (pastas, rotas, lógica, banco): **`docs/manual.md`**.  
+Personalização (interesses / ingestora → banco): **`docs/personalizacao.md`**.  
+Complementos: `docs/roadmap.md`, `docs/git-workflow.md`, `docs/mvp-producao.md`, `AGENTS.md`.
+
+## O que é
+
+- App educacional de física em **português (Brasil)**: foco no **porquê** das fórmulas, não só no cálculo.
+- Monorepo: `apps/explicadora` (produto), `apps/ingestor` (interno), `packages/physics-core` (domínio).
+- Meta próxima: **MVP público** para apresentar (ex.: professora) — ver `docs/mvp-producao.md`.
+
+## Como ajudar o mantenedor
+
+- Ele não é expert em engenharia: explique decisões de forma simples.
+- Prefira mudanças **pequenas**, testáveis e **fáceis de reverter**.
+- Não invente escopo “legal”; alinhe com a mente / o pedido atual.
+- Next.js deste repo pode diferir do treino → consulte `node_modules/next/dist/docs/`.
+
+## Quando atualizar docs
+
+- **`docs/mente.md`** (+ roadmap se preciso): visão, status de sprint, prioridades do MVP, decisões de fluxo.
+- **`docs/manual.md`**: só quando a *arquitetura* mudar (nova região de pastas, novo papel do banco, novas regras de rotas). Não encher o manual com detalhes de sprint.
