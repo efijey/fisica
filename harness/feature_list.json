@@ -275,7 +275,9 @@
       "evidence": [
         "2026-10-10: npm run snapshot-tft → apps/explicadora/app/estudo/dados/tft-set18.json (74 entradas, versão 16.20, set 18 confirmado pelo autor).",
         "2026-10-10: primeiro bloco 'No jogo' (Grandezas e unidades): Xayah × Rek'Sai contra Ornn, DPS e tempo para derrubar calculados a partir do snapshot; equações cabem no quadro (medido via CDP); build, lint e tsc ok.",
-        "Pendente: autor conferir os números; blocos 'No jogo' das outras 7 seções."
+        "2026-10-10: autor conferiu os números do primeiro bloco ('parecem certos').",
+        "2026-10-10: blocos 'No jogo' nas 8 seções (conversão = 1/velocidade de ataque; algarismos = 0,699999988079071 cru da Xayah; ordem de grandeza = ataques até o tank cair; vetores = alcance × direção; componentes = fileiras e colunas; unitários = 6 direções do hex; produtos = DPS do time como produto escalar). Contas saem do snapshot via campeaoTft. tsc, lint (0 erros), build ok; 0 katex-error; 8 caixas com 36 equações, nenhuma vaza (CDP); juiz TFT 8/8.",
+        "Pendente: autor ler os 7 blocos novos."
       ],
       "notes": "Fonte: CommunityDragon (Data Dragon oficial não tem atributos). O 'damage' 230 era de monstro PvE, não de campeão. O snapshot inclui algumas criaturas invocadas e variantes da Lux; Kayle vem sem dano. campeaoTft() falha no build se o campeão sumir ou vier sem dano. Ver docs/personalizacao.md, seção 'Física para jogar melhor'."
     },

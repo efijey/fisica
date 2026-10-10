@@ -25,6 +25,7 @@
 ## Próximo passo
 
 - **Feature:** `study-004` (lente), branch `feature/lente-tft-capitulo-1`. Lente TFT do capítulo 1 pronta como rascunho em `/estudo?mundo=tft`; falta o autor revisar (aí `revisado: true`) e a lente de nanopartículas, que depende dos artigos do autor. Ementa (`study-001`) e capítulo 1 (`study-003`) aprovados.
+- **Bloco "No jogo" (`study-006`), branch `feature/clareza-exercicios`:** as 8 seções da lente TFT têm o bloco, com contas tiradas do snapshot `dados/tft-set18.json` via `campeaoTft`. Falta o autor ler os 7 blocos novos. Para atualizar os dados num set novo: `npm run snapshot-tft` com `TFT_SET=<n>`.
 - **Onde ficam as lentes:** `apps/explicadora/app/estudo/capitulos/lentes/<mundo>/capitulo-N.ts`, registradas em `lentes/index.ts`. Só trocam intuição, exemplo e exercício; rubrica própria só quando a palavra-chave conflita com o mundo (ex.: "unidade" no TFT é peça do jogo).
 - **Por quê:** o autor quer estudar o semestre com o app.
 - **Passing (study-001):** autor aprova a ementa.
