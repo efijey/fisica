@@ -210,7 +210,7 @@
       "priority": 10,
       "area": "explicadora",
       "title": "Trilha de estudo: primeiro capítulo completo",
-      "user_visible_behavior": "Um capítulo (cinemática 1D com cálculo) tem intuição, definição formal, derivação, porquê, armadilhas, exemplo resolvido, exercícios com juiz e citação do livro.",
+      "user_visible_behavior": "Um capítulo (capítulo 1: unidades, ordem de grandeza e vetores — escolha do autor em 2026-10-10) tem intuição, definição formal, derivação, porquê, armadilhas, exemplo resolvido, exercícios com juiz e citação do livro.",
       "status": "not_started",
       "verification": [
         "Autor estuda o capítulo e dá feedback.",

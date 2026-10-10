@@ -84,6 +84,8 @@ Muitas disciplinas de Física 1 também cobrem os capítulos 8 a 10 (momento, ro
 
 ## Ordem sugerida da trilha no app
 
-1. Capítulo 2 completo (`study-003`), porque já existem cards e é onde limite, derivada e integral aparecem juntos.
-2. Capítulo 1 só no que o capítulo 2 precisar (vetores em 1D, unidades).
+Decidido pelo autor (2026-10-10): semestre = capítulos 1 a 7 (8 opcional); a trilha começa pelo capítulo 1.
+
+1. Capítulo 1 completo (`study-003`): unidades, ordem de grandeza e vetores.
+2. Capítulo 2: é onde limite, derivada e integral aparecem juntos; já existem cards.
 3. Capítulos 3 → 4 → 5 → 6 → 7, um por vez.

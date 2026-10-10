@@ -21,7 +21,7 @@
 
 ## Próximo passo
 
-- **Feature:** `study-001` (autor revisa a ementa), depois `study-002` → `study-004`.
+- **Feature:** `study-001` (autor está lendo a ementa; semestre = capítulos 1 a 7; trilha começa pelo capítulo 1), depois `study-002` → `study-004`.
 - **Por quê:** o autor quer estudar o semestre com o app.
 - **Passing (study-001):** autor aprova a ementa.
 - **Não mexer:** auth do ingestor, cadeias de inferência, deploy.
