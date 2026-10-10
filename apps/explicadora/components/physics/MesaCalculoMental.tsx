@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useRef, useState } from "react"
+import { useMemo, useRef, useState, useSyncExternalStore } from "react"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { BarraVoz } from "@/components/physics/BarraVoz"
@@ -78,6 +78,9 @@ async function chamarApiTutor(body: {
   return res.json()
 }
 
+/** Capacidades do navegador não mudam durante a sessão. */
+const semAssinatura = () => () => {}
+
 function detectarModoSttPreferido(): ModoStt {
   if (gravacaoDisponivel()) return "whisper"
   if (webSpeechDisponivel()) return "webspeech"
@@ -89,13 +92,15 @@ export function MesaCalculoMental({
   onJulgado,
 }: MesaCalculoMentalProps) {
   const mockStt = useMemo(() => criarSttClient(problema.id), [problema.id])
-  const [modoStt, setModoStt] = useState<ModoStt>("whisper")
+  const modoDetectado = useSyncExternalStore(
+    semAssinatura,
+    detectarModoSttPreferido,
+    () => "whisper" as ModoStt
+  )
+  const [modoForcado, setModoStt] = useState<ModoStt | null>(null)
+  const modoStt = modoForcado ?? modoDetectado
   const sessaoRef = useRef<SessaoGravacao | null>(null)
   const pararWebSpeechRef = useRef<(() => void) | null>(null)
-
-  useEffect(() => {
-    setModoStt(detectarModoSttPreferido())
-  }, [])
 
   const [documento, setDocumento] = useState<DocumentoFolha>(documentoVazio)
   const [ouvindo, setOuvindo] = useState(false)
@@ -310,7 +315,7 @@ export function MesaCalculoMental({
     setTurnosConsumidos(0)
     setOuvindo(false)
     setTick((n) => n + 1)
-    setModoStt(detectarModoSttPreferido())
+    setModoStt(null)
   }
 
   const bloqueadoSemTudo =

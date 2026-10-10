@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useState } from "react"
+import { useMemo, useState } from "react"
 import {
   CartesianGrid,
   Line,
@@ -512,12 +512,6 @@ export function GraficosEquacoes() {
     filtrados.find((g) => g.id === selecionadoId) ??
     filtrados[0] ??
     catalogoGraficos[0]
-
-  useEffect(() => {
-    if (selecionado && selecionado.id !== selecionadoId) {
-      setSelecionadoId(selecionado.id)
-    }
-  }, [selecionado, selecionadoId])
 
   return (
     <div className="flex flex-col gap-4">
