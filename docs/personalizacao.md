@@ -56,6 +56,21 @@ Regras para mundos de interesse:
 - Cada fato do mundo tem citação, e a UI mostra a fonte do contexto além da fonte da física.
 - Seriedade: nada de "historinha"; o exercício deve deixar o aluno entendendo um pouco mais do tema de interesse.
 
+### Física para jogar melhor (decisão de 2026-10-10)
+
+Um mundo de afinidade não é só cenário: a física pode ser **útil dentro dele**. No TFT, quem entende como as grandezas se relacionam compara itens e campeões melhor e ganha mais partidas. Isso dá ao aluno um motivo concreto para aprender, e mantém o engajamento.
+
+Exemplos com o TFT:
+
+- Velocidade de ataque é uma taxa (ataques por segundo). Dano por segundo = dano por ataque × ataques por segundo.
+- Análise dimensional útil: vida ÷ dano por segundo = tempo para derrubar o alvo.
+- Aumentos percentuais rendem mais ou menos conforme a base do campeão.
+- Itens que aumentam a velocidade de ataque durante o combate funcionam como uma aceleração; o dano total é a área sob a curva (integral, capítulo 2).
+
+Como entra no site: um bloco **"No jogo"** em cada seção da versão do mundo, com uma aplicação real.
+
+Dados do jogo: a base oficial da Riot (Data Dragon) só traz nome, imagem e custo. Os atributos (velocidade de ataque, dano, vida, alcance, efeitos de itens) vêm da **CommunityDragon**, extraída dos arquivos do jogo. Um script salva uma cópia no repositório com set, versão e data; os números são conferidos pelo autor antes de entrar no texto, e a cópia só é atualizada de propósito (a cada set novo).
+
 Primeiro mundo de interesse (paciente zero): **nanopartículas para biomateriais**. Ganchos com Física 1: arrasto viscoso e velocidade terminal (leis de Newton), energia térmica vs. gravitacional (por que não sedimentam), movimento browniano (deslocamento vs. distância), razão área/volume.
 
 ---

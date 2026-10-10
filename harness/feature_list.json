@@ -245,6 +245,37 @@
       "notes": "Gerados uma vez, revisados, salvos (como traduções). Ver docs/personalizacao.md. Capítulo 1 sai com duas lentes: TFT (afinidade) e nanopartículas para biomateriais (interesse; nível iniciante na aplicação, fatos só de artigos/trechos enviados pelo autor)."
     },
     {
+      "id": "study-005",
+      "priority": 12,
+      "area": "explicadora",
+      "title": "Clareza dos exercícios da trilha",
+      "user_visible_behavior": "Antes de responder, o aluno vê o que uma boa resposta precisa ter e pode abrir a dica.",
+      "status": "passing",
+      "verification": [
+        "No navegador: critérios visíveis antes de enviar; botão 'Ver dica' mostra a dica sem enviar.",
+        "npm run build"
+      ],
+      "evidence": [
+        "2026-10-10: /estudo mostra 'Uma boa resposta' com 2 critérios em cada um dos 8 exercícios; 8 botões 'Ver dica', clicar no primeiro mostra a dica sem enviar (CDP + screenshot). Versão TFT com critérios próprios em 3 exercícios. Juiz 8/8 nas duas versões; build, lint e tsc ok."
+      ],
+      "notes": "Feedback do autor (2026-10-10): o juiz valida bem, mas faltou saber o que fazer depois da leitura. Critérios não podem revelar a resposta."
+    },
+    {
+      "id": "study-006",
+      "priority": 13,
+      "area": "explicadora",
+      "title": "Bloco 'No jogo' na lente TFT com dados reais",
+      "user_visible_behavior": "Cada seção da versão TFT mostra uma aplicação da física que ajuda a jogar melhor, com números reais do set atual e a fonte.",
+      "status": "not_started",
+      "verification": [
+        "Snapshot dos dados com set, versão e data salvo no repo.",
+        "Autor confere os números usados.",
+        "npm run build"
+      ],
+      "evidence": [],
+      "notes": "Fonte: CommunityDragon (Data Dragon oficial não tem atributos). Dados brutos precisam de interpretação (ex.: 'damage' 230 num campeão de custo 1). Ver docs/personalizacao.md, seção 'Física para jogar melhor'."
+    },
+    {
       "id": "ing-002",
       "priority": 7,
       "area": "ingestor",
