@@ -7,7 +7,7 @@ Log de sessão. O próximo agente começa por aqui, não pelo histórico do chat
 - **Raiz:** `/Users/fabiojuniorramos/Desenvolvimento/fisica`
 - **Startup:** `./init.sh` depois `npm run dev` e, se precisar, `npm run dev:ingestor`
 - **Verificação:** `npm test` (physics-core + parser do ingestor)
-- **Feature ativa:** `study-001` — ementa de Física 1 em revisão (`docs/ementa-fisica-1.md`); depois `study-002` a `study-004`
+- **Feature ativa:** `study-004` — lente TFT do capítulo 1 aguardando revisão do autor; lente de nanopartículas depende dos artigos dele
 - **Blocker:** nenhum documentado
 
 ## O que já está no repo
@@ -35,4 +35,6 @@ Estudante de física; vai usar o app no semestre de Física 1 (cinemática, Newt
 - **Próximo passo:** `qa-002` (lint), depois `study-001` (ementa) → `study-002` (equações) → `study-003` (capítulo 1) → `study-004` (lente).
 - **Depois (mesmo dia):** `qa-002` passing — `npm run lint` com 0 erros (GraficosEquacoes sem efeito; MesaCalculoMental com `useSyncExternalStore`), build e tsc ok. Rascunho da ementa em `docs/ementa-fisica-1.md` (`study-001`, aguardando revisão).
 - **Depois (2):** filosofia registrada em `docs/roadmap.md` (livro para qualquer pessoa; público em transição: cursinho, 1º ano). `study-002` passing na branch `feature/equacoes-katex` (KaTeX + `/estudo`, conferido no navegador). Fonte Geist corrigida no `globals.css`.
+- **Depois (3):** capítulo 1 formal em `/estudo` com 8 exercícios conceituais com juiz (`study-003` passing, aprovado pelo autor); ementa aprovada (`study-001` passing). Lente TFT do capítulo 1 em `/estudo?mundo=tft` (`study-004` in_progress, rascunho aguardando revisão do autor). Branches empilhadas, todas com push: `feature/consolidar-treino-personalizado` → `feature/equacoes-katex` → `feature/trilha-capitulo-1` → `feature/lente-tft-capitulo-1`. Nenhum PR aberto ainda.
+- **Pendências do autor:** revisar a versão TFT; mandar artigos de nanopartículas; revogar a chave da OpenAI que apareceu no terminal e trocar no `.env.local`.
 - **Pasta auxiliar:** worktree `../fisica-tft` na branch `feature/treino-personalizado-qualidade`, servindo em `localhost:3002`; pode ser removida após o merge (`git worktree remove ../fisica-tft`).
